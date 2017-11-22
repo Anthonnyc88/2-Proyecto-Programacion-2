@@ -5,6 +5,8 @@
  */
 package Proyecto;
 
+import Interfaz.LoginPrincipal;
+
 /**
  *
  * @author Admie21 o roger
@@ -17,6 +19,8 @@ public class Principal {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        LoginPrincipal ventanaPrincipal = new LoginPrincipal();
+        ventanaPrincipal.setVisible(true);
         
     }
     
