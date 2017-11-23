@@ -232,10 +232,13 @@ public class LoginPrincipal extends javax.swing.JFrame {
                     this.setVisible(false);
 
                 }
-                if(!userDatabase.equals(idUser))
+                else
                 {
-                JOptionPane.showMessageDialog(null,"Incorrect Password");
-                    System.out.println("no estas registrado en el sistema");
+                
+                    Menu_Usuarios ventanaClientes = new Menu_Usuarios();
+                    ventanaClientes.setVisible(true);
+                    this.setVisible(false);
+                            
                 }
             }
         } catch (Exception e) {
