@@ -5,6 +5,7 @@
  */
 package Proyecto;
 
+import Datos.ConexionBaseDatos;
 import Interfaz.LoginPrincipal;
 
 /**
@@ -14,14 +15,21 @@ import Interfaz.LoginPrincipal;
  */
 public class Principal {
 
+    public static ConexionBaseDatos conectando = new ConexionBaseDatos();
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        LoginPrincipal ventanaPrincipal = new LoginPrincipal();
-        ventanaPrincipal.setVisible(true);
-        
+
+        System.out.println("Conectado: " + conectando.crearConexion());
+        if (conectando.crearConexion()) {
+
+            LoginPrincipal ventanaPrincipal = new LoginPrincipal();
+            ventanaPrincipal.setVisible(true);
+
+        }
+
     }
     
 }

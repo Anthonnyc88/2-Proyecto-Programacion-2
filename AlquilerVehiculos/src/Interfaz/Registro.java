@@ -6,10 +6,17 @@
 package Interfaz;
 
 import Datos.ConexionBaseDatos;
+import Proyecto.Principal;
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -25,8 +32,13 @@ import javax.swing.JPanel;
 public class Registro extends javax.swing.JFrame {
 
     ConexionBaseDatos conectando = new ConexionBaseDatos();
-     FileInputStream fis;
+    FileInputStream fis;
     int longitudBytes;
+    private Connection connection = null;
+    private ResultSet rs = null;
+    private Statement s = null;
+
+    ConexionBaseDatos con = Principal.conectando;
 
     /**
      * Creates new form Registro
@@ -69,8 +81,8 @@ public class Registro extends javax.swing.JFrame {
         textNombre = new javax.swing.JTextField();
         textDireccon = new javax.swing.JTextField();
         textTelefono = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        RadioAdministrador = new javax.swing.JRadioButton();
+        RadioUsuario = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         bntRegistrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -115,20 +127,20 @@ public class Registro extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Direcciòn");
 
-        jRadioButton1.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setText("Administrador");
+        RadioAdministrador.setBackground(new java.awt.Color(51, 51, 51));
+        buttonGroup1.add(RadioAdministrador);
+        RadioAdministrador.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        RadioAdministrador.setForeground(new java.awt.Color(255, 255, 255));
+        RadioAdministrador.setText("Administrador");
 
-        jRadioButton2.setBackground(new java.awt.Color(51, 51, 51));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setText("Usuario");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        RadioUsuario.setBackground(new java.awt.Color(51, 51, 51));
+        buttonGroup1.add(RadioUsuario);
+        RadioUsuario.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        RadioUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        RadioUsuario.setText("Usuario");
+        RadioUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                RadioUsuarioActionPerformed(evt);
             }
         });
 
@@ -138,6 +150,11 @@ public class Registro extends javax.swing.JFrame {
         jLabel4.setText("Tipo de Usuario");
 
         bntRegistrar.setText("Registrar");
+        bntRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntRegistrarActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Regresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -176,8 +193,8 @@ public class Registro extends javax.swing.JFrame {
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jRadioButton2)
-                                            .addComponent(jRadioButton1)))
+                                            .addComponent(RadioUsuario)
+                                            .addComponent(RadioAdministrador)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(jLabel4)))
@@ -237,10 +254,10 @@ public class Registro extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton1)
+                                .addComponent(RadioAdministrador)
                                 .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton2)
+                            .addComponent(RadioUsuario)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel3)
                                 .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -277,9 +294,9 @@ public class Registro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void RadioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_RadioUsuarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -290,28 +307,59 @@ public class Registro extends javax.swing.JFrame {
 
     private void btnAgregarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarImagenActionPerformed
         lblfotos.setIcon(null);
-        JFileChooser j=new JFileChooser();
+        JFileChooser j = new JFileChooser();
         j.setFileSelectionMode(JFileChooser.FILES_ONLY);//solo archivos y no carpetas
-        int estado=j.showOpenDialog(null);
-        if(estado== JFileChooser.APPROVE_OPTION){
-            try{
-                fis=new FileInputStream(j.getSelectedFile());
+        int estado = j.showOpenDialog(null);
+        if (estado == JFileChooser.APPROVE_OPTION) {
+            try {
+                fis = new FileInputStream(j.getSelectedFile());
                 //necesitamos saber la cantidad de bytes
-                this.longitudBytes=(int)j.getSelectedFile().length();
+                this.longitudBytes = (int) j.getSelectedFile().length();
                 try {
-                    Image icono=ImageIO.read(j.getSelectedFile()).getScaledInstance
-                    (lblfotos.getWidth(),lblfotos.getHeight(),Image.SCALE_DEFAULT);
+                    Image icono = ImageIO.read(j.getSelectedFile()).getScaledInstance(lblfotos.getWidth(), lblfotos.getHeight(), Image.SCALE_DEFAULT);
                     lblfotos.setIcon(new ImageIcon(icono));
                     lblfotos.updateUI();
 
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(rootPane, "imagen: "+ex);
+                    JOptionPane.showMessageDialog(rootPane, "imagen: " + ex);
                 }
-            }catch(FileNotFoundException ex){
+            } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarImagenActionPerformed
+
+    private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
+        // TODO add your handling code here:
+        conectando.crearConexion();
+        try {
+
+            String sql = "INSERT INTO usuarios (id_usuario, nombre, telefono, direccion, foto, contraseña) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.getConexion().prepareStatement(sql);
+
+            String tipo = null;
+            if (RadioAdministrador.isSelected()) {
+                tipo = "Administrador";
+            } else if (RadioUsuario.isSelected()) {
+                tipo = "Usuario";
+            }
+            ps.setInt(1, Integer.parseInt(textCedula.getText()));
+            ps.setString(2, textNombre.getText());
+            ps.setInt(3, Integer.parseInt(textTelefono.getText()));
+            ps.setString(4, textDireccon.getText());
+            ps.setBinaryStream(5, fis, longitudBytes);
+            ps.setInt(6, Integer.parseInt(Jcontraseña.getText()));
+           // ps.setString(7, tipo);
+            ps.execute();
+            ps.close();
+            
+             lblfotos.setIcon(null);
+
+            JOptionPane.showMessageDialog(rootPane, "Guardado correctamente");
+        } catch (SQLException | NumberFormatException | HeadlessException x) {
+            JOptionPane.showMessageDialog(rootPane, "exception 2 " + x);
+        }
+    }//GEN-LAST:event_bntRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -351,6 +399,8 @@ public class Registro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField Jcontraseña;
+    private javax.swing.JRadioButton RadioAdministrador;
+    private javax.swing.JRadioButton RadioUsuario;
     private javax.swing.JButton bntRegistrar;
     private javax.swing.JButton btnAgregarImagen;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -363,8 +413,6 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JLabel lblfotos;
     private javax.swing.JTextField textCedula;
     private javax.swing.JTextField textDireccon;
