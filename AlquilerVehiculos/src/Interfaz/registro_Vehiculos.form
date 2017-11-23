@@ -102,7 +102,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="154" max="32767" attributes="0"/>
+              <EmptySpace pref="90" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
@@ -301,10 +301,12 @@
     <Component class="javax.swing.JComboBox" name="ComboMarca">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="5">
             <StringItem index="0" value="Toyota"/>
-            <StringItem index="1" value="Hiundai"/>
+            <StringItem index="1" value="Hyundai"/>
             <StringItem index="2" value="Nissan"/>
+            <StringItem index="3" value="Ferrari"/>
+            <StringItem index="4" value="Mercedez Benz"/>
           </StringArray>
         </Property>
       </Properties>
@@ -326,11 +328,12 @@
     <Component class="javax.swing.JComboBox" name="ComboModelo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="5">
             <StringItem index="0" value="Tucson"/>
             <StringItem index="1" value="Tercel"/>
             <StringItem index="2" value="Sentra"/>
-            <StringItem index="3" value=""/>
+            <StringItem index="3" value="Ferrari Enzo"/>
+            <StringItem index="4" value="Mercedes-Benz Sprinter"/>
           </StringArray>
         </Property>
       </Properties>

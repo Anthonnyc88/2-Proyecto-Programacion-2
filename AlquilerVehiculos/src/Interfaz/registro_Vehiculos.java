@@ -105,14 +105,14 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Placa");
 
-        ComboMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Toyota", "Hiundai", "Nissan" }));
+        ComboMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Toyota", "Hyundai", "Nissan", "Ferrari", "Mercedez Benz" }));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Año");
 
-        ComboModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tucson", "Tercel", "Sentra", "" }));
+        ComboModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tucson", "Tercel", "Sentra", "Ferrari Enzo", "Mercedes-Benz Sprinter" }));
 
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -210,7 +210,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ComboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ComboTransmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel17)
