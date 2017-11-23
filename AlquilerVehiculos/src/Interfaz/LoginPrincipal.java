@@ -7,6 +7,7 @@ package Interfaz;
 
 import Datos.ConexionBaseDatos;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.ImageIcon;
@@ -43,6 +44,25 @@ public class LoginPrincipal extends javax.swing.JFrame {
         getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
     }
+    
+    public void conexionParaLogin() {
+        if (connection != null) {
+            return;
+        }
+
+        String nombreBaseDatos="proyecto";//aqui va el nombre de la base de datos 
+        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
+            if (connection != null) {
+                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
+            }
+        } catch (Exception e) {
+            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,7 +75,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        textNombreUsuario = new javax.swing.JTextField();
+        textUser = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -76,7 +96,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Nombre");
+        jLabel2.setText("Usuario");
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -133,7 +153,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(77, 77, 77)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                            .addComponent(textUser, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                             .addComponent(Jcontraseña)))
                     .addComponent(jLabel3))
                 .addGap(197, 197, 197))
@@ -149,7 +169,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(94, 94, 94)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textUser, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,41 +207,40 @@ public class LoginPrincipal extends javax.swing.JFrame {
 
     private void bntIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntIngresarActionPerformed
         // TODO add your handling code here:
-        
-        
+        //conectando.Conexion();
+
+        conexionParaLogin();
         String tipo = null;
-        String user = textNombreUsuario.getText();
+        String idUser = textUser.getText();
         String pass = Jcontraseña.getText();
         conectando.Conexion();
         try {
 
             s = connection.createStatement();
-            rs = s.executeQuery("SELECT tipo_usuario FROM usuarios WHERE nombre = '" + user + "' AND contraseña = '" + pass + "')");
+            rs = s.executeQuery("SELECT * FROM usuarios WHERE id_usuario = '" + idUser + "' AND contraseña = '" + pass + "'");
 
             while (rs.next()) {
-                tipo = rs.getString("tipo_usuario");
+                String userDatabase = rs.getString("id_usuario");
+                String passDatabase = rs.getString("contraseña");
+                String tipoUsuario=rs.getString("tipo_usuario");
+                
                 System.out.println(tipo);
-            }
 
+                if (userDatabase.equals(idUser) && tipoUsuario.equals("Administrador")) {
+                    Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
+                    ventanaAdministrador.setVisible(true);
+                    this.setVisible(false);
+
+                }
+                if(!userDatabase.equals(idUser))
+                {
+                JOptionPane.showMessageDialog(null,"Incorrect Password");
+                    System.out.println("no estas registrado en el sistema");
+                }
+            }
         } catch (Exception e) {
-            System.out.println("" +e);
+            System.out.println("Problemas" + e);
 
-        }
-
-        try {
-            if (tipo.equals("Administrador")) {
-                JOptionPane.showMessageDialog(null, "Bienvenido Administrador!");
-                Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
-                ventanaAdministrador.setVisible(true);
-
-            }
-            if (!tipo.equals("Cliente")) {
-                JOptionPane.showMessageDialog(null, "Bienvenido Cliente!");
-                Menu_Usuarios ventanaUsuarios = new Menu_Usuarios();
-                ventanaUsuarios.setVisible(true);
-            }
-        } catch (java.lang.NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "No estas Registrado, Por favor Registrese!");
         }
 
 
@@ -275,6 +294,6 @@ public class LoginPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField textNombreUsuario;
+    private javax.swing.JTextField textUser;
     // End of variables declaration//GEN-END:variables
 }
