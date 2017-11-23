@@ -74,9 +74,21 @@ public class ConexionBaseDatos {
         }
     }
 
-    /**
-     * Este metodo es el que hace la magia de la conexion con la base de datos
-     * necesita la url del SGDB , el puerto del server de la DB por utilizar
-     * ademas de la contraseña del server
-     */
+     public void ConexionLogin() {
+        if (connection != null) {
+            return;
+        }
+
+        String url = "jdbc:postgresql://localhost:5432/proyecto";
+        String password = "1414250816ma";
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url, "postgres", password);
+            if (connection != null) {
+                System.out.println("Connecting to database...");
+            }
+        } catch (Exception e) {
+            System.out.println("Problem when connecting to the database");
+        }
+    }
 }

@@ -334,14 +334,14 @@ public class Registro extends javax.swing.JFrame {
         conectando.crearConexion();
         try {
 
-            String sql = "INSERT INTO usuarios (id_usuario, nombre, telefono, direccion, foto, contraseña) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO usuarios (id_usuario, nombre, telefono, direccion, foto, contraseña, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.getConexion().prepareStatement(sql);
 
             String tipo = null;
             if (RadioAdministrador.isSelected()) {
                 tipo = "Administrador";
             } else if (RadioUsuario.isSelected()) {
-                tipo = "Usuario";
+                tipo = "Cliente";
             }
             ps.setInt(1, Integer.parseInt(textCedula.getText()));
             ps.setString(2, textNombre.getText());
@@ -349,11 +349,11 @@ public class Registro extends javax.swing.JFrame {
             ps.setString(4, textDireccon.getText());
             ps.setBinaryStream(5, fis, longitudBytes);
             ps.setInt(6, Integer.parseInt(Jcontraseña.getText()));
-           // ps.setString(7, tipo);
+            ps.setString(7, tipo);
             ps.execute();
             ps.close();
-            
-             lblfotos.setIcon(null);
+
+            lblfotos.setIcon(null);
 
             JOptionPane.showMessageDialog(rootPane, "Guardado correctamente");
         } catch (SQLException | NumberFormatException | HeadlessException x) {
