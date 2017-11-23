@@ -55,7 +55,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        textCedula = new javax.swing.JTextField();
+        textNombreUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -76,7 +76,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cedula");
+        jLabel2.setText("Nombre");
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -133,7 +133,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(77, 77, 77)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                            .addComponent(textNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                             .addComponent(Jcontraseña)))
                     .addComponent(jLabel3))
                 .addGap(197, 197, 197))
@@ -149,7 +149,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(94, 94, 94)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,18 +187,43 @@ public class LoginPrincipal extends javax.swing.JFrame {
 
     private void bntIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntIngresarActionPerformed
         // TODO add your handling code here:
-        conectando.ConexionLogin();
+        
+        
+        String tipo = null;
+        String user = textNombreUsuario.getText();
+        String pass = Jcontraseña.getText();
+        conectando.Conexion();
         try {
-            
-            
-            
-            
-            
-            
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT tipo_usuario FROM usuarios WHERE nombre = '" + user + "' AND contraseña = '" + pass + "')");
+
+            while (rs.next()) {
+                tipo = rs.getString("tipo_usuario");
+                System.out.println(tipo);
+            }
+
         } catch (Exception e) {
+            System.out.println("" +e);
+
         }
 
-      
+        try {
+            if (tipo.equals("Administrador")) {
+                JOptionPane.showMessageDialog(null, "Bienvenido Administrador!");
+                Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
+                ventanaAdministrador.setVisible(true);
+
+            }
+            if (!tipo.equals("Cliente")) {
+                JOptionPane.showMessageDialog(null, "Bienvenido Cliente!");
+                Menu_Usuarios ventanaUsuarios = new Menu_Usuarios();
+                ventanaUsuarios.setVisible(true);
+            }
+        } catch (java.lang.NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No estas Registrado, Por favor Registrese!");
+        }
+
 
     }//GEN-LAST:event_bntIngresarActionPerformed
 
@@ -250,6 +275,6 @@ public class LoginPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField textCedula;
+    private javax.swing.JTextField textNombreUsuario;
     // End of variables declaration//GEN-END:variables
 }
