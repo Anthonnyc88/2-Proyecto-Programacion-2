@@ -70,7 +70,7 @@ public class ConexionBaseDatos {
                 System.out.println("Connecting to database...");
             }
         } catch (Exception e) {
-            System.out.println("Problem when connecting to the database");
+            System.out.println("Problem when connecting to the database...");
         }
     }
 

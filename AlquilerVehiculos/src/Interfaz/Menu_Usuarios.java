@@ -47,7 +47,6 @@ public class Menu_Usuarios extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         bntRentar = new javax.swing.JButton();
         bntBuscarVehiculo = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -76,9 +75,7 @@ public class Menu_Usuarios extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Salir");
-
-        jButton1.setText("Cerrar Seccion");
+        jButton1.setText("Cerrar Sesion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -91,9 +88,6 @@ public class Menu_Usuarios extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(279, 279, 279)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -103,7 +97,7 @@ public class Menu_Usuarios extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(225, 225, 225)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addContainerGap())
         );
@@ -121,9 +115,7 @@ public class Menu_Usuarios extends javax.swing.JFrame {
                 .addComponent(bntRentar)
                 .addGap(30, 30, 30)
                 .addComponent(bntBuscarVehiculo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(22, 22, 22))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         pack();
@@ -191,7 +183,6 @@ public class Menu_Usuarios extends javax.swing.JFrame {
     private javax.swing.JButton bntBuscarVehiculo;
     private javax.swing.JButton bntRentar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

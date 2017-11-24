@@ -50,6 +50,11 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         bntOficina = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnModificarVehiculo = new javax.swing.JButton();
+        btnModificarMarca = new javax.swing.JButton();
+        btnModificarModelo = new javax.swing.JButton();
+        btnModificarEstilo = new javax.swing.JButton();
+        btnModificarOficina = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +70,7 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
             }
         });
 
-        bntMarcas.setText("Registrar Marcas");
+        bntMarcas.setText("Registrar Marca");
         bntMarcas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntMarcasActionPerformed(evt);
@@ -100,19 +105,45 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
             }
         });
 
+        btnModificarVehiculo.setText("Modificar Vehiculo");
+        btnModificarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarVehiculoActionPerformed(evt);
+            }
+        });
+
+        btnModificarMarca.setText("Modificar Marca");
+        btnModificarMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarMarcaActionPerformed(evt);
+            }
+        });
+
+        btnModificarModelo.setText("Modificar Modelo");
+        btnModificarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarModeloActionPerformed(evt);
+            }
+        });
+
+        btnModificarEstilo.setText("Modificar Estilo");
+        btnModificarEstilo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarEstiloActionPerformed(evt);
+            }
+        });
+
+        btnModificarOficina.setText("Modificar Oficina");
+        btnModificarOficina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarOficinaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(271, 271, 271)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bntVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bntMarcas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bntModelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bntOficina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(191, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,6 +153,24 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bntMarcas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bntModelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bntOficina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bntVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+                .addGap(191, 191, 191)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnModificarVehiculo)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnModificarModelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnModificarMarca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnModificarEstilo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnModificarOficina, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,17 +179,27 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
-                .addComponent(bntVehiculo)
-                .addGap(29, 29, 29)
-                .addComponent(bntMarcas)
-                .addGap(31, 31, 31)
-                .addComponent(bntModelo)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntVehiculo)
+                    .addComponent(btnModificarVehiculo))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntMarcas)
+                    .addComponent(btnModificarMarca))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntModelo)
+                    .addComponent(btnModificarModelo))
                 .addGap(32, 32, 32)
-                .addComponent(jButton4)
-                .addGap(38, 38, 38)
-                .addComponent(bntOficina)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(btnModificarEstilo))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntOficina)
+                    .addComponent(btnModificarOficina))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,6 +248,42 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnModificarEstiloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEstiloActionPerformed
+        // TODO add your handling code here:
+        modificar_Estilo v = new modificar_Estilo();
+        v.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btnModificarEstiloActionPerformed
+
+    private void btnModificarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarVehiculoActionPerformed
+        // TODO add your handling code here:
+        modificar_Vehiculo v = new modificar_Vehiculo();
+        v.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnModificarVehiculoActionPerformed
+
+    private void btnModificarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarModeloActionPerformed
+        // TODO add your handling code here:
+        modificar_Modelo v = new modificar_Modelo();
+        v.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnModificarModeloActionPerformed
+
+    private void btnModificarMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMarcaActionPerformed
+        // TODO add your handling code here:
+        modificar_Marca v = new modificar_Marca();
+        v.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnModificarMarcaActionPerformed
+
+    private void btnModificarOficinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarOficinaActionPerformed
+        // TODO add your handling code here:
+        modificar_Oficina v = new modificar_Oficina();
+        v.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnModificarOficinaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -230,6 +325,11 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
     private javax.swing.JButton bntModelo;
     private javax.swing.JButton bntOficina;
     private javax.swing.JButton bntVehiculo;
+    private javax.swing.JButton btnModificarEstilo;
+    private javax.swing.JButton btnModificarMarca;
+    private javax.swing.JButton btnModificarModelo;
+    private javax.swing.JButton btnModificarOficina;
+    private javax.swing.JButton btnModificarVehiculo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;

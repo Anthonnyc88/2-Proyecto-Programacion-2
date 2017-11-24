@@ -334,7 +334,7 @@ public class Registro extends javax.swing.JFrame {
         conectando.crearConexion();
         try {
 
-            String sql = "INSERT INTO usuarios (id_usuario, nombre, telefono, direccion, foto, contraseña, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO usuarios (id_usuario, nombre, telefono, direccion, foto, contraseña, tipo_usuario) VALUES (?, ?, ?, ?, ?, md5(?), ?)";
             PreparedStatement ps = con.getConexion().prepareStatement(sql);
 
             String tipo = null;
@@ -343,19 +343,49 @@ public class Registro extends javax.swing.JFrame {
             } else if (RadioUsuario.isSelected()) {
                 tipo = "Cliente";
             }
+            
+            while(!(textCedula.getText().length()==0 || textNombre.getText().length()==0 || textDireccon.getText().length()==0  || Jcontraseña.getText().length()==0)){
+            
             ps.setInt(1, Integer.parseInt(textCedula.getText()));
             ps.setString(2, textNombre.getText());
             ps.setInt(3, Integer.parseInt(textTelefono.getText()));
             ps.setString(4, textDireccon.getText());
             ps.setBinaryStream(5, fis, longitudBytes);
-            ps.setInt(6, Integer.parseInt(Jcontraseña.getText()));
+            
+            ps.setString(6,Jcontraseña.getText());
+              
             ps.setString(7, tipo);
             ps.execute();
             ps.close();
 
             lblfotos.setIcon(null);
 
-            JOptionPane.showMessageDialog(rootPane, "Guardado correctamente");
+            JOptionPane.showMessageDialog(rootPane, "Registrado correctamente");
+            
+            
+            textCedula.setText("");
+            textNombre.setText("");
+            textTelefono.setText("");
+            textDireccon.setText("");
+            Jcontraseña.setText("");
+            
+            }
+            
+//            ps.setInt(1, Integer.parseInt(textCedula.getText()));
+//            ps.setString(2, textNombre.getText());
+//            ps.setInt(3, Integer.parseInt(textTelefono.getText()));
+//            ps.setString(4, textDireccon.getText());
+//            ps.setBinaryStream(5, fis, longitudBytes);
+//            
+//           ps.setString(6,Jcontraseña.getText());
+//              
+//            ps.setString(7, tipo);
+//            ps.execute();
+//            ps.close();
+//
+//            lblfotos.setIcon(null);
+//
+//            JOptionPane.showMessageDialog(rootPane, "Guardado correctamente");
         } catch (SQLException | NumberFormatException | HeadlessException x) {
             JOptionPane.showMessageDialog(rootPane, "exception 2 " + x);
         }

@@ -148,6 +148,11 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         bntRegistrar.setText("Registrar");
 
         bntRegresar.setText("Regresar");
+        bntRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntRegresarActionPerformed(evt);
+            }
+        });
 
         lblfotos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
@@ -315,6 +320,14 @@ public class registro_Vehiculos extends javax.swing.JFrame {
             }
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarImagenActionPerformed
+
+    private void bntRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegresarActionPerformed
+        // TODO add your handling code here:
+        
+        Menu_Admnistrador ventanaRegresar = new Menu_Admnistrador();
+        ventanaRegresar.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_bntRegresarActionPerformed
 
     /**
      * @param args the command line arguments

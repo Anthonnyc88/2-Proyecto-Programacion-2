@@ -118,6 +118,12 @@ public class LoginPrincipal extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Usuario");
 
+        textUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textUserActionPerformed(evt);
+            }
+        });
+
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -244,37 +250,40 @@ public class LoginPrincipal extends javax.swing.JFrame {
         String tipo = null;
         String idUser = textUser.getText();
         String pass = Jcontraseña.getText();
-        conectando.Conexion();
+        //conectando.Conexion();
         try {
 
             s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM usuarios WHERE id_usuario = '" + idUser + "' AND contraseña = '" + pass + "'");
+            rs = s.executeQuery("SELECT * FROM usuarios WHERE id_usuario = '" + idUser + "'");
 
             while (rs.next()) {
                 String userDatabase = rs.getString("id_usuario");
-                String passDatabase = rs.getString("contraseña");
+                //String passDatabase = rs.getString("contraseña");
                 String tipoUsuario=rs.getString("tipo_usuario");
                 
                 System.out.println(tipo);
 
-                if (userDatabase.equals(idUser) && tipoUsuario.equals("Administrador")) {
+                //while(!(Jcontraseña.getText().compareToIgnoreCase("") )){
+                    if(!(Jcontraseña.getText().length()==0)){
+                
+                if (userDatabase.equals(userDatabase) && tipoUsuario.equals("Administrador")) {
                     Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
                     ventanaAdministrador.setVisible(true);
                     this.setVisible(false);
                 }
-                else
-                {
+                else if(userDatabase.equals(userDatabase) && tipoUsuario.equals("Cliente")){
                     Menu_Usuarios ventanaClientes = new Menu_Usuarios();
                     ventanaClientes.setVisible(true);
                     this.setVisible(false);
                             
+                }
+               
                 }
             }
         } catch (Exception e) {
             System.out.println("Problemas" + e);
 
         }
-
     }//GEN-LAST:event_bntIngresarActionPerformed
 
     private void JcontraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JcontraseñaKeyPressed
@@ -282,36 +291,38 @@ public class LoginPrincipal extends javax.swing.JFrame {
         
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
         
-            conexionParaLoginRoger();
+        conexionParaLoginRoger();
         String tipo = null;
         String idUser = textUser.getText();
         String pass = Jcontraseña.getText();
-        conectando.Conexion();
+        //conectando.Conexion();
         try {
 
             s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM usuarios WHERE id_usuario = '" + idUser + "' AND contraseña = '" + pass + "'");
+            rs = s.executeQuery("SELECT * FROM usuarios WHERE id_usuario = '" + idUser + "'");
 
             while (rs.next()) {
                 String userDatabase = rs.getString("id_usuario");
-                String passDatabase = rs.getString("contraseña");
+                //String passDatabase = rs.getString("contraseña");
                 String tipoUsuario=rs.getString("tipo_usuario");
                 
                 System.out.println(tipo);
 
-                if (userDatabase.equals(idUser) && tipoUsuario.equals("Administrador")) {
+                //while(!(Jcontraseña.getText().compareToIgnoreCase("") )){
+                    if(!(Jcontraseña.getText().length()==0)){
+                
+                if (userDatabase.equals(userDatabase) && tipoUsuario.equals("Administrador")) {
                     Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
                     ventanaAdministrador.setVisible(true);
                     this.setVisible(false);
-
                 }
-                else
-                {
-                
+                else if(userDatabase.equals(userDatabase) && tipoUsuario.equals("Cliente")){
                     Menu_Usuarios ventanaClientes = new Menu_Usuarios();
                     ventanaClientes.setVisible(true);
                     this.setVisible(false);
                             
+                }
+               
                 }
             }
         } catch (Exception e) {
@@ -325,6 +336,10 @@ public class LoginPrincipal extends javax.swing.JFrame {
     private void JcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JcontraseñaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JcontraseñaActionPerformed
+
+    private void textUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textUserActionPerformed
 
     /**
      * @param args the command line arguments
