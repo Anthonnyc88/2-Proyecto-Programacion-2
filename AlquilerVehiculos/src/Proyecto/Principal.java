@@ -24,9 +24,9 @@ public class Principal {
 
         System.out.println("Conectado: " + conectando.crearConexion());
         if (conectando.crearConexion()) {
-
             LoginPrincipal ventanaPrincipal = new LoginPrincipal();
             ventanaPrincipal.setVisible(true);
+            System.out.println("ejecutando el programa");
 
         }
 

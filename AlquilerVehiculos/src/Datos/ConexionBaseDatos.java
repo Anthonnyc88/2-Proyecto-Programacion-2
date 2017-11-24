@@ -44,7 +44,7 @@ public class ConexionBaseDatos {
         try {
             Class.forName("org.postgresql.Driver");
 
-            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto", "postgres", "1414250816ma");
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5433/renta_vehiculos", "postgres", "Saborio17");
             if (conexion != null) {
                 return true;
             }

@@ -6,6 +6,7 @@
 package Interfaz;
 
 import Datos.ConexionBaseDatos;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -45,12 +46,12 @@ public class LoginPrincipal extends javax.swing.JFrame {
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
     }
     
-    public void conexionParaLogin() {
+    public void conexionParaLoginTony() {
         if (connection != null) {
             return;
         }
 
-        String nombreBaseDatos="proyecto";//aqui va el nombre de la base de datos 
+        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
         String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
         String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
         try {
@@ -64,6 +65,25 @@ public class LoginPrincipal extends javax.swing.JFrame {
         }
     }
 
+     public void conexionParaLoginRoger() {
+        if (connection != null) {
+            return;
+        }
+
+        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
+        String url = "jdbc:postgresql://localhost:5433/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
+            if (connection != null) {
+                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
+            }
+        } catch (Exception e) {
+            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,6 +127,17 @@ public class LoginPrincipal extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        Jcontraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JcontraseñaActionPerformed(evt);
+            }
+        });
+        Jcontraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JcontraseñaKeyPressed(evt);
             }
         });
 
@@ -189,7 +220,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void IteemRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IteemRegistroActionPerformed
@@ -209,7 +240,49 @@ public class LoginPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         //conectando.Conexion();
 
-        conexionParaLogin();
+        conexionParaLoginRoger();
+        String tipo = null;
+        String idUser = textUser.getText();
+        String pass = Jcontraseña.getText();
+        conectando.Conexion();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT * FROM usuarios WHERE id_usuario = '" + idUser + "' AND contraseña = '" + pass + "'");
+
+            while (rs.next()) {
+                String userDatabase = rs.getString("id_usuario");
+                String passDatabase = rs.getString("contraseña");
+                String tipoUsuario=rs.getString("tipo_usuario");
+                
+                System.out.println(tipo);
+
+                if (userDatabase.equals(idUser) && tipoUsuario.equals("Administrador")) {
+                    Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
+                    ventanaAdministrador.setVisible(true);
+                    this.setVisible(false);
+                }
+                else
+                {
+                    Menu_Usuarios ventanaClientes = new Menu_Usuarios();
+                    ventanaClientes.setVisible(true);
+                    this.setVisible(false);
+                            
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Problemas" + e);
+
+        }
+
+    }//GEN-LAST:event_bntIngresarActionPerformed
+
+    private void JcontraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JcontraseñaKeyPressed
+        // TODO add your handling code here:
+        
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        
+            conexionParaLoginRoger();
         String tipo = null;
         String idUser = textUser.getText();
         String pass = Jcontraseña.getText();
@@ -245,9 +318,13 @@ public class LoginPrincipal extends javax.swing.JFrame {
             System.out.println("Problemas" + e);
 
         }
+            
+        }
+    }//GEN-LAST:event_JcontraseñaKeyPressed
 
-
-    }//GEN-LAST:event_bntIngresarActionPerformed
+    private void JcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JcontraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JcontraseñaActionPerformed
 
     /**
      * @param args the command line arguments
