@@ -84,5 +84,4 @@ public class Usuario {
     public String toString() {
         return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion + ", contase\u00f1a=" + contaseña + ", foto=" + foto + '}';
     }
-     
 }

@@ -200,7 +200,7 @@ public class registro_Estilo extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         System.out.println("estamos en registrar estilo");
-        //conectando.crearConexion();
+        //conectando.conexionParaLoginRoger();
         conexionParaLoginRoger();
         
         try {
@@ -225,13 +225,10 @@ public class registro_Estilo extends javax.swing.JFrame {
 
         } catch (Exception e) {
         }
-        
     }//GEN-LAST:event_bntRegistrarActionPerformed
 
     private void textNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNombreKeyPressed
-        // TODO add your handling code here:
-        
-        
+        // TODO add your handling code here
     }//GEN-LAST:event_textNombreKeyPressed
 
     /**
