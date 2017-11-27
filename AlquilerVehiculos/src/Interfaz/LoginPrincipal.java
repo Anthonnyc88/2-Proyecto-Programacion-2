@@ -227,6 +227,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         System.exit(0);
+        //cierra el programa
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void IteemRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IteemRegistroActionPerformed
