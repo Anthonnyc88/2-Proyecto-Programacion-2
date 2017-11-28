@@ -159,4 +159,33 @@ public class ConexionBaseDatos {
     public void insertarOficina(){
     
     }
+    
+    public void insertarInfoAlquilerVehiculo() {
+    
+    }
+    
+    public void modificarVehiculo(){
+    
+    }
+    
+    public void modificarEstilo(){
+    
+    }
+    
+    public void modificarMarca(){
+    
+    }
+     
+    public void modificarModelo(){
+    
+    }
+    
+    public void modificarOficina(){
+    
+    }
+
+    public void buscarVehiculo(){
+    
+    }
 }
+
