@@ -348,7 +348,6 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
         conectando.crearConexionRegistrosVehiculos();
-        String marca = ComboMarca.getSelectedItem().toString();
         try {
 
             String sql = "INSERT INTO vehiculo (placa, marca, modelo, estilo, transmision, año, precio, estado, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -362,13 +361,12 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                 ps.setInt(4, ComboEstilos.getSelectedIndex());
                 ps.setInt(5, ComboTransmision.getSelectedIndex());
                 ps.setInt(6, ComboAño.getSelectedIndex());
-                ps.setInt(7, Integer.parseInt(TextPrecio.getText()));
+                ps.setDouble(7, Double.parseDouble(TextPrecio.getText()));
                 ps.setInt(8, ComboEstado.getSelectedIndex());
                 ps.setBinaryStream(9, fis, longitudBytes);
 
                 ps.execute();
                 ps.close();
-
                 lblfotos.setIcon(null);
 
                 JOptionPane.showMessageDialog(rootPane, "Registrado correctamente");
