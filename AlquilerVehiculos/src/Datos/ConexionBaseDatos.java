@@ -78,6 +78,46 @@ public class ConexionBaseDatos {
         }
         return false;
     }
+    
+    
+    
+    public boolean crearConexionRegistrosVehiculos() {
+
+        try {
+            Class.forName("org.postgresql.Driver");
+
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5433/renta_vehiculos", "postgres", "Saborio17");
+            if (conexion != null) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("error en conexion: " + ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
+    
+    
+    
+    
+    
+     public boolean crearConexionAnthonny() {
+
+        try {
+            Class.forName("org.postgresql.Driver");
+
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto", "postgres", "1414250816ma");
+            if (conexion != null) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("error en conexion: " + ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
 
     public void Conexion() {
         if (connection != null) {

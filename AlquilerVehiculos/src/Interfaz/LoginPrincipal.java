@@ -51,7 +51,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
             return;
         }
 
-        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
+        String nombreBaseDatos="proyecto";//aqui va el nombre de la base de datos 
         String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
         String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
         try {
@@ -246,8 +246,9 @@ public class LoginPrincipal extends javax.swing.JFrame {
     private void bntIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntIngresarActionPerformed
         // TODO add your handling code here:
         //conectando.Conexion();
-
-        conexionParaLoginRoger();
+        
+         conexionParaLoginTony();
+        //conexionParaLoginRoger();
         String tipo = null;
         String idUser = textUser.getText();
         String pass = Jcontraseña.getText();
