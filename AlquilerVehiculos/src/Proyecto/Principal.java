@@ -10,7 +10,6 @@ import Interfaz.LoginPrincipal;
 
 /**
  *
- * @author Admie21 o roger
  * @author Anthonny
  */
 public class Principal {
@@ -22,13 +21,16 @@ public class Principal {
      */
     public static void main(String[] args) {
 
-        System.out.println("Conectado: " + conectando.crearConexionRoger());
-        if (conectando.crearConexionRoger()) {
-            LoginPrincipal ventanaPrincipal = new LoginPrincipal();
-            ventanaPrincipal.setVisible(true);
-            System.out.println("ejecutando el programa");
-
-        }
+//        System.out.println("Conectado: " + conectando.crearConexionRoger());
+//        if (conectando.crearConexionRoger()) {
+//            LoginPrincipal ventanaPrincipal = new LoginPrincipal();
+//            ventanaPrincipal.setVisible(true);
+//            System.out.println("ejecutando el programa");
+//        }
+        
+         LoginPrincipal ventanaPrincipal = new LoginPrincipal();
+         ventanaPrincipal.setVisible(true);
+         System.out.println("ejecutando el programa");
 
     }
     

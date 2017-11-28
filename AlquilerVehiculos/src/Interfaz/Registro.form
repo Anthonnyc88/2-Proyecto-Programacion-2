@@ -85,7 +85,7 @@
                                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="textTelefono" max="32767" attributes="0"/>
-                                          <Component id="textDireccon" max="32767" attributes="0"/>
+                                          <Component id="textDireccion" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -158,7 +158,7 @@
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textDireccon" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="textDireccion" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -287,7 +287,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="textNombre">
     </Component>
-    <Component class="javax.swing.JTextField" name="textDireccon">
+    <Component class="javax.swing.JTextField" name="textDireccion">
     </Component>
     <Component class="javax.swing.JTextField" name="textTelefono">
     </Component>
@@ -359,6 +359,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="Jcontrase&#xf1;a">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Jcontrase&#xf1;aActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblfotos">
       <Properties>

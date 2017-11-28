@@ -55,6 +55,7 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
         btnModificarModelo = new javax.swing.JButton();
         btnModificarEstilo = new javax.swing.JButton();
         btnModificarOficina = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,6 +141,13 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Reportes");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,7 +169,9 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bntOficina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bntVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
-                .addGap(191, 191, 191)
+                .addGap(65, 65, 65)
+                .addComponent(jButton2)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnModificarVehiculo)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -182,7 +192,8 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntVehiculo)
-                    .addComponent(btnModificarVehiculo))
+                    .addComponent(btnModificarVehiculo)
+                    .addComponent(jButton2))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntMarcas)
@@ -284,6 +295,13 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnModificarOficinaActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Reportes ventanaPrincipal = new Reportes();
+        ventanaPrincipal.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -331,6 +349,7 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarOficina;
     private javax.swing.JButton btnModificarVehiculo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
