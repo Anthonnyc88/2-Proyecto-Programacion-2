@@ -5,6 +5,10 @@
  */
 package Datos;
 
+import Procesos.Estilo;
+import Procesos.Marca;
+import Procesos.Modelo;
+import Procesos.Oficina;
 import Procesos.Usuario;
 import Procesos.Vehiculo;
 import java.sql.Connection;
@@ -150,19 +154,19 @@ public class ConexionBaseDatos {
     
     }
     
-    public void insertarEstilo(){
+    public void insertarEstilo(Estilo estilo){
     
     }
     
-    public void insertarMarca(){
+    public void insertarMarca(Marca marca){
     
     }
      
-    public void insertarModelo(){
+    public void insertarModelo(Modelo modelo){
     
     }
     
-    public void insertarOficina(){
+    public void insertarOficina(Oficina oficina){
     
     }
     
@@ -170,23 +174,23 @@ public class ConexionBaseDatos {
     
     }
     
-    public void modificarVehiculo(){
+    public void modificarVehiculo(Vehiculo vehiculo){
     
     }
     
-    public void modificarEstilo(){
+    public void modificarEstilo(Estilo estilo){
     
     }
     
-    public void modificarMarca(){
+    public void modificarMarca(Marca marca){
     
     }
      
-    public void modificarModelo(){
+    public void modificarModelo(Modelo modelo){
     
     }
     
-    public void modificarOficina(){
+    public void modificarOficina(Oficina oficina){
     
     }
 
