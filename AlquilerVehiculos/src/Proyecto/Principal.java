@@ -21,17 +21,18 @@ public class Principal {
      */
     public static void main(String[] args) {
 
-//        System.out.println("Conectado: " + conectando.crearConexionRoger());
-//        if (conectando.crearConexionRoger()) {
+//        System.out.println("Conectado: " + conectando.crearConexionAnthonny());
+//        if (conectando.crearConexionAnthonny()) {
 //            LoginPrincipal ventanaPrincipal = new LoginPrincipal();
 //            ventanaPrincipal.setVisible(true);
 //            System.out.println("ejecutando el programa");
 //        }
         
          LoginPrincipal ventanaPrincipal = new LoginPrincipal();
-         ventanaPrincipal.setVisible(true);
-         System.out.println("ejecutando el programa");
-
+            ventanaPrincipal.setVisible(true);
+            System.out.println("------------------------");
+            System.out.println("Ejecutando el programa");
+            System.out.println("------------------------");
     }
     
 }
