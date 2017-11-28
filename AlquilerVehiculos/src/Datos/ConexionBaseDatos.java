@@ -37,7 +37,8 @@ public class ConexionBaseDatos {
      * Método utilizado para establecer la conexión con la base de datos
      *
      * @return estado regresa el estado de la conexión, true si se estableció la
-     * conexión, falso en caso contrario
+     * conexión, falso en caso contrario 
+     * aa
      */
     public boolean crearConexionRoger() {
 
@@ -97,28 +98,7 @@ public class ConexionBaseDatos {
         }
         return false;
     }
-    
-    
-    
-    
-    
-     public boolean crearConexionAnthonny() {
-
-        try {
-            Class.forName("org.postgresql.Driver");
-
-            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyecto", "postgres", "1414250816ma");
-            if (conexion != null) {
-                return true;
-            }
-        } catch (SQLException ex) {
-            System.out.println("error en conexion: " + ex);
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex);
-        }
-        return false;
-    }
-
+ 
     public void Conexion() {
         if (connection != null) {
             return;
@@ -143,7 +123,7 @@ public class ConexionBaseDatos {
         }
 
         String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5433/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
         String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
         try {
             Class.forName("org.postgresql.Driver");
@@ -155,5 +135,28 @@ public class ConexionBaseDatos {
             System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
         }
     }
+    
+    public void insertarUsuario(){
+    
+    }
+    
+    public void insertarVehiculo(){
+    
+    }
+    
+    public void insertarEstilo(){
+    
+    }
+    
+    public void insertarMarca(){
+    
+    }
      
+    public void insertarModelo(){
+    
+    }
+    
+    public void insertarOficina(){
+    
+    }
 }

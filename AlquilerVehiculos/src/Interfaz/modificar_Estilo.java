@@ -9,7 +9,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -27,6 +31,19 @@ public class modificar_Estilo extends javax.swing.JFrame {
     public modificar_Estilo() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        setResizable(false);
+        setTitle("TIENDA DE VEHICULOS   ");
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Azul.jpg")).getImage());
+
+        ((JPanel) getContentPane()).setOpaque(false);
+        ImageIcon uno = new ImageIcon(this.getClass().getResource("/Imagenes/Azul.jpg"));
+        JLabel fondo = new JLabel();
+        fondo.setIcon(uno);
+        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+        fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
+        
+        //agrego fondo a las ventanas restanes
     }
 
     public void conexionDBRoger() {
