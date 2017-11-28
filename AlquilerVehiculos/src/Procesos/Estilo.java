@@ -10,7 +10,6 @@ package Procesos;
  * @author Roger Oporta
  */
 public class Estilo {
-    
     private int idEstilo;
     private String nombre;
 
@@ -42,5 +41,4 @@ public class Estilo {
     public String toString() {
         return "Estilo{" + "idEstilo=" + idEstilo + ", nombre=" + nombre + '}';
     }
-
 }
