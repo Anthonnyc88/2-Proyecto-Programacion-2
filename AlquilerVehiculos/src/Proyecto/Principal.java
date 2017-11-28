@@ -22,8 +22,8 @@ public class Principal {
      */
     public static void main(String[] args) {
 
-        System.out.println("Conectado: " + conectando.crearConexion());
-        if (conectando.crearConexion()) {
+        System.out.println("Conectado: " + conectando.crearConexionRoger());
+        if (conectando.crearConexionRoger()) {
             LoginPrincipal ventanaPrincipal = new LoginPrincipal();
             ventanaPrincipal.setVisible(true);
             System.out.println("ejecutando el programa");

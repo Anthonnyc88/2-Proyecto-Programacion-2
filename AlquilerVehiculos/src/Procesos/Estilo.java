@@ -7,7 +7,7 @@ package Procesos;
 
 /**
  *
- * @author Admie21
+ * @author Roger Oporta
  */
 public class Estilo {
     

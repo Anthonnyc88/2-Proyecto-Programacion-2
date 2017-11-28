@@ -39,12 +39,35 @@ public class ConexionBaseDatos {
      * @return estado regresa el estado de la conexión, true si se estableció la
      * conexión, falso en caso contrario
      */
-    public boolean crearConexion() {
+    public boolean crearConexionRoger() {
 
         try {
             Class.forName("org.postgresql.Driver");
 
-            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5433/renta_vehiculos", "postgres", "Saborio17");
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/renta_vehiculos", "postgres", "Saborio17");
+            if (conexion != null) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("error en conexion: " + ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
+    
+    /**
+     * Método utilizado para establecer la conexión con la base de datos
+     *
+     * @return estado regresa el estado de la conexión, true si se estableció la
+     * conexión, falso en caso contrario
+     */
+    public boolean crearConexionAnthonny() {
+
+        try {
+            Class.forName("org.postgresql.Driver");
+
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/renta_vehiculos", "postgres", "Saborio17");
             if (conexion != null) {
                 return true;
             }
