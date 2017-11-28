@@ -10,7 +10,6 @@ import Interfaz.LoginPrincipal;
 
 /**
  *
- * @author Admie21 o roger
  * @author Anthonny
  */
 public class Principal {
@@ -22,8 +21,8 @@ public class Principal {
      */
     public static void main(String[] args) {
 
-        System.out.println("Conectado: " + conectando.crearConexion());
-        if (conectando.crearConexion()) {
+        System.out.println("Conectado: " + conectando.crearConexionAnthonny());
+        if (conectando.crearConexionAnthonny()) {
             LoginPrincipal ventanaPrincipal = new LoginPrincipal();
             ventanaPrincipal.setVisible(true);
             System.out.println("ejecutando el programa");
