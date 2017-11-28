@@ -371,21 +371,6 @@ public class Registro extends javax.swing.JFrame {
             
             }
             
-//            ps.setInt(1, Integer.parseInt(textCedula.getText()));
-//            ps.setString(2, textNombre.getText());
-//            ps.setInt(3, Integer.parseInt(textTelefono.getText()));
-//            ps.setString(4, textDireccon.getText());
-//            ps.setBinaryStream(5, fis, longitudBytes);
-//            
-//           ps.setString(6,Jcontraseña.getText());
-//              
-//            ps.setString(7, tipo);
-//            ps.execute();
-//            ps.close();
-//
-//            lblfotos.setIcon(null);
-//
-//            JOptionPane.showMessageDialog(rootPane, "Guardado correctamente");
         } catch (SQLException | NumberFormatException | HeadlessException x) {
             JOptionPane.showMessageDialog(rootPane, "exception 2 " + x);
         }
