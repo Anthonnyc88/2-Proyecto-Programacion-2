@@ -5,6 +5,8 @@
  */
 package Datos;
 
+import Procesos.Usuario;
+import Procesos.Vehiculo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -136,11 +138,15 @@ public class ConexionBaseDatos {
         }
     }
     
-    public void insertarUsuario(){
+    /**
+     * Metodo que inserta un usuario
+     * @param usuario
+     */
+    public void insertarUsuario( Usuario usuario){
     
     }
     
-    public void insertarVehiculo(){
+    public void insertarVehiculo(Vehiculo vehiculo){
     
     }
     
