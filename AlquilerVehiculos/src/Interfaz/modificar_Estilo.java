@@ -5,6 +5,9 @@
  */
 package Interfaz;
 
+import Datos.ConexionBaseDatos;
+import Procesos.Estilo;
+import Procesos.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -24,7 +27,8 @@ public class modificar_Estilo extends javax.swing.JFrame {
     private Connection connection = null;
     private ResultSet rs = null;
     private Statement s = null;
-    
+    Estilo estilo = new Estilo();
+    ConexionBaseDatos coneccion = new ConexionBaseDatos();
     /**
      * Creates new form modificar_Estilo
      */
@@ -52,7 +56,7 @@ public class modificar_Estilo extends javax.swing.JFrame {
         }
 
         String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5433/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
         String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
         try {
             Class.forName("org.postgresql.Driver");
@@ -195,9 +199,7 @@ public class modificar_Estilo extends javax.swing.JFrame {
                 
             String nombreEstilo=rs.getString("nombre_estilo");
             estiloActual.setText(nombreEstilo);
-            
             }
-            
 
         } catch (Exception e) {
             System.out.println("Problemas " + e);
@@ -208,8 +210,7 @@ public class modificar_Estilo extends javax.swing.JFrame {
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
         // TODO add your handling code here:
         
-        conexionDBRoger();
-        
+        conexionDBRoger();  
         System.out.println("estamos en modificar estilo");
         
         try {

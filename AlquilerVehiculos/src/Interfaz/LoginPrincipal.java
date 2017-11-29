@@ -252,7 +252,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
         String tipo = null;
         String idUser = textUser.getText();
         String pass = Jcontraseña.getText();
-        //conectando.Conexion();
+        //conectando.crearConexion();
         try {
 
             s = connection.createStatement();

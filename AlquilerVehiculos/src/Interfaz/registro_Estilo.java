@@ -52,7 +52,7 @@ public class registro_Estilo extends javax.swing.JFrame {
         }
 
         String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5433/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
         String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
         try {
             Class.forName("org.postgresql.Driver");

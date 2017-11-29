@@ -6,6 +6,7 @@
 package Interfaz;
 
 import Datos.ConexionBaseDatos;
+import Procesos.Usuario;
 import Proyecto.Principal;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -37,6 +38,7 @@ public class Registro extends javax.swing.JFrame {
     private Connection connection = null;
     private ResultSet rs = null;
     private Statement s = null;
+    Usuario usuario = new Usuario();
 
     ConexionBaseDatos con = Principal.conectando;
 
@@ -331,6 +333,7 @@ public class Registro extends javax.swing.JFrame {
 
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
+        
         conectando.crearConexionRoger();
         try {
 
@@ -351,24 +354,18 @@ public class Registro extends javax.swing.JFrame {
             ps.setInt(3, Integer.parseInt(textTelefono.getText()));
             ps.setString(4, textDireccon.getText());
             ps.setBinaryStream(5, fis, longitudBytes);
-            
             ps.setString(6,Jcontraseña.getText());
-              
             ps.setString(7, tipo);
             ps.execute();
             ps.close();
-
             lblfotos.setIcon(null);
-
             JOptionPane.showMessageDialog(rootPane, "Registrado correctamente");
-            
             
             textCedula.setText("");
             textNombre.setText("");
             textTelefono.setText("");
             textDireccon.setText("");
             Jcontraseña.setText("");
-            
             }
             
         } catch (SQLException | NumberFormatException | HeadlessException x) {

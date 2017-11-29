@@ -11,11 +11,14 @@ import Procesos.Modelo;
 import Procesos.Oficina;
 import Procesos.Usuario;
 import Procesos.Vehiculo;
+import Proyecto.Principal;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +29,7 @@ public class ConexionBaseDatos {
     private Connection connection = null;
     private ResultSet rs = null;
     private Statement s = null;
-
+    ConexionBaseDatos con = Principal.conectando;
     private Connection conexion = null;
 
     /**
@@ -105,7 +108,7 @@ public class ConexionBaseDatos {
         return false;
     }
  
-    public void Conexion() {
+    public void crearConexion() {
         if (connection != null) {
             return;
         }
@@ -156,6 +159,7 @@ public class ConexionBaseDatos {
     
     public void insertarEstilo(Estilo estilo){
     
+      
     }
     
     public void insertarMarca(Marca marca){
@@ -180,6 +184,26 @@ public class ConexionBaseDatos {
     
     public void modificarEstilo(Estilo estilo){
     
+        crearConexionRoger();
+        
+        System.out.println("estamos en modificar estilo");
+        
+        try {
+            
+            s = connection.createStatement();
+            int z = s.executeUpdate("UPDATE estilo SET nombre_estilo = '"+estilo.getNombre()+"'  WHERE id_estilo = ' "+estilo.getIdEstilo()+" ' ");
+            
+            if (z == 1) {
+            
+                System.out.println("Se módificó el registro del estilo numero : "+estilo.getNombre());
+                JOptionPane.showMessageDialog(null,"Se módificó el registro de manera exitosa el estilo");
+                
+            }else {
+                System.out.println("Error al modificar el registro");
+                JOptionPane.showMessageDialog(null,"Error al modificar el registro");
+            }
+        } catch (Exception e) {
+        }
     }
     
     public void modificarMarca(Marca marca){
