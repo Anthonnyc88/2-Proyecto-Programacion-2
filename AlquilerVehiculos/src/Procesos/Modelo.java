@@ -9,37 +9,7 @@ package Procesos;
  *
  * @author Admie21
  */
-public class Modelo {
+public class Modelo extends Concepto {
     
-    private int idModelo;
-    private String nombre;
-
-    public Modelo(int idModelo, String nombre) {
-        this.idModelo = idModelo;
-        this.nombre = nombre;
-    }
-    
-    public Modelo(){
-    }
-
-    public int getIdModelo() {
-        return idModelo;
-    }
-
-    public void setIdModelo(int idModelo) {
-        this.idModelo = idModelo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    @Override
-    public String toString() {
-        return "Modelo{" + "idModelo=" + idModelo + ", nombre=" + nombre + '}';
-    }
+  
 }

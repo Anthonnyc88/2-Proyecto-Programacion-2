@@ -28,7 +28,7 @@ public class modificar_Estilo extends javax.swing.JFrame {
     private ResultSet rs = null;
     private Statement s = null;
     Estilo estilo = new Estilo();
-    ConexionBaseDatos coneccion = new ConexionBaseDatos();
+    ConexionBaseDatos conexionDB = new ConexionBaseDatos();
     /**
      * Creates new form modificar_Estilo
      */

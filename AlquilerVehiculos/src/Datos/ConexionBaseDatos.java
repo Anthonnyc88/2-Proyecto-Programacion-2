@@ -45,25 +45,22 @@ public class ConexionBaseDatos {
     /**
      * Método utilizado para establecer la conexión con la base de datos
      *
-     * @return estado regresa el estado de la conexión, true si se estableció la
-     * conexión, falso en caso contrario 
-     * aa
      */
-    public boolean crearConexionRoger() {
+    public void crearConexionRoger() {
 
         try {
             Class.forName("org.postgresql.Driver");
 
             conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/renta_vehiculos", "postgres", "Saborio17");
             if (conexion != null) {
-                return true;
+                return ;
             }
         } catch (SQLException ex) {
             System.out.println("error en conexion: " + ex);
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         }
-        return false;
+        
     }
     
     /**
@@ -191,11 +188,11 @@ public class ConexionBaseDatos {
         try {
             
             s = connection.createStatement();
-            int z = s.executeUpdate("UPDATE estilo SET nombre_estilo = '"+estilo.getNombre()+"'  WHERE id_estilo = ' "+estilo.getIdEstilo()+" ' ");
+            int z = s.executeUpdate("UPDATE estilo SET nombre_estilo = '"+estilo.getNombre()+"'  WHERE id_estilo = ' "+estilo.getIdentiicador()+" ' ");
             
             if (z == 1) {
             
-                System.out.println("Se módificó el registro del estilo numero : "+estilo.getNombre());
+                System.out.println("Se módificó el registro del estilo numero : "+estilo.getIdentiicador());
                 JOptionPane.showMessageDialog(null,"Se módificó el registro de manera exitosa el estilo");
                 
             }else {

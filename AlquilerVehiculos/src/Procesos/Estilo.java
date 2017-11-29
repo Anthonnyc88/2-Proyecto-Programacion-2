@@ -9,36 +9,6 @@ package Procesos;
  *
  * @author Roger Oporta
  */
-public class Estilo {
-    private int idEstilo;
-    private String nombre;
-
-    public Estilo(int idEstilo, String nombre) {
-        this.idEstilo = idEstilo;
-        this.nombre = nombre;
-    }
-   
-     public Estilo(){
-    }
-
-    public int getIdEstilo() {
-        return idEstilo;
-    }
-
-    public void setIdEstilo(int idEstilo) {
-        this.idEstilo = idEstilo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    @Override
-    public String toString() {
-        return "Estilo{" + "idEstilo=" + idEstilo + ", nombre=" + nombre + '}';
-    }
+public class Estilo extends Concepto{
+ 
 }
