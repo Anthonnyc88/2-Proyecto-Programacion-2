@@ -6,6 +6,7 @@
 package Interfaz;
 
 import Datos.ConexionBaseDatos;
+import Procesos.Marca;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -24,6 +25,7 @@ public class registro_Marcas extends javax.swing.JFrame {
 
     ConexionBaseDatos conectando = new ConexionBaseDatos();
 
+    Marca  marca = new Marca();
     private Connection connection = null;
     private ResultSet rs = null;
     private Statement s = null;
@@ -46,25 +48,6 @@ public class registro_Marcas extends javax.swing.JFrame {
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
     }
 
-    public void conexionParaLoginRoger() {
-        if (connection != null) {
-            return;
-        }
-
-        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5433/"+nombreBaseDatos;//este es el nombre de la base de datos
-        String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
-            if (connection != null) {
-                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
-            }
-        } catch (Exception e) {
-            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
-        }
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -198,32 +181,12 @@ public class registro_Marcas extends javax.swing.JFrame {
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
         
-        System.out.println("estamos en registrar marcas");
+        marca.setIdentiicador(Integer.parseInt(textIdentificador.getText()));
+        marca.setNombre(textNombre.getText());
         
-        conexionParaLoginRoger();
-        try {
-            
-            String identificadorMarca=textIdentificador.getText();
-            String nombreMarca=textNombre.getText();
-            
-            while(!( textIdentificador.getText().length()==0||textNombre.getText().length()==0 ) ){
-            
-            s = connection.createStatement();
-            int z = s.executeUpdate("INSERT INTO marca(id_marca,nombre_marca) VALUES('"+identificadorMarca +"', '" +nombreMarca + "')");
-            if (z == 1) {
-                System.out.println("Se agregó el registro de manera exitosa una Nueva marca "+nombreMarca);
-                JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa una Nueva marca ");
-                  textIdentificador.setText("");
-                  textNombre.setText("");
-
-            } else {
-                System.out.println("Error al insertar el registro");
-            }
-            }
-            
-        } catch (Exception e) {
-        }
-        
+        conectando.insertarMarca(marca);
+        textIdentificador.setText("");
+        textNombre.setText(""); 
     }//GEN-LAST:event_bntRegistrarActionPerformed
 
     /**

@@ -186,22 +186,73 @@ public class ConexionBaseDatos {
 
     public void insertarMarca(Marca marca) {
 
+        crearConexionRoger();
+        
+        System.out.println("estamos en registrar marcas");
+
+        try {
+    
+            
+            s = connection.createStatement();
+            int z = s.executeUpdate("INSERT INTO marca(id_marca,nombre_marca) VALUES('"+marca.getIdentiicador() +"', '" +marca.getNombre() + "')");
+            if (z == 1) {
+                System.out.println("Se agregó el registro de manera exitosa una Nueva marca "+marca.getIdentiicador());
+                JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa una Nueva marca ");
+                
+
+            } else {
+                System.out.println("Error al insertar el registro");
+            }
+            
+            
+        } catch (Exception e) {
+        }
+    }
+    
+    /**
+     * Metodo que busca un estilo 
+     * en base a una pk dada
+     * 
+     * @param idMarca
+     * @return 
+     */
+    public String buscarMarca(String idMarca){
+    
+        String nombreMarca="";
+        crearConexionRoger();
+        try {
+           s = connection.createStatement();
+            rs = s.executeQuery("SELECT * FROM marca WHERE id_marca='" +idMarca+ "'");
+            
+            while (rs.next()) {
+                
+          nombreMarca=rs.getString("nombre_marca");
+            }
+        } catch (Exception e) {
+            System.out.println("Problemas " + e);
+        }                        
+        
+    return nombreMarca;
     }
 
     public void insertarModelo(Modelo modelo) {
 
+        crearConexionRoger();
     }
 
     public void insertarOficina(Oficina oficina) {
 
+        crearConexionRoger();
     }
 
     public void insertarInfoAlquilerVehiculo() {
 
+        crearConexionRoger();
     }
 
     public void modificarVehiculo(Vehiculo vehiculo) {
 
+        crearConexionRoger();
     }
 
     /**
@@ -243,14 +294,10 @@ public class ConexionBaseDatos {
         String nombreEstilo="";
         crearConexionRoger();
         try {
-
             s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM estilo WHERE id_estilo='" +idEstilo+ "'");
-            
-            while (rs.next()) {
-                
+            rs = s.executeQuery("SELECT * FROM estilo WHERE id_estilo='" +idEstilo+ "'");         
+            while (rs.next()) {             
           nombreEstilo=rs.getString("nombre_estilo");
-   
             }
 
         } catch (Exception e) {
@@ -258,23 +305,44 @@ public class ConexionBaseDatos {
 
         }
                                         
-        
     return nombreEstilo;
     }
 
     public void modificarMarca(Marca marca) {
+        
+        System.out.println("estamos en modificar marca");
+        
+        crearConexionRoger();
+        
+       try {       
+            s = connection.createStatement();
+            int z = s.executeUpdate("UPDATE marca SET nombre_marca = '"+marca.getNombre()+"'  WHERE id_marca = ' "+marca.getIdentiicador()+" ' ");
+            
+            if (z == 1) {
+            
+                System.out.println("Se módificó el registro de la marca numero : "+marca.getIdentiicador());
+                JOptionPane.showMessageDialog(null,"Se módificó el registro de manera exitosa la marca");
 
+            }else {
+                System.out.println("Error al modificar el registro");
+                JOptionPane.showMessageDialog(null,"Error al modificar el registro");
+            }     
+        } catch (Exception e) {
+        }
     }
 
     public void modificarModelo(Modelo modelo) {
 
+        crearConexionRoger();
     }
 
     public void modificarOficina(Oficina oficina) {
 
+        crearConexionRoger();
     }
 
     public void buscarVehiculo() {
 
+        crearConexionRoger();
     }
 }

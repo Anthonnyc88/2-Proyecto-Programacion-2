@@ -27,8 +27,10 @@ public class modificar_Estilo extends javax.swing.JFrame {
     private Connection connection = null;
     private ResultSet rs = null;
     private Statement s = null;
-    Estilo estiloNuevo = new Estilo();
+    Estilo estilo = new Estilo();
+    
     ConexionBaseDatos conexionDB = new ConexionBaseDatos();
+    
     /**
      * Creates new form modificar_Estilo
      */
@@ -177,10 +179,10 @@ public class modificar_Estilo extends javax.swing.JFrame {
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
         // TODO add your handling code here:
         
-        estiloNuevo.setIdentiicador(Integer.parseInt(textIdEstilo.getText()));
-        estiloNuevo.setNombre(textNuevoEstilo.getText());
+        estilo.setIdentiicador(Integer.parseInt(textIdEstilo.getText()));
+        estilo.setNombre(textNuevoEstilo.getText());
         
-        conexionDB.modificarEstilo(estiloNuevo);
+        conexionDB.modificarEstilo(estilo);
         
         textIdEstilo.setText("");
         textNuevoEstilo.setText("");

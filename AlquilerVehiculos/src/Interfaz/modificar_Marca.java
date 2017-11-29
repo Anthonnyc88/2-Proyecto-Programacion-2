@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import Datos.ConexionBaseDatos;
+import Procesos.Marca;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,6 +27,10 @@ public class modificar_Marca extends javax.swing.JFrame {
     private ResultSet rs = null;
     private Statement s = null;
     
+     Marca marca = new Marca();
+    
+    ConexionBaseDatos conexionDB = new ConexionBaseDatos();
+    
     /**
      * Creates new form modificar_Marca
      */
@@ -44,25 +50,6 @@ public class modificar_Marca extends javax.swing.JFrame {
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
     }
 
-    public void conexionDBRoger() {
-        if (connection != null) {
-            return;
-        }
-
-        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5433/"+nombreBaseDatos;//este es el nombre de la base de datos
-        String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
-            if (connection != null) {
-                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
-            }
-        } catch (Exception e) {
-            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
-        }
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -180,59 +167,23 @@ public class modificar_Marca extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
      
-        String marcaBuscar=textIdMarca.getText();
+        String nombreMarca=textIdMarca.getText();
+        marcaActual.setText(conexionDB.buscarMarca(nombreMarca));
         
-        conexionDBRoger();
-        try {
-
-            s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM marca WHERE id_marca='" +marcaBuscar+ "'");
-            
-            while (rs.next()) {
-                
-            String nombreMarca=rs.getString("nombre_marca");
-            marcaActual.setText(nombreMarca);
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Problemas " + e);
-
-        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
         // TODO add your handling code here:
+     
         
-        conexionDBRoger();
+        marca.setIdentiicador(Integer.parseInt(textIdMarca.getText()));
+        marca.setNombre(textNuevaMarca.getText());
         
-        System.out.println("estamos en modificar marca");
+        conexionDB.modificarMarca(marca);
         
-        try {
-            
-            String nuevoMarca=textNuevaMarca.getText();
-            while(!(textNuevaMarca.getText().length()==0)){
-            
-            s = connection.createStatement();
-            int z = s.executeUpdate("UPDATE marca SET nombre_marca = '"+nuevoMarca+"'  WHERE id_marca = ' "+textIdMarca.getText()+" ' ");
-            
-            if (z == 1) {
-            
-                System.out.println("Se módificó el registro de la marca numero : "+textIdMarca.getText());
-                JOptionPane.showMessageDialog(null,"Se módificó el registro de manera exitosa la marca");
-                textIdMarca.setText("");
-                marcaActual.setText("");
-                textNuevaMarca.setText("");
-                
-            }else {
-                System.out.println("Error al modificar el registro");
-                JOptionPane.showMessageDialog(null,"Error al modificar el registro");
-            }
-            
-            }
-            
-        } catch (Exception e) {
-        }
-  
+        textIdMarca.setText("");
+        marcaActual.setText("");
+        textNuevaMarca.setText("");
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
 
     /**
