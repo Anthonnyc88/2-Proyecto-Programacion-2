@@ -6,6 +6,7 @@
 package Interfaz;
 
 import Datos.ConexionBaseDatos;
+import Procesos.Estilo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,7 +14,6 @@ import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -23,7 +23,8 @@ import javax.swing.JPanel;
 public class registro_Estilo extends javax.swing.JFrame {
 
     ConexionBaseDatos conectando = new ConexionBaseDatos();
-
+    Estilo estilo = new Estilo();
+    
     private Connection connection = null;
     private ResultSet rs = null;
     private Statement s = null;
@@ -198,33 +199,12 @@ public class registro_Estilo extends javax.swing.JFrame {
 
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
-
-        System.out.println("estamos en registrar estilo");
-        //conectando.conexionParaLoginRoger();
-        conexionParaLoginRoger();
         
-        try {
-
-            String identificadorEstilo = textIdentificador.getText();
-            String nombreEstilo = textNombre.getText();
-
-            while(!( textIdentificador.getText().length()==0||textNombre.getText().length()==0 ) ){
-            Statement s = connection.createStatement();
-
-            int z = s.executeUpdate("INSERT INTO estilo(id_estilo,nombre_estilo) VALUES('" + identificadorEstilo + "', '" + nombreEstilo + "')");
-            if (z == 1) {
-                System.out.println("Se agregó el registro de manera exitosa un Nuevo estilo " + nombreEstilo);
-                JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa un Nuevo estilo ");
-                textIdentificador.setText("");
-                textNombre.setText("");
-
-            } else {
-                System.out.println("Error al insertar el registro");
-            }
-            }
-
-        } catch (Exception e) {
-        }
+        estilo.setIdentiicador(Integer.parseInt(textIdentificador.getText()));
+        estilo.setNombre(textNombre.getText());       
+        conectando.insertarEstilo(estilo);    
+        textIdentificador.setText("");
+        textNombre.setText("");
     }//GEN-LAST:event_bntRegistrarActionPerformed
 
     private void textNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNombreKeyPressed

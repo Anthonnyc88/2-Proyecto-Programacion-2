@@ -46,25 +46,6 @@ public class LoginPrincipal extends javax.swing.JFrame {
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
     }
     
-    public void conexionParaLoginTony() {
-        if (connection != null) {
-            return;
-        }
-
-        String nombreBaseDatos="proyecto";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
-        String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
-            if (connection != null) {
-                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
-            }
-        } catch (Exception e) {
-            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
-        }
-    }
-
      public void conexionParaLoginRoger() {
         if (connection != null) {
             return;
@@ -246,13 +227,14 @@ public class LoginPrincipal extends javax.swing.JFrame {
     private void bntIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntIngresarActionPerformed
         // TODO add your handling code here:
         //conectando.Conexion();
+
+        //conectando.crearConexionRoger();
         
-         conexionParaLoginTony();
-        //conexionParaLoginRoger();
+        conexionParaLoginRoger();
         String tipo = null;
         String idUser = textUser.getText();
         String pass = Jcontraseña.getText();
-        //conectando.crearConexion();
+        
         try {
 
             s = connection.createStatement();
@@ -292,12 +274,12 @@ public class LoginPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-        
-        conexionParaLoginRoger();
+       
         String tipo = null;
         String idUser = textUser.getText();
         String pass = Jcontraseña.getText();
-        //conectando.Conexion();
+ 
+        conexionParaLoginRoger();
         try {
 
             s = connection.createStatement();
