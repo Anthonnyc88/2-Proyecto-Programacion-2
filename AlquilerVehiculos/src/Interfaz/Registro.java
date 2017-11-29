@@ -334,7 +334,7 @@ public class Registro extends javax.swing.JFrame {
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
         
-        conectando.crearConexionRoger();
+        conectando.crearConexionGeneral();
         try {
 
             String sql = "INSERT INTO usuarios (id_usuario, nombre, telefono, direccion, foto, contraseña, tipo_usuario) VALUES (?, ?, ?, ?, ?, md5(?), ?)";

@@ -45,7 +45,7 @@ public class ConexionBaseDatos {
      * Método utilizado para establecer la conexión con la base de datos
      *
      */
-    public void crearConexionRoger() {
+    public void crearConexionGeneral() {
      if (connection != null) {
             return;
         }
@@ -162,7 +162,7 @@ public class ConexionBaseDatos {
      */
     public void insertarEstilo(Estilo estilo) {
 
-        crearConexionRoger();
+        crearConexionGeneral();
         System.out.println("Estamos es registrar en Registrar Estilo");
         
         try {
@@ -186,7 +186,7 @@ public class ConexionBaseDatos {
 
     public void insertarMarca(Marca marca) {
 
-        crearConexionRoger();
+        crearConexionGeneral();
         
         System.out.println("estamos en registrar marcas");
 
@@ -219,7 +219,7 @@ public class ConexionBaseDatos {
     public String buscarMarca(String idMarca){
     
         String nombreMarca="";
-        crearConexionRoger();
+        crearConexionGeneral();
         try {
            s = connection.createStatement();
             rs = s.executeQuery("SELECT * FROM marca WHERE id_marca='" +idMarca+ "'");
@@ -237,22 +237,22 @@ public class ConexionBaseDatos {
 
     public void insertarModelo(Modelo modelo) {
 
-        crearConexionRoger();
+        crearConexionGeneral();
     }
 
     public void insertarOficina(Oficina oficina) {
 
-        crearConexionRoger();
+        crearConexionGeneral();
     }
 
     public void insertarInfoAlquilerVehiculo() {
 
-        crearConexionRoger();
+        crearConexionGeneral();
     }
 
     public void modificarVehiculo(Vehiculo vehiculo) {
 
-        crearConexionRoger();
+        crearConexionGeneral();
     }
 
     /**
@@ -263,7 +263,7 @@ public class ConexionBaseDatos {
     public void modificarEstilo(Estilo estilo) {
 
         System.out.println("estamos en modificar estilo");
-        crearConexionRoger();
+        crearConexionGeneral();
         try {
 
             s = connection.createStatement();
@@ -292,7 +292,7 @@ public class ConexionBaseDatos {
     public String buscarEstilo(String idEstilo){
     
         String nombreEstilo="";
-        crearConexionRoger();
+        crearConexionGeneral();
         try {
             s = connection.createStatement();
             rs = s.executeQuery("SELECT * FROM estilo WHERE id_estilo='" +idEstilo+ "'");         
@@ -312,7 +312,7 @@ public class ConexionBaseDatos {
         
         System.out.println("estamos en modificar marca");
         
-        crearConexionRoger();
+        crearConexionGeneral();
         
        try {       
             s = connection.createStatement();
@@ -333,16 +333,16 @@ public class ConexionBaseDatos {
 
     public void modificarModelo(Modelo modelo) {
 
-        crearConexionRoger();
+        crearConexionGeneral();
     }
 
     public void modificarOficina(Oficina oficina) {
 
-        crearConexionRoger();
+        crearConexionGeneral();
     }
 
     public void buscarVehiculo() {
 
-        crearConexionRoger();
+        crearConexionGeneral();
     }
 }

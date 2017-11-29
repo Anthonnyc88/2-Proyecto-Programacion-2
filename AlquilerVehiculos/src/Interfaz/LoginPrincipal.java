@@ -228,7 +228,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         //conectando.Conexion();
 
-        //conectando.crearConexionRoger();
+        //conectando.crearConexionGeneral();
         
         conexionParaLoginRoger();
         String tipo = null;
