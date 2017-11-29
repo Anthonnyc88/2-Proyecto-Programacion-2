@@ -156,6 +156,10 @@ public class ConexionBaseDatos {
 
     }
 
+    /**
+     * Metodo que registra un nuevo estilo
+     * @param estilo 
+     */
     public void insertarEstilo(Estilo estilo) {
 
         crearConexionRoger();
@@ -200,6 +204,11 @@ public class ConexionBaseDatos {
 
     }
 
+    /**
+     * Metodo que modifica un estilo en base 
+     * a pk
+     * @param estilo 
+     */
     public void modificarEstilo(Estilo estilo) {
 
         System.out.println("estamos en modificar estilo");
@@ -222,6 +231,13 @@ public class ConexionBaseDatos {
         }
     }
     
+    /**
+     * Metodo que busca un estilo 
+     * en base a una pk dada
+     * 
+     * @param idEstilo
+     * @return 
+     */
     public String buscarEstilo(String idEstilo){
     
         String nombreEstilo="";
