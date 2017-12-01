@@ -10,5 +10,18 @@ package Procesos;
  * @author Admie21
  */
 public class Marca extends Concepto{
+
+    public Marca() {
+    }
+
+    public Marca(int identiicador, String nombre) {
+        super(identiicador, nombre);
+    }
+
+    @Override
+    public String toString() {
+        return "Marca{" + '}';
+    }
+    
    
 }

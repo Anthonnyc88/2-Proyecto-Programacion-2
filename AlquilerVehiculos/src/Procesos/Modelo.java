@@ -10,6 +10,18 @@ package Procesos;
  * @author Admie21
  */
 public class Modelo extends Concepto {
+
+    public Modelo() {
+    }
+
+    public Modelo(int identiicador, String nombre) {
+        super(identiicador, nombre);
+    }
+
+    @Override
+    public String toString() {
+        return "Modelo{" + '}';
+    }
     
   
 }

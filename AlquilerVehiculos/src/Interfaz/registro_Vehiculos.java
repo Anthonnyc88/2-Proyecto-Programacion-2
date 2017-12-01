@@ -24,6 +24,12 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import Procesos.Marca;
+import Procesos.Estilo;
+import Procesos.Modelo;
+import java.sql.DriverManager;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -37,6 +43,9 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     private Connection connection = null;
     private ResultSet rs = null;
     private Statement s = null;
+    private DefaultComboBoxModel<Marca> marca;
+    private DefaultComboBoxModel<Modelo> modelo;
+    private DefaultComboBoxModel<Estilo> estilo;
 
     ConexionBaseDatos con = Principal.conectando;
 
@@ -56,7 +65,85 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         fondo.setIcon(uno);
         getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
+        mostrarMarca();
+        mostrarModelo();
+        mostrarEstilo();
+        
     }
+    
+    
+    public void crearConexionGeneralAnthonny() {
+
+         if (connection != null) {
+            return;
+        }
+
+        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
+        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
+            if (connection != null) {
+                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
+            }
+        } catch (Exception e) {
+            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
+        }
+
+    }
+    
+      public void mostrarMarca() {
+     crearConexionGeneralAnthonny();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT id_marca FROM marca");
+
+            while (rs.next()) {
+                comboMarcas.addItem(rs.getString("id_marca"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+
+    }
+      
+       public void mostrarModelo() {
+     crearConexionGeneralAnthonny();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT id_modelo FROM modelo");
+
+            while (rs.next()) {
+                ComboModelo.addItem(rs.getString("id_modelo"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+
+    }
+       
+        public void mostrarEstilo() {
+     crearConexionGeneralAnthonny();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT id_estilo FROM estilo");
+
+            while (rs.next()) {
+                ComboEstilos.addItem(rs.getString("id_estilo"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+
+    }
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,7 +161,6 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         ComboAño = new javax.swing.JComboBox();
         TextPlaca = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        ComboMarca = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         ComboModelo = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
@@ -90,6 +176,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         bntRegresar = new javax.swing.JButton();
         lblfotos = new javax.swing.JLabel();
         btnAgregarImagen = new javax.swing.JButton();
+        comboMarcas = new javax.swing.JComboBox();
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -120,21 +207,15 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Placa");
 
-        ComboMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
-
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Año");
 
-        ComboModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
-
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Estilo");
-
-        ComboEstilos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -220,12 +301,12 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel13)
                                     .addComponent(jLabel10))
-                                .addGap(79, 79, 79)
+                                .addGap(64, 64, 64)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ComboMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ComboModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ComboEstilos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ComboAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(ComboEstilos, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ComboModelo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboMarcas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ComboAño, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
@@ -236,7 +317,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ComboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ComboTransmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addGap(154, 154, 154)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel17)
@@ -259,9 +340,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(81, 81, 81)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(ComboMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -285,11 +364,17 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                                     .addComponent(ComboEstilos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(lblfotos, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TextPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(TextPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11))
+                                .addGap(28, 28, 28))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboMarcas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(19, 19, 19)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(TextPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -347,7 +432,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
 
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
-        conectando.crearConexionRegistrosVehiculos();
+        //conectando.crearConexionRegistrosVehiculos();
+        conectando.crearConexionGeneralAnthonny();
         try {
 
             String sql = "INSERT INTO vehiculo (placa, marca, modelo, estilo, transmision, año, precio, estado, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -356,7 +442,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
             while (!(TextPlaca.getText().length() == 0 || TextPrecio.getText().length() == 0)) {
 
                 ps.setInt(1, Integer.parseInt(TextPlaca.getText()));
-                ps.setInt(2, ComboMarca.getSelectedIndex());
+                ps.setInt(2, comboMarcas.getSelectedIndex());
                 ps.setInt(3, ComboModelo.getSelectedIndex());
                 ps.setInt(4, ComboEstilos.getSelectedIndex());
                 ps.setInt(5, ComboTransmision.getSelectedIndex());
@@ -423,7 +509,6 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JComboBox ComboAño;
     private javax.swing.JComboBox ComboEstado;
     private javax.swing.JComboBox ComboEstilos;
-    private javax.swing.JComboBox ComboMarca;
     private javax.swing.JComboBox ComboModelo;
     private javax.swing.JComboBox ComboTransmision;
     private javax.swing.JTextField TextPlaca;
@@ -431,6 +516,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JButton bntRegistrar;
     private javax.swing.JButton bntRegresar;
     private javax.swing.JButton btnAgregarImagen;
+    private javax.swing.JComboBox comboMarcas;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

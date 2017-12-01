@@ -6,6 +6,7 @@
 package Interfaz;
 
 import Datos.ConexionBaseDatos;
+import Procesos.Modelo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -27,6 +28,7 @@ public class registro_Modelo extends javax.swing.JFrame {
     private Connection connection = null;
     private ResultSet rs = null;
     private Statement s = null;
+    Modelo modelo = new Modelo();
     
     /**
      * Creates new form registro_Modelo
@@ -192,29 +194,15 @@ public class registro_Modelo extends javax.swing.JFrame {
         
         System.out.println("estamos en registrar modelo");
         
-        conexionParaLoginRoger();
-        try {
-            
-            String identificadorModelo=textIdentificador.getText();
-            String nombreModelo=textNombre.getText();
-            
-            while(!( textIdentificador.getText().length()==0||textNombre.getText().length()==0 ) ){
-            
-            s = connection.createStatement();
-            int z = s.executeUpdate("INSERT INTO modelo(id_modelo,nombre_modelo) VALUES('"+identificadorModelo +"', '" +nombreModelo + "')");
-            if (z == 1) {
-                System.out.println("Se agregó el registro de manera exitosa un Nuevo modelo "+nombreModelo);
-                JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa un Nuevo modelo ");
-                  textIdentificador.setText("");
-                  textNombre.setText("");
-
-            } else {
-                System.out.println("Error al insertar el registro");
-            }
-            }
-            
-        } catch (Exception e) {
-        }
+        //conexionParaLoginRoger();
+        
+        conectando.crearConexionGeneralAnthonny();
+        modelo.setIdentiicador(Integer.parseInt(textIdentificador.getText()));
+        modelo.setNombre(textNombre.getText());
+        
+        conectando.insertarModelo(modelo);
+        textIdentificador.setText("");
+        textNombre.setText(""); 
     }//GEN-LAST:event_bntRegistrarActionPerformed
 
     /**

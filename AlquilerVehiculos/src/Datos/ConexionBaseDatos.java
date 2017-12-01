@@ -68,13 +68,13 @@ public class ConexionBaseDatos {
      * Método utilizado para establecer la conexión con la base de datos
      *
      */
-    public void crearConexionAnthonny() {
+    public void crearConexionGeneralAnthonny() {
 
          if (connection != null) {
             return;
         }
 
-        String nombreBaseDatos="proyecto";//aqui va el nombre de la base de datos 
+        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
         String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
         String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
         try {
@@ -162,7 +162,8 @@ public class ConexionBaseDatos {
      */
     public void insertarEstilo(Estilo estilo) {
 
-        crearConexionGeneral();
+        //crearConexionGeneral();
+        crearConexionGeneralAnthonny();
         System.out.println("Estamos es registrar en Registrar Estilo");
         
         try {
@@ -186,7 +187,8 @@ public class ConexionBaseDatos {
 
     public void insertarMarca(Marca marca) {
 
-        crearConexionGeneral();
+        //crearConexionGeneral();
+        crearConexionGeneralAnthonny();
         
         System.out.println("estamos en registrar marcas");
 
@@ -237,7 +239,28 @@ public class ConexionBaseDatos {
 
     public void insertarModelo(Modelo modelo) {
 
-        crearConexionGeneral();
+        //crearConexionGeneral();
+        crearConexionGeneralAnthonny();
+        
+        System.out.println("estamos en registrar modelos");
+
+        try {
+    
+            
+            s = connection.createStatement();
+            int z = s.executeUpdate("INSERT INTO modelo(id_modelo,nombre_modelo) VALUES('"+modelo.getIdentiicador() +"', '" +modelo.getNombre() + "')");
+            if (z == 1) {
+                System.out.println("Se agregó el registro de manera exitosa una Nuevo modelo "+modelo.getIdentiicador());
+                JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa una Nueva marca ");
+                
+
+            } else {
+                System.out.println("Error al insertar el registro");
+            }
+            
+            
+        } catch (Exception e) {
+        }
     }
 
     public void insertarOficina(Oficina oficina) {

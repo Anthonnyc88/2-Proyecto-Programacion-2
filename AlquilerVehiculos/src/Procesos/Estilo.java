@@ -10,5 +10,14 @@ package Procesos;
  * @author Roger Oporta
  */
 public class Estilo extends Concepto{
+
+    public Estilo() {
+    }
+
+    @Override
+    public String toString() {
+        return "Estilo{" + '}';
+    }
+    
  
 }
