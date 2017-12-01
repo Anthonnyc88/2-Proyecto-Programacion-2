@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import Procesos.Estilo;
 
 /**
  *
@@ -200,8 +201,8 @@ public class registro_Estilo extends javax.swing.JFrame {
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
         
-        estilo.setIdentiicador(Integer.parseInt(textIdentificador.getText()));
-        estilo.setNombre(textNombre.getText());       
+        estilo.setCodigo_estilo(Integer.parseInt(textIdentificador.getText()));
+        estilo.setEstilo_vehiculo(textNombre.getText());       
         conectando.insertarEstilo(estilo);    
         textIdentificador.setText("");
         textNombre.setText("");

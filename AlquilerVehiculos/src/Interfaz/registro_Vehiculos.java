@@ -30,6 +30,11 @@ import Procesos.Modelo;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import Procesos.Vehiculo;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,6 +53,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     private DefaultComboBoxModel<Estilo> estilo;
 
     ConexionBaseDatos con = Principal.conectando;
+    public static File Imagen;
 
     /**
      * Creates new form Registro_Vehiculos
@@ -65,36 +71,167 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         fondo.setIcon(uno);
         getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
-        mostrarMarca();
-        mostrarModelo();
-        mostrarEstilo();
-        
+        //mostrarMarca();
+        llenarMarca();
+        llenarModelo();
+        llenarEstilo();
+             
+//        mostrarModelo();
+//        mostrarEstilo();
+
     }
-    
-    
+
     public void crearConexionGeneralAnthonny() {
 
-         if (connection != null) {
+        if (connection != null) {
             return;
         }
 
-        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String nombreBaseDatos = "renta_vehiculos";//aqui va el nombre de la base de datos 
+        String url = "jdbc:postgresql://localhost:5432/" + nombreBaseDatos;//este es el nombre de la base de datos
         String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
+            connection = DriverManager.getConnection(url, "postgres", password);//este es el nombre sel server
             if (connection != null) {
-                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
+                System.out.println("Connecting to database... Base Datos Conectada " + nombreBaseDatos);
             }
         } catch (Exception e) {
-            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
+            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos " + nombreBaseDatos);
         }
 
     }
+
+    public ArrayList<Marca> obtenerMarca() {
+        ArrayList<Marca> listamarca = new ArrayList();
+
+        crearConexionGeneralAnthonny();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT * FROM marca");
+
+            while (rs.next()) {
+                String id = rs.getString("id_marca");
+                String nombre = rs.getString("nombre_marca");
+
+                Marca marca = new Marca(Integer.parseInt(id), nombre);
+
+                listamarca.add(marca);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+
+        return listamarca;
+    }
+
+    public void llenarMarca() {
+        marca = new DefaultComboBoxModel<Marca>();
+        ArrayList<Marca> listamarca = new ArrayList();
+        listamarca = obtenerMarca();
+
+        for (Marca marca2 : listamarca) {
+            marca.addElement(marca2);
+        }
+        comboMarcas.setModel(marca);
+
+    }
     
-      public void mostrarMarca() {
-     crearConexionGeneralAnthonny();
+    
+    
+ public ArrayList<Modelo> obtenerModelo() {
+        ArrayList<Modelo> listamodelo = new ArrayList();
+
+        conectando.crearConexionGeneralAnthonny();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT * FROM modelo");
+
+            while (rs.next()) {
+                String id = rs.getString("id_modelo");
+                String nombre = rs.getString("nombre_modelo");
+                Modelo modelo = new Modelo(Integer.parseInt(id), nombre);
+
+                listamodelo.add(modelo);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+
+        return listamodelo;
+    }
+
+    public void llenarModelo() {
+        modelo = new DefaultComboBoxModel<Modelo>();
+        ArrayList<Modelo> listamodelo = new ArrayList();
+        listamodelo = obtenerModelo();
+
+        for (Modelo modelo2 : listamodelo) {
+            modelo.addElement(modelo2);
+        }
+        ComboModelo.setModel(modelo);
+
+    }
+    
+    
+    public ArrayList<Estilo> obtenerEstilo() {
+        ArrayList<Estilo> listaestilo = new ArrayList();
+
+        conectando.crearConexionGeneralAnthonny();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT * FROM estilo");
+
+            while (rs.next()) {
+                String id = rs.getString("id_estilo");
+                String nombre = rs.getString("nombre_estilo");
+                Estilo estilo = new Estilo(Integer.parseInt(id), nombre);
+
+                listaestilo.add(estilo);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+
+        return listaestilo;
+    }
+
+    public void llenarEstilo() {
+        estilo = new DefaultComboBoxModel<Estilo>();
+        ArrayList<Estilo> listaestilo = new ArrayList();
+        listaestilo = obtenerEstilo();
+
+        for (Estilo estilo2 : listaestilo) {
+            estilo.addElement(estilo2);
+        }
+        ComboEstilos.setModel(estilo);
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    public void mostrarMarca() {
+        crearConexionGeneralAnthonny();
         try {
 
             s = connection.createStatement();
@@ -108,9 +245,9 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         }
 
     }
-      
-       public void mostrarModelo() {
-     crearConexionGeneralAnthonny();
+
+    public void mostrarModelo() {
+        crearConexionGeneralAnthonny();
         try {
 
             s = connection.createStatement();
@@ -124,9 +261,9 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         }
 
     }
-       
-        public void mostrarEstilo() {
-     crearConexionGeneralAnthonny();
+
+    public void mostrarEstilo() {
+        crearConexionGeneralAnthonny();
         try {
 
             s = connection.createStatement();
@@ -140,10 +277,6 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         }
 
     }
-    
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -211,6 +344,12 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Año");
+
+        ComboModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboModeloActionPerformed(evt);
+            }
+        });
 
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -435,22 +574,31 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         //conectando.crearConexionRegistrosVehiculos();
         conectando.crearConexionGeneralAnthonny();
         try {
+            int placa = Integer.parseInt(TextPlaca.getText());
+            Marca marca = (Marca) comboMarcas.getSelectedItem();
+            Modelo modelo = (Modelo) ComboModelo.getSelectedItem();
+            Estilo estilo = (Estilo) ComboEstilos.getSelectedItem();
+            String transmisiones = ComboTransmision.getSelectedItem().toString();
+            int años = ComboAño.getSelectedIndex();
+            double precio = Double.parseDouble(TextPrecio.getText());
+            String estado = ComboEstado.getSelectedItem().toString();
 
+//            Vehiculo vehiculos = new Vehiculo(placa, marca.getCodigo_marca(), estilo.getCodigo_estilo(), modelo.getCodigo_modelo(), transmisiones, años, precio, estado, Imagen);
+//            FileInputStream foto = new FileInputStream(vehiculos.getFoto());
             String sql = "INSERT INTO vehiculo (placa, marca, modelo, estilo, transmision, año, precio, estado, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = con.getConexion().prepareStatement(sql);
+            PreparedStatement ps = conectando.getConexion().prepareStatement(sql);
 
             while (!(TextPlaca.getText().length() == 0 || TextPrecio.getText().length() == 0)) {
 
-                ps.setInt(1, Integer.parseInt(TextPlaca.getText()));
+                ps.setInt(1, placa);
                 ps.setInt(2, comboMarcas.getSelectedIndex());
                 ps.setInt(3, ComboModelo.getSelectedIndex());
                 ps.setInt(4, ComboEstilos.getSelectedIndex());
-                ps.setInt(5, ComboTransmision.getSelectedIndex());
+                ps.setString(5, transmisiones);
                 ps.setInt(6, ComboAño.getSelectedIndex());
-                ps.setDouble(7, Double.parseDouble(TextPrecio.getText()));
+                ps.setDouble(7, precio);
                 ps.setInt(8, ComboEstado.getSelectedIndex());
-                ps.setBinaryStream(9, fis, longitudBytes);
-
+                ps.setBinaryStream(9,fis,longitudBytes);
                 ps.execute();
                 ps.close();
                 lblfotos.setIcon(null);
@@ -464,8 +612,14 @@ public class registro_Vehiculos extends javax.swing.JFrame {
 
         } catch (SQLException | NumberFormatException | HeadlessException x) {
             JOptionPane.showMessageDialog(rootPane, "exception 2 " + x);
+       
+           
         }
     }//GEN-LAST:event_bntRegistrarActionPerformed
+
+    private void ComboModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboModeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboModeloActionPerformed
 
     /**
      * @param args the command line arguments

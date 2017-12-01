@@ -169,9 +169,9 @@ public class ConexionBaseDatos {
         try {
             Statement s = connection.createStatement();
 
-            int z = s.executeUpdate("INSERT INTO estilo(id_estilo,nombre_estilo) VALUES('" + estilo.getIdentiicador() + "', '" +estilo.getNombre() + "')");
+            int z = s.executeUpdate("INSERT INTO estilo(id_estilo,nombre_estilo) VALUES('" + estilo.getCodigo_estilo()+ "', '" +estilo.getEstilo_vehiculo()+ "')");
             if (z == 1) {
-                System.out.println("Se agregó el registro de manera exitosa un Nuevo estilo " + estilo.getIdentiicador());
+                System.out.println("Se agregó el registro de manera exitosa un Nuevo estilo " + estilo.getCodigo_estilo());
                 JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa un Nuevo estilo ");
                
 
@@ -196,9 +196,9 @@ public class ConexionBaseDatos {
     
             
             s = connection.createStatement();
-            int z = s.executeUpdate("INSERT INTO marca(id_marca,nombre_marca) VALUES('"+marca.getIdentiicador() +"', '" +marca.getNombre() + "')");
+            int z = s.executeUpdate("INSERT INTO marca(id_marca,nombre_marca) VALUES('"+marca.getCodigo_marca()+"', '" +marca.getMarca_vehiculo()+ "')");
             if (z == 1) {
-                System.out.println("Se agregó el registro de manera exitosa una Nueva marca "+marca.getIdentiicador());
+                System.out.println("Se agregó el registro de manera exitosa una Nueva marca "+marca.getCodigo_marca());
                 JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa una Nueva marca ");
                 
 
@@ -248,9 +248,9 @@ public class ConexionBaseDatos {
     
             
             s = connection.createStatement();
-            int z = s.executeUpdate("INSERT INTO modelo(id_modelo,nombre_modelo) VALUES('"+modelo.getIdentiicador() +"', '" +modelo.getNombre() + "')");
+            int z = s.executeUpdate("INSERT INTO modelo(id_modelo,nombre_modelo) VALUES('"+modelo.getCodigo_modelo()+"', '" +modelo.getModelo_vehiculo()+ "')");
             if (z == 1) {
-                System.out.println("Se agregó el registro de manera exitosa una Nuevo modelo "+modelo.getIdentiicador());
+                System.out.println("Se agregó el registro de manera exitosa una Nuevo modelo "+modelo.getCodigo_modelo());
                 JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa una Nueva marca ");
                 
 
@@ -290,11 +290,11 @@ public class ConexionBaseDatos {
         try {
 
             s = connection.createStatement();
-            int z = s.executeUpdate("UPDATE estilo SET nombre_estilo = '" + estilo.getNombre() + "'  WHERE id_estilo = ' " + estilo.getIdentiicador() + " ' ");
+            int z = s.executeUpdate("UPDATE estilo SET nombre_estilo = '" + estilo.getEstilo_vehiculo()+ "'  WHERE id_estilo = ' " + estilo.getCodigo_estilo()+ " ' ");
 
             if (z == 1) {
 
-                System.out.println("Se módificó el registro del estilo numero : " + estilo.getIdentiicador());
+                System.out.println("Se módificó el registro del estilo numero : " + estilo.getCodigo_estilo());
                 JOptionPane.showMessageDialog(null, "Se módificó el registro de manera exitosa el estilo");
 
             } else {
@@ -339,11 +339,11 @@ public class ConexionBaseDatos {
         
        try {       
             s = connection.createStatement();
-            int z = s.executeUpdate("UPDATE marca SET nombre_marca = '"+marca.getNombre()+"'  WHERE id_marca = ' "+marca.getIdentiicador()+" ' ");
+            int z = s.executeUpdate("UPDATE marca SET nombre_marca = '"+marca.getMarca_vehiculo()+"'  WHERE id_marca = ' "+marca.getCodigo_marca()+" ' ");
             
             if (z == 1) {
             
-                System.out.println("Se módificó el registro de la marca numero : "+marca.getIdentiicador());
+                System.out.println("Se módificó el registro de la marca numero : "+marca.getCodigo_marca());
                 JOptionPane.showMessageDialog(null,"Se módificó el registro de manera exitosa la marca");
 
             }else {

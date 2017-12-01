@@ -197,8 +197,8 @@ public class registro_Modelo extends javax.swing.JFrame {
         //conexionParaLoginRoger();
         
         conectando.crearConexionGeneralAnthonny();
-        modelo.setIdentiicador(Integer.parseInt(textIdentificador.getText()));
-        modelo.setNombre(textNombre.getText());
+        modelo.setCodigo_modelo(Integer.parseInt(textIdentificador.getText()));
+        modelo.setModelo_vehiculo(textNombre.getText());
         
         conectando.insertarModelo(modelo);
         textIdentificador.setText("");

@@ -335,6 +335,7 @@ public class Registro extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         conectando.crearConexionGeneral();
+       // conectando.crearConexionGeneralAnthonny();
         try {
 
             String sql = "INSERT INTO usuarios (id_usuario, nombre, telefono, direccion, foto, contraseña, tipo_usuario) VALUES (?, ?, ?, ?, ?, md5(?), ?)";

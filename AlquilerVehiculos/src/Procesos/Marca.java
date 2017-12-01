@@ -7,21 +7,44 @@ package Procesos;
 
 /**
  *
- * @author Admie21
+ * @author Anthonny
  */
-public class Marca extends Concepto{
+public class Marca {
+
+    int Codigo_marca;
+    String Marca_vehiculo;
 
     public Marca() {
     }
+    
+    
+    
 
-    public Marca(int identiicador, String nombre) {
-        super(identiicador, nombre);
+    public Marca(int Codigo_marca, String Marca_vehiculo) {
+        this.Codigo_marca = Codigo_marca;
+        this.Marca_vehiculo = Marca_vehiculo;
+    }
+
+    public void setCodigo_marca(int Codigo_marca) {
+        this.Codigo_marca = Codigo_marca;
+    }
+
+    public void setMarca_vehiculo(String Marca_vehiculo) {
+        this.Marca_vehiculo = Marca_vehiculo;
+    }
+
+    public int getCodigo_marca() {
+        return Codigo_marca;
+    }
+
+    public String getMarca_vehiculo() {
+        return Marca_vehiculo;
     }
 
     @Override
     public String toString() {
-        return "Marca{" + '}';
+        return this.Marca_vehiculo;
+
     }
-    
-   
+
 }
