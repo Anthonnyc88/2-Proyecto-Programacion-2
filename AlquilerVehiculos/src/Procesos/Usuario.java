@@ -17,7 +17,7 @@ public class Usuario {
     public String nombre;
     public int telefono;
     public String direccion;
-    public String  contaseña;
+    public String  contraseña;
     public ImageIcon foto;
 
     public Usuario(int cedula, String nombre, int telefono, String direccion, String contaseña, ImageIcon foto) {
@@ -25,7 +25,7 @@ public class Usuario {
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.contaseña = contaseña;
+        this.contraseña = contaseña;
         this.foto = foto;
     }
     
@@ -65,11 +65,11 @@ public class Usuario {
     }
 
     public String getContaseña() {
-        return contaseña;
+        return contraseña;
     }
 
     public void setContaseña(String contaseña) {
-        this.contaseña = contaseña;
+        this.contraseña = contaseña;
     }
 
     public ImageIcon getFoto() {
@@ -82,6 +82,6 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion + ", contase\u00f1a=" + contaseña + ", foto=" + foto + '}';
+        return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion + ", contase\u00f1a=" + contraseña + ", foto=" + foto + '}';
     }
 }

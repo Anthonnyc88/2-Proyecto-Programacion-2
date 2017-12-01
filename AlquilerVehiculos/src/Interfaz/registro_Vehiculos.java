@@ -115,9 +115,9 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                 String id = rs.getString("id_marca");
                 String nombre = rs.getString("nombre_marca");
 
-                Marca marca = new Marca(Integer.parseInt(id), nombre);
+             //   Marca marca = new Marca(Integer.parseInt(id), nombre);
 
-                listamarca.add(marca);
+                //listamarca.add(marca);
 
             }
         } catch (Exception e) {
@@ -153,9 +153,9 @@ public class registro_Vehiculos extends javax.swing.JFrame {
             while (rs.next()) {
                 String id = rs.getString("id_modelo");
                 String nombre = rs.getString("nombre_modelo");
-                Modelo modelo = new Modelo(Integer.parseInt(id), nombre);
+               // Modelo modelo = new Modelo(Integer.parseInt(id), nombre);
 
-                listamodelo.add(modelo);
+               // listamodelo.add(modelo);
 
             }
         } catch (Exception e) {
@@ -190,9 +190,9 @@ public class registro_Vehiculos extends javax.swing.JFrame {
             while (rs.next()) {
                 String id = rs.getString("id_estilo");
                 String nombre = rs.getString("nombre_estilo");
-                Estilo estilo = new Estilo(Integer.parseInt(id), nombre);
+               // Estilo estilo = new Estilo(Integer.parseInt(id), nombre);
 
-                listaestilo.add(estilo);
+              //  listaestilo.add(estilo);
 
             }
         } catch (Exception e) {

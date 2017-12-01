@@ -9,6 +9,6 @@ package Procesos;
  *
  * @author Admie21
  */
-public class Oficina {
+public class Oficina extends Concepto{
     
 }

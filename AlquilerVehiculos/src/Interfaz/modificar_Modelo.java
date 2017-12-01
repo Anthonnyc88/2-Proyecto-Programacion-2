@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import Datos.ConexionBaseDatos;
+import Procesos.Modelo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,7 +22,10 @@ import javax.swing.JPanel;
  * @author Admie21
  */
 public class modificar_Modelo extends javax.swing.JFrame {
-
+    
+    Modelo modelo = new Modelo();
+    ConexionBaseDatos conectando = new ConexionBaseDatos();
+    
     private Connection connection = null;
     private ResultSet rs = null;
     private Statement s = null;
@@ -180,59 +185,24 @@ public class modificar_Modelo extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String modeloBuscar=textIdModelo.getText();
+       
+        modelo.setIdentificador(Integer.parseInt(modeloBuscar));
         
-        conexionDBRoger();
-        try {
-
-            s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM modelo WHERE id_modelo='" +modeloBuscar+ "'");
-            
-            while (rs.next()) {
-                
-            String nombreModelo=rs.getString("nombre_modelo");
-            modeloActual.setText(nombreModelo);
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Problemas " + e);
-
-        }
+        modeloActual.setText(conectando.buscarModelo(modelo));
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
         // TODO add your handling code here:
-        conexionDBRoger();
+       
+        modelo.setIdentificador(Integer.parseInt(textIdModelo.getText()));
+        modelo.setNombre(textNuevoModelo.getText());
         
-        System.out.println("estamos en modificar modelo");
+        conectando.modificarModelo(modelo);
         
-        try {
-            
-            String nuevoMarca=textNuevoModelo.getText();
-            while(!(textNuevoModelo.getText().length()==0)){
-            
-            s = connection.createStatement();
-            int z = s.executeUpdate("UPDATE modelo SET nombre_modelo = '"+nuevoMarca+"'  WHERE id_modelo = ' "+textIdModelo.getText()+" ' ");
-            
-            if (z == 1) {
-            
-                System.out.println("Se módificó el registro el modelo numero : "+textIdModelo.getText());
-                JOptionPane.showMessageDialog(null,"Se módificó el registro de manera exitosa del modelo");
-                textIdModelo.setText("");
-                modeloActual.setText("");
-                textNuevoModelo.setText("");
-                
-            }else {
-                System.out.println("Error al modificar el registro");
-                JOptionPane.showMessageDialog(null,"Error al modificar el registro");
-            }
-            
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Problemas "+e);
-        }
-        
+        textIdModelo.setText("");
+        modeloActual.setText("");
+        textNuevoModelo.setText("");
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
 
     /**
@@ -260,6 +230,7 @@ public class modificar_Modelo extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(modificar_Modelo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

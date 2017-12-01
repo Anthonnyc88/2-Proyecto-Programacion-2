@@ -5,6 +5,8 @@
  */
 package Datos;
 
+import Interfaz.Menu_Admnistrador;
+import Interfaz.Menu_Usuarios;
 import Procesos.Estilo;
 import Procesos.Marca;
 import Procesos.Modelo;
@@ -63,18 +65,37 @@ public class ConexionBaseDatos {
             System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
         }
     }
+    
+    public void crearConexionGeneralAnthonny() {
+     if (connection != null) {
+            return;
+        }
+
+        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
+        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
+            if (connection != null) {
+                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
+            }
+        } catch (Exception e) {
+            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
+        }
+    }
 
     /**
      * Método utilizado para establecer la conexión con la base de datos
      *
      */
-    public void crearConexionGeneralAnthonny() {
+    public void crearConexionAnthonny() {
 
          if (connection != null) {
             return;
         }
 
-        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
+        String nombreBaseDatos="proyecto";//aqui va el nombre de la base de datos 
         String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
         String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
         try {
@@ -162,16 +183,15 @@ public class ConexionBaseDatos {
      */
     public void insertarEstilo(Estilo estilo) {
 
-        //crearConexionGeneral();
-        crearConexionGeneralAnthonny();
+        crearConexionGeneral();
         System.out.println("Estamos es registrar en Registrar Estilo");
         
         try {
             Statement s = connection.createStatement();
 
-            int z = s.executeUpdate("INSERT INTO estilo(id_estilo,nombre_estilo) VALUES('" + estilo.getCodigo_estilo()+ "', '" +estilo.getEstilo_vehiculo()+ "')");
+            int z = s.executeUpdate("INSERT INTO estilo(id_estilo,nombre_estilo) VALUES('" + estilo.getIdentificador() + "', '" +estilo.getNombre() + "')");
             if (z == 1) {
-                System.out.println("Se agregó el registro de manera exitosa un Nuevo estilo " + estilo.getCodigo_estilo());
+                System.out.println("Se agregó el registro de manera exitosa un Nuevo estilo " + estilo.getIdentificador());
                 JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa un Nuevo estilo ");
                
 
@@ -187,8 +207,7 @@ public class ConexionBaseDatos {
 
     public void insertarMarca(Marca marca) {
 
-        //crearConexionGeneral();
-        crearConexionGeneralAnthonny();
+        crearConexionGeneral();
         
         System.out.println("estamos en registrar marcas");
 
@@ -196,9 +215,9 @@ public class ConexionBaseDatos {
     
             
             s = connection.createStatement();
-            int z = s.executeUpdate("INSERT INTO marca(id_marca,nombre_marca) VALUES('"+marca.getCodigo_marca()+"', '" +marca.getMarca_vehiculo()+ "')");
+            int z = s.executeUpdate("INSERT INTO marca(id_marca,nombre_marca) VALUES('"+marca.getIdentificador() +"', '" +marca.getNombre() + "')");
             if (z == 1) {
-                System.out.println("Se agregó el registro de manera exitosa una Nueva marca "+marca.getCodigo_marca());
+                System.out.println("Se agregó el registro de manera exitosa una Nueva marca "+marca.getIdentificador());
                 JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa una Nueva marca ");
                 
 
@@ -239,26 +258,18 @@ public class ConexionBaseDatos {
 
     public void insertarModelo(Modelo modelo) {
 
-        //crearConexionGeneral();
-        crearConexionGeneralAnthonny();
+        crearConexionGeneral();
         
-        System.out.println("estamos en registrar modelos");
-
+        System.out.println("estamos en registrar modelo");
         try {
-    
-            
-            s = connection.createStatement();
-            int z = s.executeUpdate("INSERT INTO modelo(id_modelo,nombre_modelo) VALUES('"+modelo.getCodigo_modelo()+"', '" +modelo.getModelo_vehiculo()+ "')");
+       s = connection.createStatement();
+            int z = s.executeUpdate("INSERT INTO modelo(id_modelo,nombre_modelo) VALUES('"+modelo.getIdentificador() +"', '" +modelo.getNombre() + "')");
             if (z == 1) {
-                System.out.println("Se agregó el registro de manera exitosa una Nuevo modelo "+modelo.getCodigo_modelo());
-                JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa una Nueva marca ");
-                
-
+                System.out.println("Se agregó el registro de manera exitosa un Nuevo modelo "+modelo.getIdentificador());
+                JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa un Nuevo modelo ");
             } else {
                 System.out.println("Error al insertar el registro");
             }
-            
-            
         } catch (Exception e) {
         }
     }
@@ -266,9 +277,24 @@ public class ConexionBaseDatos {
     public void insertarOficina(Oficina oficina) {
 
         crearConexionGeneral();
+        
+        System.out.println("estamos en registrar oficinas");
+        try {
+            s = connection.createStatement();
+            int z = s.executeUpdate("INSERT INTO oficinas(id_oficina,nombre_oficina) VALUES('"+oficina.getIdentificador() +"', '" +oficina.getIdentificador()+"')");
+            if (z == 1) {
+                System.out.println("Se agregó el registro de manera exitosa una Nueva oficina "+oficina.getIdentificador());
+                JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa una Nueva oficina ");
+
+            } else {
+                System.out.println("Error al insertar el registro");
+            }
+ 
+        } catch (Exception e) {
+        }
     }
 
-    public void insertarInfoAlquilerVehiculo() {
+    public void insertarInformacionRentaVehiculo() {
 
         crearConexionGeneral();
     }
@@ -290,11 +316,11 @@ public class ConexionBaseDatos {
         try {
 
             s = connection.createStatement();
-            int z = s.executeUpdate("UPDATE estilo SET nombre_estilo = '" + estilo.getEstilo_vehiculo()+ "'  WHERE id_estilo = ' " + estilo.getCodigo_estilo()+ " ' ");
+            int z = s.executeUpdate("UPDATE estilo SET nombre_estilo = '" + estilo.getNombre() + "'  WHERE id_estilo = ' " + estilo.getIdentificador() + " ' ");
 
             if (z == 1) {
 
-                System.out.println("Se módificó el registro del estilo numero : " + estilo.getCodigo_estilo());
+                System.out.println("Se módificó el registro del estilo numero : " + estilo.getIdentificador());
                 JOptionPane.showMessageDialog(null, "Se módificó el registro de manera exitosa el estilo");
 
             } else {
@@ -339,11 +365,11 @@ public class ConexionBaseDatos {
         
        try {       
             s = connection.createStatement();
-            int z = s.executeUpdate("UPDATE marca SET nombre_marca = '"+marca.getMarca_vehiculo()+"'  WHERE id_marca = ' "+marca.getCodigo_marca()+" ' ");
+            int z = s.executeUpdate("UPDATE marca SET nombre_marca = '"+marca.getNombre()+"'  WHERE id_marca = ' "+marca.getIdentificador()+" ' ");
             
             if (z == 1) {
             
-                System.out.println("Se módificó el registro de la marca numero : "+marca.getCodigo_marca());
+                System.out.println("Se módificó el registro de la marca numero : "+marca.getIdentificador());
                 JOptionPane.showMessageDialog(null,"Se módificó el registro de manera exitosa la marca");
 
             }else {
@@ -353,19 +379,148 @@ public class ConexionBaseDatos {
         } catch (Exception e) {
         }
     }
+    
+    public String buscarModelo(Modelo modelo){
+    
+        
+        String modeloNombre="";
+        crearConexionGeneral();
+        
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT * FROM modelo WHERE id_modelo='" +modelo.getIdentificador()+ "'");
+            
+            while (rs.next()) {
+                
+            modeloNombre=rs.getString("nombre_modelo");
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Problemas " + e);
+
+        }
+    
+        return modeloNombre;
+    }
 
     public void modificarModelo(Modelo modelo) {
 
         crearConexionGeneral();
+        
+        System.out.println("estamos en modificar modelo");
+        
+        try {
+      
+            s = connection.createStatement();
+            int z = s.executeUpdate("UPDATE modelo SET nombre_modelo = '"+modelo.getNombre()+"'  WHERE id_modelo = ' "+modelo.getIdentificador()+" ' ");
+            
+            if (z == 1) {
+            
+                System.out.println("Se módificó el registro el modelo numero : "+modelo.getIdentificador());
+                JOptionPane.showMessageDialog(null,"Se módificó el registro de manera exitosa del modelo");
+         
+                
+            }else {
+                System.out.println("Error al modificar el registro");
+                JOptionPane.showMessageDialog(null,"Error al modificar el registro");
+            }           
+            
+            
+        } catch (Exception e) {
+            System.out.println("Problemas "+e);
+        }       
     }
 
-    public void modificarOficina(Oficina oficina) {
+    public String buscarOficina(Oficina oficina){
 
+
+           String modeloOficina="";
+           crearConexionGeneral();
+
+           try {
+
+               s = connection.createStatement();
+               rs = s.executeQuery("SELECT * FROM oficinas WHERE id_oficina='" +oficina.getIdentificador()+ "'");
+
+               while (rs.next()) {
+
+               modeloOficina=rs.getString("nombre_oficina");
+               }
+
+           } catch (Exception e) {
+               System.out.println("Problemas " + e);
+
+           }
+
+           return modeloOficina;
+       }   
+    
+    public void modificarOficina(Oficina oficina) {
+        
         crearConexionGeneral();
+     
+         System.out.println("estamos en modificar modelo");
+        try {
+  
+            s = connection.createStatement();
+            int z = s.executeUpdate("UPDATE oficinas SET nombre_oficina = '"+oficina.getNombre()+"'  WHERE id_oficina = ' "+oficina.getIdentificador()+" ' ");
+            
+            if (z == 1) {
+            
+                System.out.println("Se módificó el registro la oficina numero : "+oficina.getIdentificador());
+                JOptionPane.showMessageDialog(null,"Se módificó el registro de manera exitosa de la oficina");;
+                
+            }else {
+                System.out.println("Error al modificar el registro");
+                JOptionPane.showMessageDialog(null,"Error al modificar el registro");
+            }
+     
+        }catch (Exception e) {
+            
+            System.out.println("Problemas "+e);
+        }
+
     }
 
     public void buscarVehiculo() {
 
         crearConexionGeneral();
+    }
+    
+    public String loginUsuarios(Usuario usuario){
+    
+        String tipoUsuario="";
+        crearConexionGeneral();
+        
+          try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT * FROM usuarios WHERE id_usuario = '" + usuario.getCedula() + "'");
+
+            while (rs.next()) {
+                String userDatabase = rs.getString("id_usuario");
+                //String passDatabase = rs.getString("contraseña");
+                String datoTipoUsuario=rs.getString("tipo_usuario");
+                String nombreUsuario=rs.getString("nombre");
+        
+                if (userDatabase.equals(userDatabase) && datoTipoUsuario.equals("Administrador")) {
+
+                    tipoUsuario="Administrador";
+                    System.out.println("Bienvenido Administrador "+nombreUsuario);
+                }
+                else if(userDatabase.equals(userDatabase) && datoTipoUsuario.equals("Cliente")){
+
+                    tipoUsuario="Cliente";
+                }else{
+                      System.out.println("Usuario No Registrado");
+                }
+               
+            }
+        } catch (Exception e) {
+            System.out.println("Problemas" + e);
+        }
+          
+          return tipoUsuario;
     }
 }

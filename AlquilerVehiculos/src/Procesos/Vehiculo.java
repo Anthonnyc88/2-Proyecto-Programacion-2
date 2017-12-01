@@ -5,74 +5,103 @@
  */
 package Procesos;
 
-import java.io.File;
 import javax.swing.ImageIcon;
 
 /**
  *
- * @author Anthonny
+ * @author Admie21
  */
 public class Vehiculo {
 
-    int Placa_vehiculo;
-    int Codigo_marca;
-    int Codigo_estilo;
-    int Codigo_modelo;
-    String Transmision_vehiculo;
-    int Año;
-    double Precio;
-    String Estado;
-    File Foto;
+    private String placa;
+    private int idMarca;
+    private int idModelo;
+    private int idEstilo;
+    private int año;
+    private double precio;
+    private ImageIcon foto;
+    private boolean estado;
 
-    public Vehiculo() {
+    public Vehiculo(String placa, int idMarca, int idModelo, int idEstilo, int año, double precio, ImageIcon foto, boolean estado) {
+        this.placa = placa;
+        this.idMarca = idMarca;
+        this.idModelo = idModelo;
+        this.idEstilo = idEstilo;
+        this.año = año;
+        this.precio = precio;
+        this.foto = foto;
+        this.estado = estado;
+    }
+  
+    public Vehiculo(){
     }
 
-    public Vehiculo(int Placa_vehiculo, int Codigo_marca, int Codigo_estilo, int Codigo_modelo, String Transmision_vehiculo, int Año, double Precio, String Estado, File Foto) {
-        this.Placa_vehiculo = Placa_vehiculo;
-        this.Codigo_marca = Codigo_marca;
-        this.Codigo_estilo = Codigo_estilo;
-        this.Codigo_modelo = Codigo_modelo;
-        this.Transmision_vehiculo = Transmision_vehiculo;
-        this.Año = Año;
-        this.Precio = Precio;
-        this.Estado = Estado;
-        this.Foto = Foto;
+    public String getPlaca() {
+        return placa;
     }
 
-    public int getPlaca_vehiculo() {
-        return Placa_vehiculo;
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
-    public int getCodigo_marca() {
-        return Codigo_marca;
+    public int getIdMarca() {
+        return idMarca;
     }
 
-    public int getCodigo_estilo() {
-        return Codigo_estilo;
+    public void setIdMarca(int idMarca) {
+        this.idMarca = idMarca;
     }
 
-    public int getCodigo_modelo() {
-        return Codigo_modelo;
+    public int getIdModelo() {
+        return idModelo;
     }
 
-    public String getTransmision_vehiculo() {
-        return Transmision_vehiculo;
+    public void setIdModelo(int idModelo) {
+        this.idModelo = idModelo;
+    }
+
+    public int getIdEstilo() {
+        return idEstilo;
+    }
+
+    public void setIdEstilo(int idEstilo) {
+        this.idEstilo = idEstilo;
     }
 
     public int getAño() {
-        return Año;
+        return año;
+    }
+
+    public void setAño(int año) {
+        this.año = año;
     }
 
     public double getPrecio() {
-        return Precio;
+        return precio;
     }
 
-    public File getFoto() {
-        return Foto;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
-    public String getEstado() {
-        return Estado;
+    public ImageIcon getFoto() {
+        return foto;
     }
 
+    public void setFoto(ImageIcon foto) {
+        this.foto = foto;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehiculo{" + "placa=" + placa + ", idMarca=" + idMarca + ", idModelo=" + idModelo + ", idEstilo=" + idEstilo + ", a\u00f1o=" + año + ", precio=" + precio + ", foto=" + foto + ", estado=" + estado + '}';
+    }
 }

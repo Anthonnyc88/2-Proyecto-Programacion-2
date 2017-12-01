@@ -6,6 +6,7 @@
 package Interfaz;
 
 import Datos.ConexionBaseDatos;
+import Procesos.Usuario;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,9 +25,7 @@ import javax.swing.JPanel;
 public class LoginPrincipal extends javax.swing.JFrame {
 
     ConexionBaseDatos conectando = new ConexionBaseDatos();
-    private Connection connection = null;
-    private ResultSet rs = null;
-    private Statement s = null;
+    Usuario usuario = new Usuario();
 
     /**
      * Creates new form Login
@@ -45,46 +44,6 @@ public class LoginPrincipal extends javax.swing.JFrame {
         getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
     }
-    
-     public void conexionParaLoginRoger() {
-        if (connection != null) {
-            return;
-        }
-
-        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
-        String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
-            if (connection != null) {
-                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
-            }
-        } catch (Exception e) {
-            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
-        }
-     }
-    
-        
-        public void conexionParaLoginAnthonny() {
-        if (connection != null) {
-            return;
-        }
-
-        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
-        String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
-            if (connection != null) {
-                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
-            }
-        } catch (Exception e) {
-            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
-        }
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -246,48 +205,32 @@ public class LoginPrincipal extends javax.swing.JFrame {
 
     private void bntIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntIngresarActionPerformed
         // TODO add your handling code here:
-        //conectando.Conexion();
-
-        //conectando.crearConexionGeneral();
+      
+        if(Jcontraseña.getText().length()==0){
         
-        //conexionParaLoginRoger();
-        conexionParaLoginAnthonny();
-        String tipo = null;
-        String idUser = textUser.getText();
-        String pass = Jcontraseña.getText();
+            JOptionPane.showMessageDialog(null,"Debe de Ingresar la Contraseña");
+        }else{
         
-        try {
-
-            s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM usuarios WHERE id_usuario = '" + idUser + "'");
-
-            while (rs.next()) {
-                String userDatabase = rs.getString("id_usuario");
-                //String passDatabase = rs.getString("contraseña");
-                String tipoUsuario=rs.getString("tipo_usuario");
-                
-                System.out.println(tipo);
-
-                //while(!(Jcontraseña.getText().compareToIgnoreCase("") )){
-                    if(!(Jcontraseña.getText().length()==0)){
-                
-                if (userDatabase.equals(userDatabase) && tipoUsuario.equals("Administrador")) {
-                    Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
-                    ventanaAdministrador.setVisible(true);
-                    this.setVisible(false);
-                }
-                else if(userDatabase.equals(userDatabase) && tipoUsuario.equals("Cliente")){
-                    Menu_Usuarios ventanaClientes = new Menu_Usuarios();
-                    ventanaClientes.setVisible(true);
-                    this.setVisible(false);
-                            
-                }
-               
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Problemas" + e);
-
+        usuario.setCedula(Integer.parseInt(textUser.getText()));
+        usuario.setContaseña(Jcontraseña.getText());
+        
+        if("Administrador".equals(conectando.loginUsuarios(usuario))){
+  
+              Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
+              ventanaAdministrador.setVisible(true);
+              this.setVisible(false);
+            
+        }else if("Cliente".equals(conectando.loginUsuarios(usuario))){
+        
+             Menu_Usuarios ventanaClientes = new Menu_Usuarios();
+             ventanaClientes.setVisible(true);
+             this.setVisible(false);
+            
+        }else if("Usuario No Registrado en el Sistema".equals(conectando.loginUsuarios(usuario))){
+        
+            JOptionPane.showMessageDialog(null,"Usuario No Registrado en el Sistema");
+        }
+    
         }
     }//GEN-LAST:event_bntIngresarActionPerformed
 
@@ -295,47 +238,34 @@ public class LoginPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-       
-        String tipo = null;
-        String idUser = textUser.getText();
-        String pass = Jcontraseña.getText();
- 
-        conexionParaLoginRoger();
-        try {
-
-            s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM usuarios WHERE id_usuario = '" + idUser + "'");
-
-            while (rs.next()) {
-                String userDatabase = rs.getString("id_usuario");
-                //String passDatabase = rs.getString("contraseña");
-                String tipoUsuario=rs.getString("tipo_usuario");
-                
-                System.out.println(tipo);
-
-                //while(!(Jcontraseña.getText().compareToIgnoreCase("") )){
-                    if(!(Jcontraseña.getText().length()==0)){
-                
-                if (userDatabase.equals(userDatabase) && tipoUsuario.equals("Administrador")) {
-                    Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
-                    ventanaAdministrador.setVisible(true);
-                    this.setVisible(false);
-                }
-                else if(userDatabase.equals(userDatabase) && tipoUsuario.equals("Cliente")){
-                    Menu_Usuarios ventanaClientes = new Menu_Usuarios();
-                    ventanaClientes.setVisible(true);
-                    this.setVisible(false);
-                            
-                }
-               
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Problemas" + e);
-
-        }
+        
+            if(Jcontraseña.getText().length()==0){
+        
+            JOptionPane.showMessageDialog(null,"Debe de Ingresar la Contraseña");
+        }else{
+        
+        usuario.setCedula(Integer.parseInt(textUser.getText()));
+        usuario.setContaseña(Jcontraseña.getText());
+        
+        if("Administrador".equals(conectando.loginUsuarios(usuario))){
+  
+              Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
+              ventanaAdministrador.setVisible(true);
+              this.setVisible(false);
             
+        }else if("Cliente".equals(conectando.loginUsuarios(usuario))){
+        
+             Menu_Usuarios ventanaClientes = new Menu_Usuarios();
+             ventanaClientes.setVisible(true);
+             this.setVisible(false);
+            
+        }else if("Usuario No Registrado en el Sistema".equals(conectando.loginUsuarios(usuario))){
+        
+            JOptionPane.showMessageDialog(null,"Usuario No Registrado en el Sistema");
         }
+    
+        }
+       }
     }//GEN-LAST:event_JcontraseñaKeyPressed
 
     private void JcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JcontraseñaActionPerformed
@@ -371,6 +301,8 @@ public class LoginPrincipal extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(LoginPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

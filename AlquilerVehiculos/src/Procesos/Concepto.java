@@ -17,17 +17,17 @@ public class Concepto {
     public Concepto() {
     }
 
-    public Concepto(int identiicador, String nombre) {
-        this.identificador = identiicador;
+    public Concepto(int identificador, String nombre) {
+        this.identificador = identificador;
         this.nombre = nombre;
     }
 
-    public int getIdentiicador() {
+    public int getIdentificador() {
         return identificador;
     }
 
-    public void setIdentiicador(int identiicador) {
-        this.identificador = identiicador;
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
     }
 
     public String getNombre() {
@@ -40,6 +40,6 @@ public class Concepto {
 
     @Override
     public String toString() {
-        return "Concepto{" + "identiicador=" + identificador + ", nombre=" + nombre + '}';
+        return "Concepto{" + "identificador=" + identificador + ", nombre=" + nombre + '}';
     }
 }

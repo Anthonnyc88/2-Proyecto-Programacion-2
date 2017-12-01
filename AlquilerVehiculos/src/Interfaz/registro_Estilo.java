@@ -201,8 +201,8 @@ public class registro_Estilo extends javax.swing.JFrame {
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
         
-        estilo.setCodigo_estilo(Integer.parseInt(textIdentificador.getText()));
-        estilo.setEstilo_vehiculo(textNombre.getText());       
+        estilo.setIdentificador(Integer.parseInt(textIdentificador.getText()));
+        estilo.setNombre(textNombre.getText());       
         conectando.insertarEstilo(estilo);    
         textIdentificador.setText("");
         textNombre.setText("");

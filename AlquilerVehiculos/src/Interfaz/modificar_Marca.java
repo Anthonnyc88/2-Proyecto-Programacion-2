@@ -176,8 +176,8 @@ public class modificar_Marca extends javax.swing.JFrame {
         // TODO add your handling code here:
      
         
-        marca.setCodigo_marca(Integer.parseInt(textIdMarca.getText()));
-        marca.setMarca_vehiculo(textNuevaMarca.getText());
+        marca.setIdentificador(Integer.parseInt(textIdMarca.getText()));
+        marca.setNombre(textNuevaMarca.getText());
         
         conexionDB.modificarMarca(marca);
         
