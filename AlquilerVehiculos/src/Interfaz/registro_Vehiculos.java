@@ -571,7 +571,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
 
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
-        //conectando.crearConexionRegistrosVehiculos();
+
         conectando.crearConexionGeneralAnthonny();
         try {
             int placa = Integer.parseInt(TextPlaca.getText());

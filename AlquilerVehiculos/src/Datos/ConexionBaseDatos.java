@@ -53,7 +53,7 @@ public class ConexionBaseDatos {
         }
 
         String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String url = "jdbc:postgresql://localhost:5433/"+nombreBaseDatos;//este es el nombre de la base de datos
         String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
         try {
             Class.forName("org.postgresql.Driver");
@@ -85,30 +85,6 @@ public class ConexionBaseDatos {
         }
     }
 
-    /**
-     * Método utilizado para establecer la conexión con la base de datos
-     *
-     */
-    public void crearConexionAnthonny() {
-
-         if (connection != null) {
-            return;
-        }
-
-        String nombreBaseDatos="proyecto";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
-        String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
-            if (connection != null) {
-                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
-            }
-        } catch (Exception e) {
-            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
-        }
-
-    }
 
     public boolean crearConexionRegistrosVehiculos() {
 
@@ -126,43 +102,7 @@ public class ConexionBaseDatos {
         }
         return false;
     }
-//
-//    public void crearConexion() {
-//        if (connection != null) {
-//            return;
-//        }
-//
-//        String url = "jdbc:postgresql://localhost:5432/proyecto";
-//        String password = "1414250816ma";
-//        try {
-//            Class.forName("org.postgresql.Driver");
-//            connection = DriverManager.getConnection(url, "postgres", password);
-//            if (connection != null) {
-//                System.out.println("Connecting to database...");
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Problem when connecting to the database...");
-//        }
-//    }
 
-//    public void conexionParaLoginRoger() {
-//        if (connection != null) {
-//            return;
-//        }
-//
-//        String nombreBaseDatos = "renta_vehiculos";//aqui va el nombre de la base de datos 
-//        String url = "jdbc:postgresql://localhost:5432/" + nombreBaseDatos;//este es el nombre de la base de datos
-//        String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
-//        try {
-//            Class.forName("org.postgresql.Driver");
-//            connection = DriverManager.getConnection(url, "postgres", password);//este es el nombre sel server
-//            if (connection != null) {
-//                System.out.println("Connecting to database... Base Datos Conectada " + nombreBaseDatos);
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos " + nombreBaseDatos);
-//        }
-//    }
 
     /**
      * Metodo que inserta un usuario
@@ -184,6 +124,7 @@ public class ConexionBaseDatos {
     public void insertarEstilo(Estilo estilo) {
 
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
         System.out.println("Estamos es registrar en Registrar Estilo");
         
         try {
@@ -208,6 +149,7 @@ public class ConexionBaseDatos {
     public void insertarMarca(Marca marca) {
 
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
         
         System.out.println("estamos en registrar marcas");
 
@@ -241,6 +183,7 @@ public class ConexionBaseDatos {
     
         String nombreMarca="";
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
         try {
            s = connection.createStatement();
             rs = s.executeQuery("SELECT * FROM marca WHERE id_marca='" +idMarca+ "'");
@@ -259,6 +202,7 @@ public class ConexionBaseDatos {
     public void insertarModelo(Modelo modelo) {
 
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
         
         System.out.println("estamos en registrar modelo");
         try {
@@ -277,11 +221,12 @@ public class ConexionBaseDatos {
     public void insertarOficina(Oficina oficina) {
 
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
         
         System.out.println("estamos en registrar oficinas");
         try {
             s = connection.createStatement();
-            int z = s.executeUpdate("INSERT INTO oficinas(id_oficina,nombre_oficina) VALUES('"+oficina.getIdentificador() +"', '" +oficina.getIdentificador()+"')");
+            int z = s.executeUpdate("INSERT INTO oficinas(id_oficina,nombre_oficina) VALUES('"+oficina.getIdentificador() +"', '" +oficina.getNombre()+"')");
             if (z == 1) {
                 System.out.println("Se agregó el registro de manera exitosa una Nueva oficina "+oficina.getIdentificador());
                 JOptionPane.showMessageDialog(null, "Se agregó el registro de manera exitosa una Nueva oficina ");
@@ -297,6 +242,7 @@ public class ConexionBaseDatos {
     public void insertarInformacionRentaVehiculo() {
 
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
     }
 
     public void modificarVehiculo(Vehiculo vehiculo) {
@@ -313,6 +259,7 @@ public class ConexionBaseDatos {
 
         System.out.println("estamos en modificar estilo");
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
         try {
 
             s = connection.createStatement();
@@ -342,6 +289,7 @@ public class ConexionBaseDatos {
     
         String nombreEstilo="";
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
         try {
             s = connection.createStatement();
             rs = s.executeQuery("SELECT * FROM estilo WHERE id_estilo='" +idEstilo+ "'");         
@@ -362,6 +310,7 @@ public class ConexionBaseDatos {
         System.out.println("estamos en modificar marca");
         
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
         
        try {       
             s = connection.createStatement();
@@ -385,6 +334,7 @@ public class ConexionBaseDatos {
         
         String modeloNombre="";
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
         
         try {
 
@@ -407,6 +357,7 @@ public class ConexionBaseDatos {
     public void modificarModelo(Modelo modelo) {
 
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
         
         System.out.println("estamos en modificar modelo");
         
@@ -437,6 +388,7 @@ public class ConexionBaseDatos {
 
            String modeloOficina="";
            crearConexionGeneral();
+           //crearConexionGeneralAnthonny();
 
            try {
 
@@ -459,6 +411,7 @@ public class ConexionBaseDatos {
     public void modificarOficina(Oficina oficina) {
         
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
      
          System.out.println("estamos en modificar modelo");
         try {
@@ -492,6 +445,7 @@ public class ConexionBaseDatos {
     
         String tipoUsuario="";
         crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
         
           try {
 
@@ -500,7 +454,6 @@ public class ConexionBaseDatos {
 
             while (rs.next()) {
                 String userDatabase = rs.getString("id_usuario");
-                //String passDatabase = rs.getString("contraseña");
                 String datoTipoUsuario=rs.getString("tipo_usuario");
                 String nombreUsuario=rs.getString("nombre");
         

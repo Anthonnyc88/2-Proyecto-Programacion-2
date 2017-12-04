@@ -200,12 +200,17 @@ public class registro_Estilo extends javax.swing.JFrame {
 
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
+
+        while(!(textIdentificador.getText().length()==0||textNombre.getText().length()==0)){
         
         estilo.setIdentificador(Integer.parseInt(textIdentificador.getText()));
         estilo.setNombre(textNombre.getText());       
         conectando.insertarEstilo(estilo);    
         textIdentificador.setText("");
         textNombre.setText("");
+        
+        }
+        
     }//GEN-LAST:event_bntRegistrarActionPerformed
 
     private void textNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNombreKeyPressed

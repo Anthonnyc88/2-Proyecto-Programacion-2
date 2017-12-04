@@ -206,6 +206,8 @@ public class LoginPrincipal extends javax.swing.JFrame {
     private void bntIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntIngresarActionPerformed
         // TODO add your handling code here:
       
+        if(!(textUser.getText().length()==0)){
+        
         if(Jcontraseña.getText().length()==0){
         
             JOptionPane.showMessageDialog(null,"Debe de Ingresar la Contraseña");
@@ -215,23 +217,33 @@ public class LoginPrincipal extends javax.swing.JFrame {
         usuario.setContaseña(Jcontraseña.getText());
         
         if("Administrador".equals(conectando.loginUsuarios(usuario))){
-  
-              Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
-              ventanaAdministrador.setVisible(true);
-              this.setVisible(false);
+        
+            Menu_Admnistrador v = new Menu_Admnistrador();
+            v.setVisible(true);
+            this.setVisible(false);
             
+            System.out.println("Usuario Administrador");
+        
         }else if("Cliente".equals(conectando.loginUsuarios(usuario))){
         
-             Menu_Usuarios ventanaClientes = new Menu_Usuarios();
-             ventanaClientes.setVisible(true);
-             this.setVisible(false);
-            
-        }else if("Usuario No Registrado en el Sistema".equals(conectando.loginUsuarios(usuario))){
         
-            JOptionPane.showMessageDialog(null,"Usuario No Registrado en el Sistema");
+             Menu_Usuarios v = new Menu_Usuarios();
+            v.setVisible(true);
+            this.setVisible(false);
+            
+            System.out.println("Usuario Cliente");
+            
+        }else{
+        
+            JOptionPane.showMessageDialog(null,"Usuario no Registrado en el Sistema");
+            
         }
     
         }
+    }else{
+      
+            JOptionPane.showMessageDialog(null,"Debe de Ingresar un Nombre de Usuario");
+     }
     }//GEN-LAST:event_bntIngresarActionPerformed
 
     private void JcontraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JcontraseñaKeyPressed
@@ -239,7 +251,9 @@ public class LoginPrincipal extends javax.swing.JFrame {
         
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
         
-            if(Jcontraseña.getText().length()==0){
+           if(!(textUser.getText().length()==0)){
+        
+        if(Jcontraseña.getText().length()==0){
         
             JOptionPane.showMessageDialog(null,"Debe de Ingresar la Contraseña");
         }else{
@@ -248,23 +262,33 @@ public class LoginPrincipal extends javax.swing.JFrame {
         usuario.setContaseña(Jcontraseña.getText());
         
         if("Administrador".equals(conectando.loginUsuarios(usuario))){
-  
-              Menu_Admnistrador ventanaAdministrador = new Menu_Admnistrador();
-              ventanaAdministrador.setVisible(true);
-              this.setVisible(false);
+        
+            Menu_Admnistrador v = new Menu_Admnistrador();
+            v.setVisible(true);
+            this.setVisible(false);
             
+            System.out.println("Usuario Administrador");
+        
         }else if("Cliente".equals(conectando.loginUsuarios(usuario))){
         
-             Menu_Usuarios ventanaClientes = new Menu_Usuarios();
-             ventanaClientes.setVisible(true);
-             this.setVisible(false);
-            
-        }else if("Usuario No Registrado en el Sistema".equals(conectando.loginUsuarios(usuario))){
         
-            JOptionPane.showMessageDialog(null,"Usuario No Registrado en el Sistema");
+             Menu_Usuarios v = new Menu_Usuarios();
+            v.setVisible(true);
+            this.setVisible(false);
+            
+            System.out.println("Usuario Cliente");
+            
+        }else{
+        
+            JOptionPane.showMessageDialog(null,"Usuario no Registrado en el Sistema");
+            
         }
     
         }
+    }else{
+      
+            JOptionPane.showMessageDialog(null,"Debe de Ingresar un Nombre de Usuario");
+     }
        }
     }//GEN-LAST:event_JcontraseñaKeyPressed
 

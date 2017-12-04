@@ -193,16 +193,16 @@ public class registro_Modelo extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         System.out.println("estamos en registrar modelo");
-        
-        //conexionParaLoginRoger();
-        
-        conectando.crearConexionGeneralAnthonny();
+  
+        while(!(textIdentificador.getText().length()==0||textNombre.getText().length()==0)){
         modelo.setIdentificador(Integer.parseInt(textIdentificador.getText()));
         modelo.setNombre(textNombre.getText());
         
         conectando.insertarModelo(modelo);
         textIdentificador.setText("");
         textNombre.setText(""); 
+        
+        }
     }//GEN-LAST:event_bntRegistrarActionPerformed
 
     /**

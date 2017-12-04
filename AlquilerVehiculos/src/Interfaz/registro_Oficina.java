@@ -167,6 +167,9 @@ public class registro_Oficina extends javax.swing.JFrame {
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
      
+        
+        while(!(textIdentificador.getText().length()==0||textNombre.getText().length()==0)){
+        
         oficina.setIdentificador(Integer.parseInt(textIdentificador.getText()));
         oficina.setNombre(textNombre.getText());
         
@@ -174,6 +177,10 @@ public class registro_Oficina extends javax.swing.JFrame {
         
         textIdentificador.setText("");
         textNombre.setText("");
+        
+        }
+        
+        
     }//GEN-LAST:event_bntRegistrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

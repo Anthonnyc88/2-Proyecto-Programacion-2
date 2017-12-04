@@ -181,12 +181,14 @@ public class registro_Marcas extends javax.swing.JFrame {
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
         
+        while(!(textIdentificador.getText().length()==0||textNombre.getText().length()==0)){
         marca.setIdentificador(Integer.parseInt(textIdentificador.getText()));
         marca.setNombre(textNombre.getText());
         
         conectando.insertarMarca(marca);
         textIdentificador.setText("");
         textNombre.setText(""); 
+        }
     }//GEN-LAST:event_bntRegistrarActionPerformed
 
     /**
