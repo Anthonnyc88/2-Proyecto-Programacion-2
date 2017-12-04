@@ -175,6 +175,7 @@ public class modificar_Marca extends javax.swing.JFrame {
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
         // TODO add your handling code here:
      
+       while(!(textIdMarca.getText().length()==0  || textNuevaMarca.getText().length()==0)){
         
         marca.setIdentificador(Integer.parseInt(textIdMarca.getText()));
         marca.setNombre(textNuevaMarca.getText());
@@ -184,6 +185,7 @@ public class modificar_Marca extends javax.swing.JFrame {
         textIdMarca.setText("");
         marcaActual.setText("");
         textNuevaMarca.setText("");
+       }
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
 
     /**

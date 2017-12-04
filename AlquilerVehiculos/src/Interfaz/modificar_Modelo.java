@@ -176,6 +176,8 @@ public class modificar_Modelo extends javax.swing.JFrame {
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
         // TODO add your handling code here:
        
+       while(!(textIdModelo.getText().length()==0  || textNuevoModelo.getText().length()==0)){
+        
         modelo.setIdentificador(Integer.parseInt(textIdModelo.getText()));
         modelo.setNombre(textNuevoModelo.getText());
         
@@ -184,6 +186,7 @@ public class modificar_Modelo extends javax.swing.JFrame {
         textIdModelo.setText("");
         modeloActual.setText("");
         textNuevoModelo.setText("");
+       }
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
 
     /**

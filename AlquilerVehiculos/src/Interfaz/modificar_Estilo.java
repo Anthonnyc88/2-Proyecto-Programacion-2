@@ -180,7 +180,7 @@ public class modificar_Estilo extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
-        
+        while(!(textIdEstilo.getText().length()==0  || textNuevoEstilo.getText().length()==0)){
         estilo.setIdentificador(Integer.parseInt(textIdEstilo.getText()));
         estilo.setNombre(textNuevoEstilo.getText());
         
@@ -190,6 +190,7 @@ public class modificar_Estilo extends javax.swing.JFrame {
         textNuevoEstilo.setText("");
         textoEstiloActual.setText("");
    
+        }
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
 
     /**
