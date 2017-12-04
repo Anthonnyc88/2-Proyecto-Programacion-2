@@ -179,6 +179,8 @@ public class modificar_Estilo extends javax.swing.JFrame {
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
         // TODO add your handling code here:
         
+        
+        
         estilo.setIdentificador(Integer.parseInt(textIdEstilo.getText()));
         estilo.setNombre(textNuevoEstilo.getText());
         

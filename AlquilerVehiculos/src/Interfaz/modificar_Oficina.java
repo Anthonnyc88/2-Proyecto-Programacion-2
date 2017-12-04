@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import Datos.ConexionBaseDatos;
+import Procesos.Oficina;
 
 /**
  *
@@ -21,9 +23,9 @@ import javax.swing.JPanel;
  */
 public class modificar_Oficina extends javax.swing.JFrame {
 
-    private Connection connection = null;
-    private ResultSet rs = null;
-    private Statement s = null;
+    ConexionBaseDatos conectando = new ConexionBaseDatos();
+    Oficina oficina = new Oficina();
+ 
     
     /**
      * Creates new form modificar_Oficina
@@ -43,25 +45,7 @@ public class modificar_Oficina extends javax.swing.JFrame {
         getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
     }
-    
-    public void conexionDBRoger() {
-        if (connection != null) {
-            return;
-        }
-
-        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5433/"+nombreBaseDatos;//este es el nombre de la base de datos
-        String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
-            if (connection != null) {
-                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
-            }
-        } catch (Exception e) {
-            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
-        }
-    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -181,60 +165,27 @@ public class modificar_Oficina extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String oficinaBuscar=textIdentificadorOficina.getText();
+        oficina.setIdentificador(Integer.parseInt(oficinaBuscar));
         
-        conexionDBRoger();
-        try {
-
-            s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM oficinas WHERE id_oficina='" +oficinaBuscar+ "'");
-            
-            while (rs.next()) {
-                
-            String nombreOficina=rs.getString("nombre_oficina");
-            ubicacionActual.setText(nombreOficina);
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Problemas " + e);
-
-        }
+        ubicacionActual.setText(conectando.buscarOficina(oficina));
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
         // TODO add your handling code here:
         
-        conexionDBRoger();
+       while(!(textIdentificadorOficina.getText().length()==0||textNuevaUbicacion.getText().length()==0)){
         
-        System.out.println("estamos en modificar modelo");
+        oficina.setIdentificador(Integer.parseInt(textIdentificadorOficina.getText()));
+        oficina.setNombre(textNuevaUbicacion.getText());
         
-        try {
-            
-            String nuevoUbicacion=textNuevaUbicacion.getText();
-            while(!(textNuevaUbicacion.getText().length()==0)){
-            
-            s = connection.createStatement();
-            int z = s.executeUpdate("UPDATE oficinas SET nombre_oficina = '"+nuevoUbicacion+"'  WHERE id_oficina = ' "+textIdentificadorOficina.getText()+" ' ");
-            
-            if (z == 1) {
-            
-                System.out.println("Se módificó el registro la oficina numero : "+textIdentificadorOficina.getText());
-                JOptionPane.showMessageDialog(null,"Se módificó el registro de manera exitosa de la oficina");
-                textIdentificadorOficina.setText("");
-                ubicacionActual.setText("");
-                textNuevaUbicacion.setText("");
-                
-            }else {
-                System.out.println("Error al modificar el registro");
-                JOptionPane.showMessageDialog(null,"Error al modificar el registro");
-            }
-            
-            }
-            
-        }catch (Exception e) {
-            
-            System.out.println("Problemas "+e);
+        conectando.modificarOficina(oficina);
+        
+        textIdentificadorOficina.setText("");
+        textNuevaUbicacion.setText("");
+        
         }
+        
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
 
     /**

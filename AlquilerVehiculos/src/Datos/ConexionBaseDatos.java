@@ -386,7 +386,7 @@ public class ConexionBaseDatos {
     public String buscarOficina(Oficina oficina){
 
 
-           String modeloOficina="";
+           String nombreOficina="";
            crearConexionGeneral();
            //crearConexionGeneralAnthonny();
 
@@ -397,7 +397,7 @@ public class ConexionBaseDatos {
 
                while (rs.next()) {
 
-               modeloOficina=rs.getString("nombre_oficina");
+               nombreOficina=rs.getString("nombre_oficina");
                }
 
            } catch (Exception e) {
@@ -405,7 +405,7 @@ public class ConexionBaseDatos {
 
            }
 
-           return modeloOficina;
+           return nombreOficina;
        }   
     
     public void modificarOficina(Oficina oficina) {

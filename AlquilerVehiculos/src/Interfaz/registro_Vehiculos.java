@@ -101,11 +101,36 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         }
 
     }
+    
+    /**
+     * Método utilizado para establecer la conexión con la base de datos
+     *
+     */
+    public void crearConexionGeneral() {
+     if (connection != null) {
+            return;
+        }
+
+        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
+        String url = "jdbc:postgresql://localhost:5433/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
+            if (connection != null) {
+                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
+            }
+        } catch (Exception e) {
+            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
+        }
+    }
 
     public ArrayList<Marca> obtenerMarca() {
         ArrayList<Marca> listamarca = new ArrayList();
 
         crearConexionGeneralAnthonny();
+        //crearConexionGeneral();
+        
         try {
 
             s = connection.createStatement();
@@ -115,9 +140,6 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                 String id = rs.getString("id_marca");
                 String nombre = rs.getString("nombre_marca");
 
-             //   Marca marca = new Marca(Integer.parseInt(id), nombre);
-
-                //listamarca.add(marca);
 
             }
         } catch (Exception e) {
@@ -145,6 +167,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         ArrayList<Modelo> listamodelo = new ArrayList();
 
         conectando.crearConexionGeneralAnthonny();
+        //conectando.crearConexionGeneral();
         try {
 
             s = connection.createStatement();
@@ -182,6 +205,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         ArrayList<Estilo> listaestilo = new ArrayList();
 
         conectando.crearConexionGeneralAnthonny();
+        //conectando.crearConexionGeneral();
         try {
 
             s = connection.createStatement();
@@ -213,25 +237,11 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         ComboEstilos.setModel(estilo);
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
 
     public void mostrarMarca() {
         crearConexionGeneralAnthonny();
+        //crearConexionGeneral();
         try {
 
             s = connection.createStatement();
@@ -248,6 +258,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
 
     public void mostrarModelo() {
         crearConexionGeneralAnthonny();
+        //crearConexionGeneral();
         try {
 
             s = connection.createStatement();
@@ -264,6 +275,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
 
     public void mostrarEstilo() {
         crearConexionGeneralAnthonny();
+        //crearConexionGeneral();
         try {
 
             s = connection.createStatement();
@@ -334,6 +346,11 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         jLabel10.setText("Marca");
 
         ComboAño.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018" }));
+        ComboAño.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboAñoActionPerformed(evt);
+            }
+        });
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -573,6 +590,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         conectando.crearConexionGeneralAnthonny();
+        //conectando.crearConexionGeneral();
         try {
             int placa = Integer.parseInt(TextPlaca.getText());
             Marca marca = (Marca) comboMarcas.getSelectedItem();
@@ -620,6 +638,10 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     private void ComboModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboModeloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboModeloActionPerformed
+
+    private void ComboAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboAñoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboAñoActionPerformed
 
     /**
      * @param args the command line arguments
