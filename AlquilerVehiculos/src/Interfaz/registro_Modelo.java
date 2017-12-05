@@ -195,7 +195,8 @@ public class registro_Modelo extends javax.swing.JFrame {
         System.out.println("estamos en registrar modelo");
   
         while(!(textIdentificador.getText().length()==0||textNombre.getText().length()==0)){
-        modelo.setIdentificador(Integer.parseInt(textIdentificador.getText()));
+        
+            modelo.setIdentificador(Integer.parseInt(textIdentificador.getText()));
         modelo.setNombre(textNombre.getText());
         
         conectando.insertarModelo(modelo);

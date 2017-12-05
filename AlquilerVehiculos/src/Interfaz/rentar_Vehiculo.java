@@ -9,17 +9,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
+import Datos.ConexionBaseDatos;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Anthonny
  */
 public class rentar_Vehiculo extends javax.swing.JFrame {
 
+    ConexionBaseDatos conectando = new ConexionBaseDatos();
     
     private Connection connection = null;
     private ResultSet rs = null;
@@ -41,6 +44,7 @@ public class rentar_Vehiculo extends javax.swing.JFrame {
         fondo.setIcon(uno);
         getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
+        llenarPlacas();
     }
     
     public void conexionDBRoger() {
@@ -61,6 +65,76 @@ public class rentar_Vehiculo extends javax.swing.JFrame {
             System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
         }
     }
+    
+    public ArrayList<String> obtenerVehiculos() {
+        ArrayList<String> listaVehiculos = new ArrayList();
+
+        conectando.crearConexionGeneral();
+        
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT * FROM marca");
+
+            while (rs.next()) {
+                String nombre = rs.getString("nombre_marca");
+                listaVehiculos.add(nombre);
+          
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+
+        return listaVehiculos;
+    }
+    
+     public void llenarPlacas() {
+
+        for (int i = 0; i < obtenerVehiculos().size(); i++) {
+         
+            optsPlacasVehiculos.addItem(obtenerVehiculos().get(i).toString());
+        }
+
+    }
+     
+     public ArrayList<String> obtenerOficinas() {
+        ArrayList<String> listaOficinas = new ArrayList();
+
+        conectando.crearConexionGeneral();
+        
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT * FROM oficinas");
+
+            while (rs.next()) {
+                String nombre = rs.getString("nombre_oficina");
+                listaOficinas.add(nombre);
+          
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+
+        return listaOficinas;
+    }
+    
+     public void llenarOficinasRetiro() {
+
+        for (int i = 0; i < obtenerOficinas().size(); i++) {
+         
+            optsOficinasRetiro.addItem(obtenerOficinas().get(i).toString());
+        }
+
+    }
+     
+     public void llenarOficinasDevolucion() {
+
+        for (int i = 0; i < obtenerOficinas().size(); i++) {
+         
+            optsOficinasDevolucion.addItem(obtenerOficinas().get(i).toString());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,8 +145,56 @@ public class rentar_Vehiculo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        optsPlacasVehiculos = new javax.swing.JComboBox<String>();
+        btnVerDetalles = new javax.swing.JButton();
+        panelDetallesDevolucion = new javax.swing.JPanel();
+        optsOficinasDevolucion = new javax.swing.JComboBox<String>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        textHoraDevolucion = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        textDiaDevolucion = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        textMesDevolucion = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        textAñoDevolucion = new javax.swing.JTextField();
+        panelDetallesRetiro = new javax.swing.JPanel();
+        optsOficinasRetiro = new javax.swing.JComboBox<String>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        textHoraRetiro1 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        textDiaRetiro1 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        textMesRetiro1 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        textAñoRetiro1 = new javax.swing.JTextField();
+        panelExtras = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        optExtraGPS = new javax.swing.JRadioButton();
+        optExtraBooster = new javax.swing.JRadioButton();
+        optExtraSillaBebe = new javax.swing.JRadioButton();
+        optRentar = new javax.swing.JButton();
+        optGuardarDevolucionDetallesRenta = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,28 +210,283 @@ public class rentar_Vehiculo extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Placa:");
+
+        btnVerDetalles.setText(" Detalles Vehiculo");
+        btnVerDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerDetallesActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Oficina Devolucion");
+
+        jLabel4.setText("Detalles Devolucion:");
+
+        jLabel5.setText("Hora Devolucion:");
+
+        jLabel6.setText("Fecha Devolucion:");
+
+        jLabel7.setText("Dia:");
+
+        jLabel8.setText("Mes:");
+
+        jLabel9.setText("Año:");
+
+        javax.swing.GroupLayout panelDetallesDevolucionLayout = new javax.swing.GroupLayout(panelDetallesDevolucion);
+        panelDetallesDevolucion.setLayout(panelDetallesDevolucionLayout);
+        panelDetallesDevolucionLayout.setHorizontalGroup(
+            panelDetallesDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDetallesDevolucionLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(panelDetallesDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDetallesDevolucionLayout.createSequentialGroup()
+                        .addGroup(panelDetallesDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addGroup(panelDetallesDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDetallesDevolucionLayout.createSequentialGroup()
+                                .addGap(0, 21, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addGap(120, 120, 120))
+                            .addGroup(panelDetallesDevolucionLayout.createSequentialGroup()
+                                .addGroup(panelDetallesDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textHoraDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(optsOficinasDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(panelDetallesDevolucionLayout.createSequentialGroup()
+                        .addGroup(panelDetallesDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelDetallesDevolucionLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(textDiaDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(textMesDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textAñoDevolucion))
+                            .addComponent(jLabel6))
+                        .addContainerGap())))
+        );
+        panelDetallesDevolucionLayout.setVerticalGroup(
+            panelDetallesDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDetallesDevolucionLayout.createSequentialGroup()
+                .addComponent(jLabel4)
+                .addGap(20, 20, 20)
+                .addGroup(panelDetallesDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(optsOficinasDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(24, 24, 24)
+                .addGroup(panelDetallesDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(textHoraDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jLabel6)
+                .addGap(27, 27, 27)
+                .addGroup(panelDetallesDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(textDiaDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(textMesDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(textAñoDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel10.setText("Oficina Retiro");
+
+        jLabel11.setText("Detalles Retiro:");
+
+        jLabel12.setText("Hora Retiro:");
+
+        jLabel13.setText("Fecha Retiro:");
+
+        jLabel14.setText("Dia:");
+
+        jLabel15.setText("Mes:");
+
+        jLabel16.setText("Año:");
+
+        javax.swing.GroupLayout panelDetallesRetiroLayout = new javax.swing.GroupLayout(panelDetallesRetiro);
+        panelDetallesRetiro.setLayout(panelDetallesRetiroLayout);
+        panelDetallesRetiroLayout.setHorizontalGroup(
+            panelDetallesRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDetallesRetiroLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(panelDetallesRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addGroup(panelDetallesRetiroLayout.createSequentialGroup()
+                        .addGroup(panelDetallesRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelDetallesRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textHoraRetiro1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(optsOficinasRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelDetallesRetiroLayout.createSequentialGroup()
+                        .addGroup(panelDetallesRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel11)
+                            .addGroup(panelDetallesRetiroLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(18, 18, 18)
+                                .addComponent(textDiaRetiro1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel15)
+                                .addGap(18, 18, 18)
+                                .addComponent(textMesRetiro1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(textAñoRetiro1, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelDetallesRetiroLayout.setVerticalGroup(
+            panelDetallesRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDetallesRetiroLayout.createSequentialGroup()
+                .addComponent(jLabel11)
+                .addGap(20, 20, 20)
+                .addGroup(panelDetallesRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(optsOficinasRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(24, 24, 24)
+                .addGroup(panelDetallesRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(textHoraRetiro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jLabel13)
+                .addGap(27, 27, 27)
+                .addGroup(panelDetallesRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(textDiaRetiro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(textMesRetiro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(textAñoRetiro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+        jLabel17.setText("Extras:");
+
+        optExtraGPS.setText("GPS");
+
+        optExtraBooster.setText("Booster");
+
+        optExtraSillaBebe.setText("Silla Bebe");
+
+        javax.swing.GroupLayout panelExtrasLayout = new javax.swing.GroupLayout(panelExtras);
+        panelExtras.setLayout(panelExtrasLayout);
+        panelExtrasLayout.setHorizontalGroup(
+            panelExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelExtrasLayout.createSequentialGroup()
+                .addGroup(panelExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelExtrasLayout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel17))
+                    .addGroup(panelExtrasLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(panelExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(optExtraBooster)
+                            .addComponent(optExtraGPS)
+                            .addComponent(optExtraSillaBebe))))
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+        panelExtrasLayout.setVerticalGroup(
+            panelExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelExtrasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addGap(18, 18, 18)
+                .addComponent(optExtraGPS)
+                .addGap(18, 18, 18)
+                .addComponent(optExtraBooster)
+                .addGap(18, 18, 18)
+                .addComponent(optExtraSillaBebe)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        optRentar.setText("Rentar");
+        optRentar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optRentarActionPerformed(evt);
+            }
+        });
+
+        optGuardarDevolucionDetallesRenta.setText("Guardar Detalles Renta");
+        optGuardarDevolucionDetallesRenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optGuardarDevolucionDetallesRentaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(panelExtras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(135, 135, 135))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(32, 32, 32))))
+                        .addGap(136, 136, 136))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(139, 139, 139)
+                                .addComponent(optRentar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(97, 97, 97)
+                                .addComponent(optGuardarDevolucionDetallesRenta)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(panelDetallesRetiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(panelDetallesDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(224, 224, 224)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(optsPlacasVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVerDetalles))
+                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(33, 33, 33))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(optsPlacasVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerDetalles))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelDetallesRetiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelDetallesDevolucion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelExtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(optGuardarDevolucionDetallesRenta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(optRentar)
+                        .addGap(53, 53, 53)
+                        .addComponent(jButton1)
+                        .addGap(10, 10, 10)))
+                .addContainerGap())
         );
 
         pack();
@@ -121,6 +498,52 @@ public class rentar_Vehiculo extends javax.swing.JFrame {
         ventanaRegresar.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnVerDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDetallesActionPerformed
+        // TODO add your handling code here:
+        
+        conectando.crearConexionGeneral();
+        
+        String placaInfo=optsPlacasVehiculos.getSelectedItem().toString();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT nombre_marca,nombre_modelo,nombre_estilo,transmision,año FROM vehiculo JOIN marca ON marca=marca.id_marca JOIN modelo ON modelo=modelo.id_modelo JOIN estilo ON estilo=estilo.id_estilo WHERE placa='"+placaInfo+"'");
+            
+            while (rs.next()) {
+                String nombreMarca = rs.getString("nombre_marca");
+                String nombreModelo=rs.getString("nombre_modelo");
+                String nombreEstilo=rs.getString("nombre_estilo");
+                String tipoTransmision=rs.getString("transmision");
+                String añoVehiculo=rs.getString("año");
+            
+                String detalleTotal="Marca : "+nombreMarca+" , Modelo : "+nombreModelo+" , Estilo : "+nombreEstilo+" , Transmision : "+tipoTransmision+" , Año : "+añoVehiculo;
+                JOptionPane.showMessageDialog(null,detalleTotal);
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+        
+    }//GEN-LAST:event_btnVerDetallesActionPerformed
+
+    private void optRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optRentarActionPerformed
+        // TODO add your handling code here
+        
+        String cedulaCliente = JOptionPane.showInputDialog(null,"Introduce tu Numero de Cedula : ");
+        
+        if(cedulaCliente.length()==0){
+        
+            JOptionPane.showMessageDialog(null,"Debes de Ingresar un Numero de Cedula");
+        }else{
+        
+        }
+    }//GEN-LAST:event_optRentarActionPerformed
+
+    private void optGuardarDevolucionDetallesRentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optGuardarDevolucionDetallesRentaActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_optGuardarDevolucionDetallesRentaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,7 +582,44 @@ public class rentar_Vehiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVerDetalles;
     private javax.swing.JButton jButton1;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JRadioButton optExtraBooster;
+    private javax.swing.JRadioButton optExtraGPS;
+    private javax.swing.JRadioButton optExtraSillaBebe;
+    private javax.swing.JButton optGuardarDevolucionDetallesRenta;
+    private javax.swing.JButton optRentar;
+    private javax.swing.JComboBox<String> optsOficinasDevolucion;
+    private javax.swing.JComboBox<String> optsOficinasRetiro;
+    private javax.swing.JComboBox<String> optsPlacasVehiculos;
+    private javax.swing.JPanel panelDetallesDevolucion;
+    private javax.swing.JPanel panelDetallesRetiro;
+    private javax.swing.JPanel panelExtras;
+    private javax.swing.JTextField textAñoDevolucion;
+    private javax.swing.JTextField textAñoRetiro1;
+    private javax.swing.JTextField textDiaDevolucion;
+    private javax.swing.JTextField textDiaRetiro1;
+    private javax.swing.JTextField textHoraDevolucion;
+    private javax.swing.JTextField textHoraRetiro1;
+    private javax.swing.JTextField textMesDevolucion;
+    private javax.swing.JTextField textMesRetiro1;
     // End of variables declaration//GEN-END:variables
 }

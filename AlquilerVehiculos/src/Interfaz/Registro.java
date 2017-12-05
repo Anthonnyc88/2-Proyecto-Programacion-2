@@ -6,7 +6,6 @@
 package Interfaz;
 
 import Datos.ConexionBaseDatos;
-import Procesos.Usuario;
 import Proyecto.Principal;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -14,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +38,7 @@ public class Registro extends javax.swing.JFrame {
     private Connection connection = null;
     private ResultSet rs = null;
     private Statement s = null;
-    Usuario usuario = new Usuario();
+
 
     ConexionBaseDatos con = Principal.conectando;
 
@@ -59,6 +59,29 @@ public class Registro extends javax.swing.JFrame {
         getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
 
+    }
+    
+    /**
+     * Método utilizado para establecer la conexión con la base de datos
+     *
+     */
+    public void crearConexionGeneral() {
+     if (connection != null) {
+            return;
+        }
+
+        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
+        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
+            if (connection != null) {
+                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
+            }
+        } catch (Exception e) {
+            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
+        }
     }
 
     /**
@@ -81,16 +104,16 @@ public class Registro extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         textCedula = new javax.swing.JTextField();
         textNombre = new javax.swing.JTextField();
-        textDireccon = new javax.swing.JTextField();
+        textDireccion = new javax.swing.JTextField();
         textTelefono = new javax.swing.JTextField();
         RadioAdministrador = new javax.swing.JRadioButton();
         RadioUsuario = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         bntRegistrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        Jcontraseña = new javax.swing.JPasswordField();
         lblfotos = new javax.swing.JLabel();
         btnAgregarImagen = new javax.swing.JButton();
+        Jcontraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,7 +150,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Direcciòn");
+        jLabel9.setText("Direccion");
 
         RadioAdministrador.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(RadioAdministrador);
@@ -204,33 +227,29 @@ public class Registro extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(46, 46, 46)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textCedula)
-                                            .addComponent(textNombre)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(bntRegistrar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton1))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9)
-                                            .addComponent(jLabel7))
-                                        .addGap(32, 32, 32)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textTelefono)
-                                            .addComponent(textDireccon))))
-                                .addGap(230, 230, 230))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Jcontraseña)
-                                .addGap(225, 225, 225)))
-                        .addGap(10, 10, 10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Jcontraseña))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(46, 46, 46)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textCedula)
+                                    .addComponent(textNombre)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(bntRegistrar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel7))
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textTelefono)
+                                    .addComponent(textDireccion))))
+                        .addGap(240, 240, 240)
                         .addComponent(lblfotos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(118, 118, 118))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -275,11 +294,11 @@ public class Registro extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(textDireccon, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(Jcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Jcontraseña))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bntRegistrar)
@@ -333,14 +352,17 @@ public class Registro extends javax.swing.JFrame {
 
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
-        
-        conectando.crearConexionGeneral();
-       // conectando.crearConexionGeneralAnthonny();
+    
+         conectando.crearConexionGeneral();
+        //crearConexionGeneral();
         try {
 
+            System.out.println("estamos en registrar usuarios");
             String sql = "INSERT INTO usuarios (id_usuario, nombre, telefono, direccion, foto, contraseña, tipo_usuario) VALUES (?, ?, ?, ?, ?, md5(?), ?)";
-            PreparedStatement ps = con.getConexion().prepareStatement(sql);
+            PreparedStatement ps = conectando.getConexion().prepareStatement(sql);
 
+            while(!(textCedula.getText().length()==0 || textNombre.getText().length()==0 || textDireccion.getText().length()==0  || Jcontraseña.getText().length()==0)){
+            
             String tipo = null;
             if (RadioAdministrador.isSelected()) {
                 tipo = "Administrador";
@@ -348,12 +370,10 @@ public class Registro extends javax.swing.JFrame {
                 tipo = "Cliente";
             }
             
-            while(!(textCedula.getText().length()==0 || textNombre.getText().length()==0 || textDireccon.getText().length()==0  || Jcontraseña.getText().length()==0)){
-            
             ps.setInt(1, Integer.parseInt(textCedula.getText()));
             ps.setString(2, textNombre.getText());
             ps.setInt(3, Integer.parseInt(textTelefono.getText()));
-            ps.setString(4, textDireccon.getText());
+            ps.setString(4, textDireccion.getText());
             ps.setBinaryStream(5, fis, longitudBytes);
             ps.setString(6,Jcontraseña.getText());
             ps.setString(7, tipo);
@@ -365,7 +385,7 @@ public class Registro extends javax.swing.JFrame {
             textCedula.setText("");
             textNombre.setText("");
             textTelefono.setText("");
-            textDireccon.setText("");
+            textDireccion.setText("");
             Jcontraseña.setText("");
             }
             
@@ -428,7 +448,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblfotos;
     private javax.swing.JTextField textCedula;
-    private javax.swing.JTextField textDireccon;
+    private javax.swing.JTextField textDireccion;
     private javax.swing.JTextField textNombre;
     private javax.swing.JTextField textNombre1;
     private javax.swing.JTextField textTelefono;

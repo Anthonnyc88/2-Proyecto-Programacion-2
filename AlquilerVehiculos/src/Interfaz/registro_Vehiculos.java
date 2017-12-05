@@ -9,7 +9,6 @@ import Datos.ConexionBaseDatos;
 import Proyecto.Principal;
 import java.awt.HeadlessException;
 import java.awt.Image;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,11 +29,8 @@ import Procesos.Modelo;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
-import Procesos.Vehiculo;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -112,7 +108,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         }
 
         String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5433/"+nombreBaseDatos;//este es el nombre de la base de datos
+        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
         String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
         try {
             Class.forName("org.postgresql.Driver");
@@ -125,11 +121,11 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         }
     }
 
-    public ArrayList<Marca> obtenerMarca() {
-        ArrayList<Marca> listamarca = new ArrayList();
+    public ArrayList<String> obtenerMarca() {
+        ArrayList<String> listamarca = new ArrayList();
 
-        crearConexionGeneralAnthonny();
-        //crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
+        crearConexionGeneral();
         
         try {
 
@@ -137,10 +133,9 @@ public class registro_Vehiculos extends javax.swing.JFrame {
             rs = s.executeQuery("SELECT * FROM marca");
 
             while (rs.next()) {
-                String id = rs.getString("id_marca");
                 String nombre = rs.getString("nombre_marca");
-
-
+                listamarca.add(nombre);
+          
             }
         } catch (Exception e) {
             System.out.println("Error de conexión");
@@ -150,35 +145,33 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     public void llenarMarca() {
-        marca = new DefaultComboBoxModel<Marca>();
-        ArrayList<Marca> listamarca = new ArrayList();
-        listamarca = obtenerMarca();
 
-        for (Marca marca2 : listamarca) {
-            marca.addElement(marca2);
+        for (int i = 0; i < obtenerMarca().size(); i++) {
+            
+            comboMarcas.addItem(obtenerMarca().get(i).toString());
+            
         }
-        comboMarcas.setModel(marca);
 
     }
     
     
     
- public ArrayList<Modelo> obtenerModelo() {
-        ArrayList<Modelo> listamodelo = new ArrayList();
+ public ArrayList<String> obtenerModelo() {
+     
+        ArrayList<String> listamodelo = new ArrayList();
 
-        conectando.crearConexionGeneralAnthonny();
-        //conectando.crearConexionGeneral();
+        //conectando.crearConexionGeneralAnthonny();
+        conectando.crearConexionGeneral();
         try {
 
             s = connection.createStatement();
             rs = s.executeQuery("SELECT * FROM modelo");
 
             while (rs.next()) {
-                String id = rs.getString("id_modelo");
                 String nombre = rs.getString("nombre_modelo");
                // Modelo modelo = new Modelo(Integer.parseInt(id), nombre);
 
-               // listamodelo.add(modelo);
+                listamodelo.add(nombre);
 
             }
         } catch (Exception e) {
@@ -189,34 +182,30 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     public void llenarModelo() {
-        modelo = new DefaultComboBoxModel<Modelo>();
-        ArrayList<Modelo> listamodelo = new ArrayList();
-        listamodelo = obtenerModelo();
+   
 
-        for (Modelo modelo2 : listamodelo) {
-            modelo.addElement(modelo2);
+        for (int i = 0; i < obtenerModelo().size(); i++) {
+            
+            ComboModelo.addItem(obtenerModelo().get(i).toString());
+            
         }
-        ComboModelo.setModel(modelo);
-
     }
     
     
-    public ArrayList<Estilo> obtenerEstilo() {
-        ArrayList<Estilo> listaestilo = new ArrayList();
+    public ArrayList<String> obtenerEstilo() {
+        ArrayList<String> listaestilo = new ArrayList();
 
-        conectando.crearConexionGeneralAnthonny();
-        //conectando.crearConexionGeneral();
+        //conectando.crearConexionGeneralAnthonny();
+        conectando.crearConexionGeneral();
         try {
 
             s = connection.createStatement();
             rs = s.executeQuery("SELECT * FROM estilo");
 
             while (rs.next()) {
-                String id = rs.getString("id_estilo");
                 String nombre = rs.getString("nombre_estilo");
-               // Estilo estilo = new Estilo(Integer.parseInt(id), nombre);
 
-              //  listaestilo.add(estilo);
+               listaestilo.add(nombre);
 
             }
         } catch (Exception e) {
@@ -227,21 +216,19 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     public void llenarEstilo() {
-        estilo = new DefaultComboBoxModel<Estilo>();
-        ArrayList<Estilo> listaestilo = new ArrayList();
-        listaestilo = obtenerEstilo();
-
-        for (Estilo estilo2 : listaestilo) {
-            estilo.addElement(estilo2);
+       
+        for (int i = 0; i < obtenerEstilo().size(); i++) {
+            
+            ComboEstilos.addItem(obtenerEstilo().get(i).toString());
+            
         }
-        ComboEstilos.setModel(estilo);
 
     }
  
 
     public void mostrarMarca() {
-        crearConexionGeneralAnthonny();
-        //crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
+        crearConexionGeneral();
         try {
 
             s = connection.createStatement();
@@ -257,8 +244,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     public void mostrarModelo() {
-        crearConexionGeneralAnthonny();
-        //crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
+        crearConexionGeneral();
         try {
 
             s = connection.createStatement();
@@ -274,8 +261,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     public void mostrarEstilo() {
-        crearConexionGeneralAnthonny();
-        //crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
+        crearConexionGeneral();
         try {
 
             s = connection.createStatement();
@@ -589,8 +576,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
 
-        conectando.crearConexionGeneralAnthonny();
-        //conectando.crearConexionGeneral();
+        //conectando.crearConexionGeneralAnthonny();
+        conectando.crearConexionGeneral();
         try {
             int placa = Integer.parseInt(TextPlaca.getText());
             Marca marca = (Marca) comboMarcas.getSelectedItem();
