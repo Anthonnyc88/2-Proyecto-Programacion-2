@@ -40,7 +40,7 @@ public class Registro extends javax.swing.JFrame {
     private Statement s = null;
 
 
-    ConexionBaseDatos con = Principal.conectando;
+    ConexionBaseDatos conectar = Principal.conectando;
 
     /**
      * Creates new form Registro
@@ -353,13 +353,13 @@ public class Registro extends javax.swing.JFrame {
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
         // TODO add your handling code here:
     
-         conectando.crearConexionGeneral();
+         //conectando.crearConexionGeneral();
         //crearConexionGeneral();
         try {
 
             System.out.println("estamos en registrar usuarios");
             String sql = "INSERT INTO usuarios (id_usuario, nombre, telefono, direccion, foto, contraseña, tipo_usuario) VALUES (?, ?, ?, ?, ?, md5(?), ?)";
-            PreparedStatement ps = conectando.getConexion().prepareStatement(sql);
+            PreparedStatement ps = conectar.getConexion().prepareStatement(sql);
 
             while(!(textCedula.getText().length()==0 || textNombre.getText().length()==0 || textDireccion.getText().length()==0  || Jcontraseña.getText().length()==0)){
             

@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
  */
 public class Vehiculo {
 
-    private String placa;
+    private int placa;
     private int idMarca;
     private int idModelo;
     private int idEstilo;
@@ -22,7 +22,10 @@ public class Vehiculo {
     private ImageIcon foto;
     private boolean estado;
 
-    public Vehiculo(String placa, int idMarca, int idModelo, int idEstilo, int año, double precio, ImageIcon foto, boolean estado) {
+    public Vehiculo() {
+    }
+
+    public Vehiculo(int placa, int idMarca, int idModelo, int idEstilo, int año, double precio, ImageIcon foto, boolean estado) {
         this.placa = placa;
         this.idMarca = idMarca;
         this.idModelo = idModelo;
@@ -32,15 +35,12 @@ public class Vehiculo {
         this.foto = foto;
         this.estado = estado;
     }
-  
-    public Vehiculo(){
-    }
 
-    public String getPlaca() {
+    public int getPlaca() {
         return placa;
     }
 
-    public void setPlaca(String placa) {
+    public void setPlaca(int placa) {
         this.placa = placa;
     }
 
@@ -104,4 +104,11 @@ public class Vehiculo {
     public String toString() {
         return "Vehiculo{" + "placa=" + placa + ", idMarca=" + idMarca + ", idModelo=" + idModelo + ", idEstilo=" + idEstilo + ", a\u00f1o=" + año + ", precio=" + precio + ", foto=" + foto + ", estado=" + estado + '}';
     }
+    
+    
+    
+    
+    
+    
+
 }

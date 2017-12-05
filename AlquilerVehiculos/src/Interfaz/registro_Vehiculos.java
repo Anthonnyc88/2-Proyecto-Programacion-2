@@ -9,6 +9,7 @@ import Datos.ConexionBaseDatos;
 import Proyecto.Principal;
 import java.awt.HeadlessException;
 import java.awt.Image;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -29,8 +30,11 @@ import Procesos.Modelo;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import Procesos.Vehiculo;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,16 +44,11 @@ public class registro_Vehiculos extends javax.swing.JFrame {
 
     FileInputStream fis;
     int longitudBytes;
-    ConexionBaseDatos conectando = new ConexionBaseDatos();
+    //ConexionBaseDatos conectando = new ConexionBaseDatos();
     private Connection connection = null;
     private ResultSet rs = null;
     private Statement s = null;
-    private DefaultComboBoxModel<Marca> marca;
-    private DefaultComboBoxModel<Modelo> modelo;
-    private DefaultComboBoxModel<Estilo> estilo;
-
-    ConexionBaseDatos con = Principal.conectando;
-    public static File Imagen;
+    ConexionBaseDatos conectar = Principal.conectando;
 
     /**
      * Creates new form Registro_Vehiculos
@@ -67,192 +66,79 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         fondo.setIcon(uno);
         getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
-        //mostrarMarca();
-        llenarMarca();
-        llenarModelo();
-        llenarEstilo();
-             
-//        mostrarModelo();
-//        mostrarEstilo();
-
+        mostrarMarca();
+        mostrarModelo();
+        mostrarEstilo();
     }
 
-    public void crearConexionGeneralAnthonny() {
-
+    public void crearConexion() {
         if (connection != null) {
             return;
         }
 
-        String nombreBaseDatos = "renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5432/" + nombreBaseDatos;//este es el nombre de la base de datos
-        String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
+        String url = "jdbc:postgresql://localhost:5432/renta_vehiculos";
+        String password = "1414250816ma";
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url, "postgres", password);//este es el nombre sel server
+            connection = DriverManager.getConnection(url, "postgres", password);
             if (connection != null) {
-                System.out.println("Connecting to database... Base Datos Conectada " + nombreBaseDatos);
+                System.out.println("Connecting to database...");
             }
         } catch (Exception e) {
-            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos " + nombreBaseDatos);
+            System.out.println("Problem when connecting to the database...");
         }
-
     }
-    
-    /**
-     * Método utilizado para establecer la conexión con la base de datos
-     *
-     */
-    public void crearConexionGeneral() {
-     if (connection != null) {
+
+    public void conexionParaLoginRoger() {
+        if (connection != null) {
             return;
         }
-
-        String nombreBaseDatos="renta_vehiculos";//aqui va el nombre de la base de datos 
-        String url = "jdbc:postgresql://localhost:5432/"+nombreBaseDatos;//este es el nombre de la base de datos
-        String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url,"postgres", password);//este es el nombre sel server
-            if (connection != null) {
-                System.out.println("Connecting to database... Base Datos Conectada "+nombreBaseDatos);
-            }
-        } catch (Exception e) {
-            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos "+nombreBaseDatos);
-        }
     }
-
-    public ArrayList<String> obtenerMarca() {
-        ArrayList<String> listamarca = new ArrayList();
-
-        //crearConexionGeneralAnthonny();
-        crearConexionGeneral();
-        
-        try {
-
-            s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM marca");
-
-            while (rs.next()) {
-                String nombre = rs.getString("nombre_marca");
-                listamarca.add(nombre);
-          
-            }
-        } catch (Exception e) {
-            System.out.println("Error de conexión");
-        }
-
-        return listamarca;
-    }
-
-    public void llenarMarca() {
-
-        for (int i = 0; i < obtenerMarca().size(); i++) {
-            
-            comboMarcas.addItem(obtenerMarca().get(i).toString());
-            
-        }
-
-    }
-    
-    
-    
- public ArrayList<String> obtenerModelo() {
-     
-        ArrayList<String> listamodelo = new ArrayList();
-
-        //conectando.crearConexionGeneralAnthonny();
-        conectando.crearConexionGeneral();
-        try {
-
-            s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM modelo");
-
-            while (rs.next()) {
-                String nombre = rs.getString("nombre_modelo");
-               // Modelo modelo = new Modelo(Integer.parseInt(id), nombre);
-
-                listamodelo.add(nombre);
-
-            }
-        } catch (Exception e) {
-            System.out.println("Error de conexión");
-        }
-
-        return listamodelo;
-    }
-
-    public void llenarModelo() {
-   
-
-        for (int i = 0; i < obtenerModelo().size(); i++) {
-            
-            ComboModelo.addItem(obtenerModelo().get(i).toString());
-            
-        }
-    }
-    
-    
-    public ArrayList<String> obtenerEstilo() {
-        ArrayList<String> listaestilo = new ArrayList();
-
-        //conectando.crearConexionGeneralAnthonny();
-        conectando.crearConexionGeneral();
-        try {
-
-            s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM estilo");
-
-            while (rs.next()) {
-                String nombre = rs.getString("nombre_estilo");
-
-               listaestilo.add(nombre);
-
-            }
-        } catch (Exception e) {
-            System.out.println("Error de conexión");
-        }
-
-        return listaestilo;
-    }
-
-    public void llenarEstilo() {
-       
-        for (int i = 0; i < obtenerEstilo().size(); i++) {
-            
-            ComboEstilos.addItem(obtenerEstilo().get(i).toString());
-            
-        }
-
-    }
- 
 
     public void mostrarMarca() {
-        //crearConexionGeneralAnthonny();
-        crearConexionGeneral();
+        crearConexion();
         try {
 
             s = connection.createStatement();
-            rs = s.executeQuery("SELECT id_marca FROM marca");
+            rs = s.executeQuery("SELECT nombre_marca FROM marca");
 
             while (rs.next()) {
-                comboMarcas.addItem(rs.getString("id_marca"));
+                comboMarcas.addItem(rs.getString("nombre_marca"));
             }
         } catch (Exception e) {
             System.out.println("Error de conexión");
         }
+
+    }
+
+    public int id_Marca() {
+        int id_materia = 0;
+        String nombre = comboMarcas.getSelectedItem().toString();
+        crearConexion();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT id_marca FROM marca WHERE nombre_marca = '" + nombre + "'");
+
+            while (rs.next()) {
+                id_materia = rs.getInt("id_marca");
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+        return id_materia;
 
     }
 
     public void mostrarModelo() {
-        //crearConexionGeneralAnthonny();
-        crearConexionGeneral();
+        crearConexion();
         try {
 
             s = connection.createStatement();
-            rs = s.executeQuery("SELECT id_modelo FROM modelo");
+            rs = s.executeQuery("SELECT nombre_modelo FROM modelo");
 
             while (rs.next()) {
-                ComboModelo.addItem(rs.getString("id_modelo"));
+                ComboModelo.addItem(rs.getString("nombre_modelo"));
             }
         } catch (Exception e) {
             System.out.println("Error de conexión");
@@ -260,20 +146,57 @@ public class registro_Vehiculos extends javax.swing.JFrame {
 
     }
 
-    public void mostrarEstilo() {
-        //crearConexionGeneralAnthonny();
-        crearConexionGeneral();
+    public int id_Modelo() {
+        int id_materia = 0;
+        String nombre = ComboModelo.getSelectedItem().toString();
+        crearConexion();
         try {
 
             s = connection.createStatement();
-            rs = s.executeQuery("SELECT id_estilo FROM estilo");
+            rs = s.executeQuery("SELECT id_modelo FROM modelo WHERE nombre_modelo = '" + nombre + "'");
 
             while (rs.next()) {
-                ComboEstilos.addItem(rs.getString("id_estilo"));
+                id_materia = rs.getInt("id_modelo");
             }
         } catch (Exception e) {
             System.out.println("Error de conexión");
         }
+        return id_materia;
+
+    }
+
+    public void mostrarEstilo() {
+        crearConexion();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT nombre_estilo FROM estilo");
+
+            while (rs.next()) {
+                ComboEstilos.addItem(rs.getString("nombre_estilo"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+
+    }
+
+    public int id_Estilo() {
+        int id_materia = 0;
+        String nombre = ComboEstilos.getSelectedItem().toString();
+        crearConexion();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT id_estilo FROM estilo WHERE nombre_estilo = '" + nombre + "'");
+
+            while (rs.next()) {
+                id_materia = rs.getInt("id_estilo");
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+        return id_materia;
 
     }
 
@@ -290,7 +213,6 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        ComboAño = new javax.swing.JComboBox();
         TextPlaca = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -309,6 +231,11 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         lblfotos = new javax.swing.JLabel();
         btnAgregarImagen = new javax.swing.JButton();
         comboMarcas = new javax.swing.JComboBox();
+        textAño = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -331,13 +258,6 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Marca");
-
-        ComboAño.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018" }));
-        ComboAño.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboAñoActionPerformed(evt);
-            }
-        });
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -408,6 +328,18 @@ public class registro_Vehiculos extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setText("Opciones");
+
+        jMenuItem1.setText("Eliminar Vehiculo");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Modificar Vehiculo");
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -449,7 +381,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                                     .addComponent(ComboEstilos, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(ComboModelo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(comboMarcas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ComboAño, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(textAño)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
@@ -491,13 +423,11 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                                 .addGap(37, 37, 37)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addGap(28, 28, 28))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(ComboAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)))
+                                .addGap(12, 12, 12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(textAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel9)
                                     .addComponent(ComboModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -533,7 +463,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel16)
                         .addComponent(ComboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bntRegresar)
                 .addGap(52, 52, 52))
         );
@@ -574,61 +504,47 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_bntRegresarActionPerformed
 
     private void bntRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistrarActionPerformed
-        // TODO add your handling code here:
 
-        //conectando.crearConexionGeneralAnthonny();
-        conectando.crearConexionGeneral();
         try {
             int placa = Integer.parseInt(TextPlaca.getText());
-            Marca marca = (Marca) comboMarcas.getSelectedItem();
-            Modelo modelo = (Modelo) ComboModelo.getSelectedItem();
-            Estilo estilo = (Estilo) ComboEstilos.getSelectedItem();
             String transmisiones = ComboTransmision.getSelectedItem().toString();
-            int años = ComboAño.getSelectedIndex();
+            int años = Integer.parseInt(textAño.getText());
             double precio = Double.parseDouble(TextPrecio.getText());
             String estado = ComboEstado.getSelectedItem().toString();
 
-//            Vehiculo vehiculos = new Vehiculo(placa, marca.getCodigo_marca(), estilo.getCodigo_estilo(), modelo.getCodigo_modelo(), transmisiones, años, precio, estado, Imagen);
-//            FileInputStream foto = new FileInputStream(vehiculos.getFoto());
+            Statement s = connection.createStatement();
             String sql = "INSERT INTO vehiculo (placa, marca, modelo, estilo, transmision, año, precio, estado, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = conectando.getConexion().prepareStatement(sql);
 
-            while (!(TextPlaca.getText().length() == 0 || TextPrecio.getText().length() == 0)) {
+            PreparedStatement ps = conectar.getConexion().prepareStatement(sql);
 
-                ps.setInt(1, placa);
-                ps.setInt(2, comboMarcas.getSelectedIndex());
-                ps.setInt(3, ComboModelo.getSelectedIndex());
-                ps.setInt(4, ComboEstilos.getSelectedIndex());
-                ps.setString(5, transmisiones);
-                ps.setInt(6, ComboAño.getSelectedIndex());
-                ps.setDouble(7, precio);
-                ps.setInt(8, ComboEstado.getSelectedIndex());
-                ps.setBinaryStream(9,fis,longitudBytes);
-                ps.execute();
-                ps.close();
-                lblfotos.setIcon(null);
+            ps.setInt(1, placa);
+            ps.setInt(2, id_Marca());
+            ps.setInt(3, id_Modelo());
+            ps.setInt(4, id_Estilo());
+            ps.setString(5, transmisiones);
+            ps.setInt(6, años);
+            ps.setDouble(7, precio);
+            ps.setString(8, estado);
+            ps.setBinaryStream(9, fis, longitudBytes);
+            ps.execute();
+            ps.close();
 
-                JOptionPane.showMessageDialog(rootPane, "Registrado correctamente");
+            JOptionPane.showMessageDialog(rootPane, " Vehiculo Registrado correctamente");
+            lblfotos.setIcon(null);
+            TextPlaca.setText("");
+            textAño.setText("");
+            TextPrecio.setText("");
 
-                TextPlaca.setText("");
-                TextPrecio.setText("");
-
-            }
-
+//
         } catch (SQLException | NumberFormatException | HeadlessException x) {
             JOptionPane.showMessageDialog(rootPane, "exception 2 " + x);
-       
-           
+
         }
     }//GEN-LAST:event_bntRegistrarActionPerformed
 
     private void ComboModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboModeloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboModeloActionPerformed
-
-    private void ComboAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboAñoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboAñoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -659,6 +575,10 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -669,7 +589,6 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox ComboAño;
     private javax.swing.JComboBox ComboEstado;
     private javax.swing.JComboBox ComboEstilos;
     private javax.swing.JComboBox ComboModelo;
@@ -691,6 +610,11 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel lblfotos;
+    private javax.swing.JTextField textAño;
     // End of variables declaration//GEN-END:variables
 }

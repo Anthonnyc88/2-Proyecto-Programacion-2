@@ -100,6 +100,43 @@ public class ConexionBaseDatos {
         }
         return false;
     }
+    
+    
+    
+     //SOLO SIRVE PARA REGISTROS ESTE METODO
+    public boolean crearConexionRegistrosAnthonny() {
+        try {
+            Class.forName("org.postgresql.Driver");
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/renta_vehiculos", "postgres", "1414250816ma");
+            if (conexion != null) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("error en conexion: " + ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
+    
+    
+    
+    
+     //SOLO SIRVE PARA REGISTROS ESTE METODO
+    public boolean crearConexionRegistrosRoger() {
+        try {
+            Class.forName("org.postgresql.Driver");
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5433/renta_vehiculos", "postgres", "Saborio17");
+            if (conexion != null) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("error en conexion: " + ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
 
 
     /**
@@ -442,8 +479,8 @@ public class ConexionBaseDatos {
     public String loginUsuarios(Usuario usuario){
     
         String tipoUsuario="";
-        crearConexionGeneral();
-        //crearConexionGeneralAnthonny();
+        //crearConexionGeneral();
+        crearConexionGeneralAnthonny();
         
           try {
 
