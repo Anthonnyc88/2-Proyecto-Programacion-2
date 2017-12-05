@@ -22,7 +22,7 @@ public class Principal {
     public static void main(String[] args) {
 
         System.out.println("Conectado: " + conectando.crearConexionRegistrosAnthonny());
-        //System.out.println("Conectado: " + conectando.crearConexionRegistrosAnthonny());
+        //System.out.println("Conectado: " + conectando.crearConexionRegistrosRoger());
         if (conectando.crearConexionRegistrosAnthonny()) {
             LoginPrincipal ventanaPrincipal = new LoginPrincipal();
             ventanaPrincipal.setVisible(true);
