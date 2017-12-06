@@ -154,6 +154,11 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
         });
 
         jButton3.setText("Eliminar Vehiculo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Eliminar Estilo");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -374,6 +379,13 @@ public class Menu_Admnistrador extends javax.swing.JFrame {
         v.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        eliminar_Vehiculo cb = new eliminar_Vehiculo();
+        cb.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
