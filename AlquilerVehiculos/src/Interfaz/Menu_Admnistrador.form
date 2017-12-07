@@ -36,9 +36,9 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnModificarVehiculo" alignment="1" max="32767" attributes="0"/>
                   <Component id="btnModificarModelo" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnModificarEstilo" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="btnModificarOficina" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnModificarMarca" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnModificarEstilo" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnModificarOficina" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
