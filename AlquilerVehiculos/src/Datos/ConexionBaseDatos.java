@@ -126,7 +126,7 @@ public class ConexionBaseDatos {
     public boolean crearConexionRegistrosRoger() {
         try {
             Class.forName("org.postgresql.Driver");
-            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5433/renta_vehiculos", "postgres", "Saborio17");
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/renta_vehiculos", "postgres", "Saborio17");
             if (conexion != null) {
                 return true;
             }
@@ -479,7 +479,7 @@ public class ConexionBaseDatos {
     public String loginUsuarios(Usuario usuario){
     
         String tipoUsuario="";
-        //crearConexionGeneral();
+        crearConexionGeneral();
         crearConexionGeneralAnthonny();
         
           try {
