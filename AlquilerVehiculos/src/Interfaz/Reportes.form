@@ -84,16 +84,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Reporte 1"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntReporte1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bntReporte2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reporte 2"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntReporte2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bntReporte3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reporte 3"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntReporte3ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bntRegresar">
       <Properties>

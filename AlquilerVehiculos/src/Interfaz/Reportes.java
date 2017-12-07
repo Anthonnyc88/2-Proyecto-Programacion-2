@@ -58,10 +58,25 @@ public class Reportes extends javax.swing.JFrame {
         jLabel1.setText("Reportes de Usuarios");
 
         bntReporte1.setText("Reporte 1");
+        bntReporte1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntReporte1ActionPerformed(evt);
+            }
+        });
 
         bntReporte2.setText("Reporte 2");
+        bntReporte2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntReporte2ActionPerformed(evt);
+            }
+        });
 
         bntReporte3.setText("Reporte 3");
+        bntReporte3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntReporte3ActionPerformed(evt);
+            }
+        });
 
         bntRegresar.setText("Regresar");
         bntRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +131,27 @@ public class Reportes extends javax.swing.JFrame {
         ventanaAdministrador.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_bntRegresarActionPerformed
+
+    private void bntReporte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntReporte1ActionPerformed
+        // TODO add your handling code here:
+        Reporte_1 v = new Reporte_1();
+        v.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bntReporte1ActionPerformed
+
+    private void bntReporte2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntReporte2ActionPerformed
+        // TODO add your handling code here:
+        Reporte_2 vv = new Reporte_2();
+        vv.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bntReporte2ActionPerformed
+
+    private void bntReporte3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntReporte3ActionPerformed
+        // TODO add your handling code here:
+        Reporte_3 vvv = new Reporte_3();
+        vvv.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bntReporte3ActionPerformed
 
     /**
      * @param args the command line arguments
