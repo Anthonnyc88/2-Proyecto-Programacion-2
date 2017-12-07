@@ -63,6 +63,11 @@ public class Reporte_1 extends javax.swing.JFrame {
         jLabel1.setText("Imprimir los vehículos registrados de acuerdo con el estado. Se debe escoger entre disponible u ocupado. La información que se muestra es: placa, marca, modelo y estilo.");
 
         jButton2.setText("Imprimir Reporte");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,6 +108,10 @@ public class Reporte_1 extends javax.swing.JFrame {
         ventanaRegresar.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
