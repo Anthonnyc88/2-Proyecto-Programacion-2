@@ -5,6 +5,10 @@
  */
 package Procesos;
 
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Roger Oporta
@@ -122,4 +126,5 @@ public class InformacionAlquiler {
     public String toString() {
         return "InformacionAlquiler{" + "placa=" + placa + ", idUsuario=" + idUsuario + ", nombreUsuario=" + nombreUsuario + ", oficinaRetiro=" + oficinaRetiro + ", oficinaDevolucion=" + oficinaDevolucion + ", fechaRetiro=" + fechaRetiro + ", horaRetiro=" + horaRetiro + ", fechaDevolucion=" + fechaDevolucion + ", horaDevolucion=" + horaDevolucion + ", precioAlquiler=" + precioAlquiler + '}';
     }
+ 
 }
