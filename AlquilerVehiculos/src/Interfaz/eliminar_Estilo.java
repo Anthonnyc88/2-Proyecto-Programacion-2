@@ -50,12 +50,12 @@ public class eliminar_Estilo extends javax.swing.JFrame {
         getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
         fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
         
-        Cargar_tablaeliminar();
+        Cargar_tabla_eliminar();
         
 
     }
 
-    public void crearConexionGeneralEliminar() {
+    public void crearConexionGeneralEliminarAnthony() {
         if (connection != null) {
             return;
         }
@@ -74,14 +74,33 @@ public class eliminar_Estilo extends javax.swing.JFrame {
         }
     }
     
+    public void crearConexionGeneralEliminarRoger() {
+        if (connection != null) {
+            return;
+        }
+
+        String nombreBaseDatos = "renta_vehiculos";//aqui va el nombre de la base de datos 
+        String url = "jdbc:postgresql://localhost:5432/" + nombreBaseDatos;//este es el nombre de la base de datos
+        String password = "Saborio17";//esta es la contraseña del postgrade deñ usuario
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url, "postgres", password);//este es el nombre sel server
+            if (connection != null) {
+                System.out.println("Connecting to database... Base Datos Conectada " + nombreBaseDatos);
+            }
+        } catch (Exception e) {
+            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos " + nombreBaseDatos);
+        }
+    }
     
     
-     public void Cargar_tablaeliminar() {
+    
+     public void Cargar_tabla_eliminar() {
         
         ArrayList<String> id_marca = null;
         ArrayList<String> marca = null;
-        crearConexionGeneralEliminar();
-        
+        //crearConexionGeneralEliminarAnthony();
+        crearConexionGeneralEliminarRoger();
         try {
             id_marca = new <String>ArrayList();
             marca = new <String>ArrayList();
@@ -142,14 +161,15 @@ public class eliminar_Estilo extends javax.swing.JFrame {
                 String strResultado = tablaModelo.getValueAt(Eliminar_marca.getSelectedRow(), 0).toString();
                 int opcion = JOptionPane.showConfirmDialog(null, "Eliminar : " + strResultado);
                 if (opcion == 0) {
-                   crearConexionGeneralEliminar();
+                   //crearConexionGeneralEliminarAnthony();
+                    crearConexionGeneralEliminarRoger();
                     try {
                         
                         s = connection.createStatement();
                         int z = s.executeUpdate("DELETE FROM estilo WHERE id_estilo = '" + strResultado + "'");
                         if (z == 1) {
                             JOptionPane.showMessageDialog(null, "Se eliminó el registro de manera exitosa");
-                            Cargar_tablaeliminar();
+                            Cargar_tabla_eliminar();
                         } else {
                             JOptionPane.showMessageDialog(null, "Error al eliminar el registro");
                         }
