@@ -71,7 +71,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         mostrarEstilo();
     }
 
-    public void crearConexion() {
+    public void crearConexionAnthonny() {
         if (connection != null) {
             return;
         }
@@ -85,10 +85,30 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                 System.out.println("Connecting to database...");
             }
         } catch (Exception e) {
-            System.out.println("Problem when connecting to the database...");
+            System.out.println("Problem when connecting to the database..."+e);
         }
     }
+    
+    
 
+    public void crearConexionRoger() {
+        if (connection != null) {
+            return;
+        }
+
+        String url = "jdbc:postgresql://localhost:5432/renta_vehiculos";
+        String password = "Saborio17";
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url, "postgres", password);
+            if (connection != null) {
+                System.out.println("Connecting to database...");
+            }
+        } catch (Exception e) {
+            System.out.println("Problem when connecting to the database..."+e);
+        }
+    }
+    
     public void conexionParaLoginRoger() {
         if (connection != null) {
             return;
@@ -96,7 +116,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     public void mostrarMarca() {
-        crearConexion();
+        //crearConexionAnthonny();
+        crearConexionRoger();
         try {
 
             s = connection.createStatement();
@@ -114,7 +135,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     public int id_Marca() {
         int id_materia = 0;
         String nombre = comboMarcas.getSelectedItem().toString();
-        crearConexion();
+        //crearConexionAnthonny();
+        crearConexionRoger();
         try {
 
             s = connection.createStatement();
@@ -131,7 +153,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     public void mostrarModelo() {
-        crearConexion();
+        //crearConexionAnthonny();
+        crearConexionRoger();
         try {
 
             s = connection.createStatement();
@@ -149,7 +172,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     public int id_Modelo() {
         int id_materia = 0;
         String nombre = ComboModelo.getSelectedItem().toString();
-        crearConexion();
+        //crearConexionAnthonny();
+        crearConexionRoger();
         try {
 
             s = connection.createStatement();
@@ -166,7 +190,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     public void mostrarEstilo() {
-        crearConexion();
+        //crearConexionAnthonny();
+        crearConexionRoger();
         try {
 
             s = connection.createStatement();
@@ -184,7 +209,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     public int id_Estilo() {
         int id_materia = 0;
         String nombre = ComboEstilos.getSelectedItem().toString();
-        crearConexion();
+        //crearConexionAnthonny();
+        crearConexionRoger();
         try {
 
             s = connection.createStatement();
