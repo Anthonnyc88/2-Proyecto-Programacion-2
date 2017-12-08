@@ -5,9 +5,6 @@
  */
 package Procesos;
 
-import java.text.ParseException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 
 /**
  *
@@ -124,7 +121,8 @@ public class InformacionAlquiler {
 
     @Override
     public String toString() {
-        return "InformacionAlquiler{" + "placa=" + placa + ", idUsuario=" + idUsuario + ", nombreUsuario=" + nombreUsuario + ", oficinaRetiro=" + oficinaRetiro + ", oficinaDevolucion=" + oficinaDevolucion + ", fechaRetiro=" + fechaRetiro + ", horaRetiro=" + horaRetiro + ", fechaDevolucion=" + fechaDevolucion + ", horaDevolucion=" + horaDevolucion + ", precioAlquiler=" + precioAlquiler + '}';
+        return "InformacionAlquiler{" + "\nplaca=" + placa + ",\nidUsuario=" + idUsuario + ",\nnombreUsuario=" + nombreUsuario + ",\noficinaRetiro=" + oficinaRetiro + ",\noficinaDevolucion=" + oficinaDevolucion + ",\nfechaRetiro=" 
+                + fechaRetiro + ",\nhoraRetiro=" + horaRetiro + ",\nfechaDevolucion=" + fechaDevolucion + ",\nhoraDevolucion=" + horaDevolucion + ",\nprecioAlquiler=" + precioAlquiler + '}';
     }
  
 }

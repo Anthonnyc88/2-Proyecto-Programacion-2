@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import Procesos.InformacionAlquiler;
 
 /**
  *
@@ -274,10 +275,29 @@ public class ConexionBaseDatos {
         }
     }
 
-    public void insertarInformacionRentaVehiculo() {
+    public void insertarInformacionRentaVehiculo(InformacionAlquiler infoAlquiler) {
 
         crearConexionGeneral();
         //crearConexionGeneralAnthonny();
+        
+        System.out.println("estamos en registrar rentas");
+        try {
+            s = connection.createStatement();
+            int z = s.executeUpdate("INSERT INTO alquiler_vehiculos(placa_vehiculo,id_usuario,nombre_usuario,oficina_retiro,oficina_devolucion,fecha_retiro,hora_retiro,fecha_devolucion,hora_devolucion,precio_alquiler) VALUES('"+infoAlquiler.getPlaca()+"','"+infoAlquiler.getIdUsuario()+"','"+infoAlquiler.getNombreUsuario()+"','"+infoAlquiler.getOficinaRetiro()+"','"+infoAlquiler.getOficinaDevolucion()+"','"+infoAlquiler.getFechaRetiro()+"','"+infoAlquiler.getHoraRetiro()+"','"+infoAlquiler.getFechaDevolucion()+"','"+infoAlquiler.getHoraDevolucion()+"','"+infoAlquiler.getPrecioAlquiler()+"')");
+            if (z == 1) {
+                System.out.println("---------------------------------------------\n"
+                        + "Esta es la info almacenada:\n"+infoAlquiler.toString()+
+                                 "\n---------------------------------------------");
+                JOptionPane.showMessageDialog(null,"Se agregó el registro de manera exitosa la renta del Vehiculo\nDisfrutelo y que Dios lo acompañe ");
+
+            } else {
+                System.out.println("Error al insertar la Informacion de la Renta");
+            }
+ 
+        } catch (Exception e) {
+            System.out.println("Erores en la Insersion "+e);
+        }
+        
     }
 
     public void modificarVehiculo(Vehiculo vehiculo) {
@@ -520,4 +540,5 @@ public class ConexionBaseDatos {
         
         return  detalleTotal;
     }
+ 
 }
