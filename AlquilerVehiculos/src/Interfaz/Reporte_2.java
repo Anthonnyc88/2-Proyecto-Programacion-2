@@ -5,10 +5,23 @@
  */
 package Interfaz;
 
+import Procesos.Reporte_dos;
+import java.awt.Desktop;
+import static java.awt.SystemColor.info;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,12 +29,18 @@ import javax.swing.JPanel;
  */
 public class Reporte_2 extends javax.swing.JFrame {
 
+    int prueba = 0;
+    Reporte_dos imprimir = new Reporte_dos();
+    private Connection connection = null;
+    private ResultSet rs = null;
+    private Statement s = null;
+
     /**
      * Creates new form Reporte_2
      */
     public Reporte_2() {
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         setResizable(false);
         setTitle("TIENDA DE VEHICULOS   ");
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Azul.jpg")).getImage());
@@ -35,6 +54,68 @@ public class Reporte_2 extends javax.swing.JFrame {
 
     }
 
+    public void crearConexionGeneralAnthonny() {
+        if (connection != null) {
+            return;
+        }
+
+        String nombreBaseDatos = "renta_vehiculos";//aqui va el nombre de la base de datos 
+        String url = "jdbc:postgresql://localhost:5432/" + nombreBaseDatos;//este es el nombre de la base de datos
+        String password = "1414250816ma";//esta es la contraseña del postgrade deñ usuario
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url, "postgres", password);//este es el nombre sel server
+            if (connection != null) {
+                System.out.println("Connecting to database... Base Datos Conectada " + nombreBaseDatos);
+            }
+        } catch (Exception e) {
+            System.out.println("Problem when connecting to the database... No se Puede conectar la Base Datos " + nombreBaseDatos);
+        }
+    }
+
+    public String informacion() {
+        crearConexionGeneralAnthonny();
+        ArrayList<String> placa = null;
+        ArrayList<String> marca = null;
+        ArrayList<String> modelo = null;
+        ArrayList<String> estilo = null;
+        placa = new <String>ArrayList();
+        marca = new <String>ArrayList();
+        modelo = new <String>ArrayList();
+        estilo = new <String>ArrayList();
+        ArrayList<String> Info = new ArrayList<String>();
+        String info2 = "";
+
+        try {
+
+            String tipo = null;
+            if (radioDisponible.isSelected()) {
+                tipo = "Disponible";
+            } else if (radioOcupado.isSelected()) {
+                tipo = "Ocupado";
+            }
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT placa, marca, modelo, estilo FROM vehiculo "
+                    + " \n" + " WHERE estado ='" + tipo + "'");
+
+            while (rs.next()) {
+                placa.add(rs.getString("placa"));
+                marca.add(rs.getString("marca"));
+                modelo.add(rs.getString("modelo"));
+                estilo.add(rs.getString("estilo"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error de conexión" + e);
+        }
+        for (int i = 0; i < placa.size(); i++) {
+            Info.add("Placa Vehiculo: " + placa.get(i) + ", Marca: " + marca.get(i) + ", Modelo: " + modelo.get(i) + ", Estilo: " + estilo.get(i)   + ".");
+            info2 += Info.get(i);
+        }
+
+        return info2;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,8 +125,11 @@ public class Reporte_2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        radioDisponible = new javax.swing.JRadioButton();
+        radioOcupado = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,28 +141,55 @@ public class Reporte_2 extends javax.swing.JFrame {
         });
 
         jButton2.setText("Imprimir Reporte");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radioDisponible);
+        radioDisponible.setText("Disponible");
+
+        buttonGroup1.add(radioOcupado);
+        radioOcupado.setText("Ocupado");
+        radioOcupado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioOcupadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(182, 182, 182)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                        .addGap(173, 173, 173)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radioDisponible)
+                                    .addComponent(radioOcupado)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(193, 193, 193)
                         .addComponent(jButton1)))
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(jButton2)
+                .addContainerGap(89, Short.MAX_VALUE)
+                .addComponent(radioDisponible)
                 .addGap(18, 18, 18)
+                .addComponent(radioOcupado)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addGap(66, 66, 66))
         );
 
         pack();
@@ -87,10 +198,30 @@ public class Reporte_2 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-      Reportes ventanaRegresar = new Reportes();
+        Reportes ventanaRegresar = new Reportes();
         ventanaRegresar.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        prueba += 1;
+        try {
+            imprimir.creando_PDF_Reporte1("Reporte 2", informacion(), "Desarolladores Anthonny Calderon Y Roger Oporta RENT A CAR",
+                    "C:\\Users\\Anthonny\\Desktop\\ProyectoRentCar-master-d006d3472d05d71be0688cbd822eeec2c14572f6\\ProyectoRentCar\\ProyectoRentCar\\AlquilerVehiculos/" + "Reporte 2 " + prueba + ".pdf");
+            String file = new String("Reporte 2 " + prueba + ".pdf");
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        } catch (IOException ex) {
+            Logger.getLogger(Reporte_1.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("" + ex);
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void radioOcupadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioOcupadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radioOcupadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,7 +259,10 @@ public class Reporte_2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JRadioButton radioDisponible;
+    private javax.swing.JRadioButton radioOcupado;
     // End of variables declaration//GEN-END:variables
 }
