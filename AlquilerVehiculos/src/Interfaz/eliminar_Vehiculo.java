@@ -103,8 +103,8 @@ public class eliminar_Vehiculo extends javax.swing.JFrame {
         ArrayList<String> precio = null;
         ArrayList<String> estado = null;
 
-        //crearConexionGeneralEliminarAnthonny();
-        crearConexionGeneralEliminarRoger();
+        crearConexionGeneralEliminarAnthonny();
+        //crearConexionGeneralEliminarRoger();
         
         try {
             id_placa = new <String>ArrayList();
@@ -184,8 +184,8 @@ public class eliminar_Vehiculo extends javax.swing.JFrame {
                 String strResultado = tablaModelo.getValueAt(Eliminar_marca.getSelectedRow(), 0).toString();
                 int opcion = JOptionPane.showConfirmDialog(null, "Eliminar : " + strResultado);
                 if (opcion == 0) {
-                    //crearConexionGeneralEliminarAnthonny();
-                    crearConexionGeneralEliminarRoger();
+                    crearConexionGeneralEliminarAnthonny();
+                    //crearConexionGeneralEliminarRoger();
                     try {
 
                         s = connection.createStatement();

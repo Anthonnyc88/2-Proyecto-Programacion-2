@@ -116,8 +116,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     public void mostrarMarca() {
-        //crearConexionAnthonny();
-        crearConexionRoger();
+        crearConexionAnthonny();
+        //crearConexionRoger();
         try {
 
             s = connection.createStatement();
@@ -135,8 +135,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     public int id_Marca() {
         int id_materia = 0;
         String nombre = comboMarcas.getSelectedItem().toString();
-        //crearConexionAnthonny();
-        crearConexionRoger();
+        crearConexionAnthonny();
+        //crearConexionRoger();
         try {
 
             s = connection.createStatement();
@@ -153,8 +153,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     public void mostrarModelo() {
-        //crearConexionAnthonny();
-        crearConexionRoger();
+        crearConexionAnthonny();
+        //crearConexionRoger();
         try {
 
             s = connection.createStatement();
@@ -172,8 +172,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     public int id_Modelo() {
         int id_materia = 0;
         String nombre = ComboModelo.getSelectedItem().toString();
-        //crearConexionAnthonny();
-        crearConexionRoger();
+        crearConexionAnthonny();
+        //crearConexionRoger();
         try {
 
             s = connection.createStatement();
@@ -190,8 +190,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     }
 
     public void mostrarEstilo() {
-        //crearConexionAnthonny();
-        crearConexionRoger();
+        crearConexionAnthonny();
+        //crearConexionRoger();
         try {
 
             s = connection.createStatement();
@@ -209,8 +209,8 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     public int id_Estilo() {
         int id_materia = 0;
         String nombre = ComboEstilos.getSelectedItem().toString();
-        //crearConexionAnthonny();
-        crearConexionRoger();
+        crearConexionAnthonny();
+        //crearConexionRoger();
         try {
 
             s = connection.createStatement();

@@ -131,9 +131,9 @@ public class Menu_Usuarios extends javax.swing.JFrame {
 
     private void bntBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarVehiculoActionPerformed
         // TODO add your handling code here:
-        buscar_Vehiculo ventanaUsuarios1 = new buscar_Vehiculo();
-        ventanaUsuarios1.setVisible(true);
-        this.setVisible(false);
+//        BuscarVehiculo ventanaUsuarios1 = new BuscarVehiculo();
+//        ventanaUsuarios1.setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_bntBuscarVehiculoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -97,8 +97,8 @@ public class eliminar_Oficinas extends javax.swing.JFrame {
         
         ArrayList<String> id_marca = null;
         ArrayList<String> marca = null;
-        //crearConexionGeneralEliminarAnthonny();
-        crearConexionGeneralEliminarRoger();
+        crearConexionGeneralEliminarAnthonny();
+       // crearConexionGeneralEliminarRoger();
         try {
             id_marca = new <String>ArrayList();
             marca = new <String>ArrayList();
@@ -159,8 +159,8 @@ public class eliminar_Oficinas extends javax.swing.JFrame {
                 String strResultado = tablaModelo.getValueAt(Eliminar_marca.getSelectedRow(), 0).toString();
                 int opcion = JOptionPane.showConfirmDialog(null, "Eliminar : " + strResultado);
                 if (opcion == 0) {
-                   //crearConexionGeneralEliminarAnthonny();
-                    crearConexionGeneralEliminarRoger();
+                   crearConexionGeneralEliminarAnthonny();
+                    //crearConexionGeneralEliminarRoger();
                     try {
                         
                         s = connection.createStatement();
