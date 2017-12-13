@@ -84,7 +84,6 @@ public class ConexionBaseDatos {
         }
     }
 
-
     public boolean crearConexionRegistrosVehiculos() {
 
         try {
@@ -102,8 +101,6 @@ public class ConexionBaseDatos {
         return false;
     }
     
-    
-    
      //SOLO SIRVE PARA REGISTROS ESTE METODO
     public boolean crearConexionRegistrosAnthonny() {
         try {
@@ -119,10 +116,7 @@ public class ConexionBaseDatos {
         }
         return false;
     }
-    
-    
-    
-    
+ 
      //SOLO SIRVE PARA REGISTROS ESTE METODO
     public boolean crearConexionRegistrosRoger() {
         try {
@@ -182,6 +176,11 @@ public class ConexionBaseDatos {
         
     }
 
+    /**
+     * Metodo que inserta una 
+     * marca en la DB
+     * @param marca 
+     */
     public void insertarMarca(Marca marca) {
 
         crearConexionGeneral();
@@ -209,7 +208,7 @@ public class ConexionBaseDatos {
     }
     
     /**
-     * Metodo que busca un estilo 
+     * Metodo que busca una marca 
      * en base a una pk dada
      * 
      * @param idMarca
@@ -235,6 +234,11 @@ public class ConexionBaseDatos {
     return nombreMarca;
     }
 
+    /**
+     * Metodo que inserta un modelo
+     * en la DB
+     * @param modelo 
+     */
     public void insertarModelo(Modelo modelo) {
 
         crearConexionGeneral();
@@ -254,6 +258,11 @@ public class ConexionBaseDatos {
         }
     }
 
+    /**
+     * Metodo que inserta una oficina
+     * en la DB
+     * @param oficina 
+     */
     public void insertarOficina(Oficina oficina) {
 
         crearConexionGeneral();
@@ -275,6 +284,12 @@ public class ConexionBaseDatos {
         }
     }
 
+    /**
+     * Metodo que Inserta la Informacion
+     * de un Vehiculo
+     * 
+     * @param infoAlquiler 
+     */
     public void insertarInformacionRentaVehiculo(InformacionAlquiler infoAlquiler) {
 
         crearConexionGeneral();
@@ -360,6 +375,11 @@ public class ConexionBaseDatos {
     return nombreEstilo;
     }
 
+    /**
+     * Metodo que modifica 
+     * una marca
+     * @param marca 
+     */
     public void modificarMarca(Marca marca) {
         
         System.out.println("estamos en modificar marca");
@@ -384,6 +404,13 @@ public class ConexionBaseDatos {
         }
     }
     
+    /**
+     * Metodo que busca la informacion
+     * de un modelo
+     * @param modelo
+     * 
+     * @return el nombre del Modelo
+     */
     public String buscarModelo(Modelo modelo){
     
         
@@ -409,6 +436,11 @@ public class ConexionBaseDatos {
         return modeloNombre;
     }
 
+    /**
+     * Metodo que modifica
+     * un Modelo
+     * @param modelo 
+     */
     public void modificarModelo(Modelo modelo) {
 
         crearConexionGeneral();
@@ -438,6 +470,11 @@ public class ConexionBaseDatos {
         }       
     }
 
+    /**
+     * Metodo que busca los datos de una oficina
+     * @param oficina
+     * @return  el nombre de la Oficina
+     */
     public String buscarOficina(Oficina oficina){
 
 
@@ -463,6 +500,11 @@ public class ConexionBaseDatos {
            return nombreOficina;
        }   
     
+    /**
+     * Metodo que modifica los datos 
+     * de una oficina
+     * @param oficina 
+     */
     public void modificarOficina(Oficina oficina) {
         
         crearConexionGeneral();
@@ -496,6 +538,14 @@ public class ConexionBaseDatos {
         crearConexionGeneral();
     }
     
+    /**
+     * Metodo que devuelve el tipo de 
+     * Usuario en el momento de que se
+     * Logea
+     * 
+     * @param usuario
+     * @return el tipo de Usuario 
+     */
     public String loginUsuarios(Usuario usuario){
     
         String tipoUsuario="";
@@ -540,5 +590,37 @@ public class ConexionBaseDatos {
         
         return  detalleTotal;
     }
- 
+    
+    /**
+     * Metodo que cambia el Etdo de un
+     * Vehiculo a la hora de Rentarlo.
+     * @param vehiculo 
+     */
+    public void cambiarEstadoVehiculo(Vehiculo vehiculo){
+    
+    
+        crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
+        System.out.println("estamos en cambiar estado de Vehiculos");
+        try {
+  
+            s = connection.createStatement();
+            int z = s.executeUpdate("UPDATE vehiculo SET estado = '"+vehiculo.getEstado()+"'  WHERE placa = ' "+vehiculo.getPlaca()+" ' ");
+            
+            if (z == 1) {
+            
+                System.out.println("Se módificó el estado del vehiculo placa : "+vehiculo.getPlaca());
+                JOptionPane.showMessageDialog(null,"Vehiculo Reservado");;
+                
+            }else {
+                System.out.println("Error al modificar el registro");
+                JOptionPane.showMessageDialog(null,"Error al modificar el registro");
+            }
+     
+        }catch (Exception e) {
+            
+            System.out.println("Problemas "+e);
+        }
+     
+    } 
 }

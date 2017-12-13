@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Procesos.Vehiculo;
 /**
  *
  * @author Anthonny
@@ -29,6 +30,7 @@ import java.util.logging.Logger;
 public class rentar_Vehiculo extends javax.swing.JFrame {
 
     ConexionBaseDatos conectando = new ConexionBaseDatos();
+    Vehiculo vehiculo = new Vehiculo();
     InformacionAlquiler informacionAlquiler = new InformacionAlquiler();
     
     //atributos del objeto alquiler
@@ -150,7 +152,7 @@ public class rentar_Vehiculo extends javax.swing.JFrame {
         try {
 
             s = connection.createStatement();
-            rs = s.executeQuery("SELECT * FROM vehiculo");
+            rs = s.executeQuery("SELECT * FROM vehiculo WHERE estado = 'Disponible'");
 
             while (rs.next()) {
                 String placas = rs.getString("placa");
@@ -682,55 +684,7 @@ public class rentar_Vehiculo extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         JOptionPane.showMessageDialog(null,"Estoy probando el codigo en la parte el boton de rentar\nSi no sirve ubo esta el otro jjjjjijij");
-        
-//         if((Integer.parseInt(textHoraRetiro1.getText())>24)||(Integer.parseInt(textHoraDevolucion.getText())>24)){
-//            
-//                JOptionPane.showMessageDialog(null,"Horas Incorrectas , Introduzca Datos Correctos");
-//                System.out.println("horas incorrectas");
-//            
-//            }else{
-//            
-//                horaRetiro=Integer.parseInt(textHoraRetiro1.getText());
-//                horaDevolucion=Integer.parseInt(textHoraDevolucion.getText());
-//            }
-//        
-//        if( ((Integer.parseInt(textDiaRetiro1.getText())>31) || (Integer.parseInt(textMesRetiro1.getText())>12) || (Integer.parseInt(textAñoRetiro1.getText())>2018) ) && ((Integer.parseInt(textDiaDevolucion.getText())>31) || (Integer.parseInt(textMesDevolucion.getText())>12) || (Integer.parseInt(textAñoDevolucion.getText())>2018) ) ){
-//            
-//            JOptionPane.showMessageDialog(null,"Fechas Incorrectas , Introduzca Datos Correctos");
-//            
-//        }else{
-//         
-//            fechaRetiro=textDiaRetiro1.getText()+"-"+textMesRetiro1.getText()+"-"+textAñoRetiro1.getText();
-//            fechaDevolucion=textDiaDevolucion.getText()+"-"+textMesDevolucion.getText()+"-"+textAñoDevolucion.getText();
-//            int cantidadDiasAlquiler=0;
-//            
-//            try {
-//                cantidadDiasAlquiler = diasAlquiler(fechaRetiro, fechaDevolucion);
-//            } catch (ParseException ex) {
-//                
-//                //Logger.getLogger(rentar_Vehiculo.class.getName()).log(Level.SEVERE, null, ex);
-//                System.out.println("Problemas "+ex);
-//            }
-//            
-//            informacionAlquiler.setPlaca(optsPlacasVehiculos.getSelectedItem().toString());
-//            precioAlquiler=(obtenerPrecioAlquiler(placaAutomovilAlquiler)*cantidadDiasAlquiler);
-//            
-//            informacionAlquiler.setOficinaRetiro(obtenerIDOficina(optsOficinasRetiro.getSelectedItem().toString()));
-//            informacionAlquiler.setOficinaDevolucion(obtenerIDOficina(optsOficinasDevolucion.getSelectedItem().toString()));
-//            
-//            informacionAlquiler.setHoraRetiro(horaRetiro);
-//            informacionAlquiler.setHoraDevolucion(horaDevolucion);
-//            
-//            informacionAlquiler.setFechaRetiro(fechaRetiro);
-//            informacionAlquiler.setFechaDevolucion(fechaDevolucion);
-//            System.out.println("-------------------------------------");
-//            System.out.println("fechas aceptadas");
-//            System.out.println("detalles de la informacion del alquiler sin la cedula , nombre cliente y sin las extras");
-//            System.out.println(informacionAlquiler.toString());
-//            System.out.println("----------------------------------------------");
-//        
-//        }
-        
+  
     }//GEN-LAST:event_optGuardarDetallesRentaActionPerformed
 
     private void btnRentarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarVehiculoActionPerformed
@@ -822,6 +776,11 @@ public class rentar_Vehiculo extends javax.swing.JFrame {
             textDiaDevolucion.setText("");
             textHoraRetiro1.setText("");
             textHoraDevolucion.setText("");
+            
+            vehiculo.setPlaca(Integer.parseInt(optsPlacasVehiculos.getSelectedItem().toString()));
+            vehiculo.setEstado("Ocupado");
+            
+            conectando.cambiarEstadoVehiculo(vehiculo);//AQUI SE CAMBIA EL ESTADO DEL VEHICULO A OCUPADO
 //
         }
     }//GEN-LAST:event_btnRentarVehiculoActionPerformed

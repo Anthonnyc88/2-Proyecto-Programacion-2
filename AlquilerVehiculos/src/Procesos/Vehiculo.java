@@ -5,6 +5,7 @@
  */
 package Procesos;
 
+import java.io.File;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,13 +20,13 @@ public class Vehiculo {
     private int idEstilo;
     private int año;
     private double precio;
-    private ImageIcon foto;
-    private boolean estado;
+    private File foto;
+    private String estado;
 
     public Vehiculo() {
     }
 
-    public Vehiculo(int placa, int idMarca, int idModelo, int idEstilo, int año, double precio, ImageIcon foto, boolean estado) {
+    public Vehiculo(int placa, int idMarca, int idModelo, int idEstilo, int año, double precio, File foto, String estado) {
         this.placa = placa;
         this.idMarca = idMarca;
         this.idModelo = idModelo;
@@ -84,19 +85,19 @@ public class Vehiculo {
         this.precio = precio;
     }
 
-    public ImageIcon getFoto() {
+    public File getFoto() {
         return foto;
     }
 
-    public void setFoto(ImageIcon foto) {
+    public void setFoto(File foto) {
         this.foto = foto;
     }
 
-    public boolean isEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -104,11 +105,4 @@ public class Vehiculo {
     public String toString() {
         return "Vehiculo{" + "placa=" + placa + ", idMarca=" + idMarca + ", idModelo=" + idModelo + ", idEstilo=" + idEstilo + ", a\u00f1o=" + año + ", precio=" + precio + ", foto=" + foto + ", estado=" + estado + '}';
     }
-    
-    
-    
-    
-    
-    
-
 }

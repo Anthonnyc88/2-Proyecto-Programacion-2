@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -16,12 +17,13 @@ import javax.swing.JPanel;
  */
 public class buscar_Vehiculo extends javax.swing.JFrame {
 
+    private DefaultListModel modelo;
     /**
      * Creates new form buscar_Vehiculo
      */
     public buscar_Vehiculo() {
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         setResizable(false);
         setTitle("TIENDA DE VEHICULOS   ");
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Azul.jpg")).getImage());
@@ -45,11 +47,16 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        optMarca = new javax.swing.JRadioButton();
+        optModelo = new javax.swing.JRadioButton();
+        optEstilo = new javax.swing.JRadioButton();
+        optTransmision = new javax.swing.JRadioButton();
+        optAño = new javax.swing.JRadioButton();
+        optPrecio = new javax.swing.JRadioButton();
+        optTodos = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaResultadosConsultas = new javax.swing.JList();
+        btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,60 +72,124 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton1.setText("Marca");
-
-        jRadioButton2.setText("Modelo");
-
-        jRadioButton3.setText("Estilo");
-
-        jRadioButton4.setText("Transmision");
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+        optMarca.setText("Marca");
+        optMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
+                optMarcaActionPerformed(evt);
             }
         });
 
-        jRadioButton5.setText("jRadioButton5");
+        optModelo.setText("Modelo");
+        optModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optModeloActionPerformed(evt);
+            }
+        });
+
+        optEstilo.setText("Estilo");
+        optEstilo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optEstiloActionPerformed(evt);
+            }
+        });
+
+        optTransmision.setText("Transmision");
+        optTransmision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optTransmisionActionPerformed(evt);
+            }
+        });
+
+        optAño.setText("Año");
+        optAño.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optAñoActionPerformed(evt);
+            }
+        });
+
+        optPrecio.setText("Precio");
+        optPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optPrecioActionPerformed(evt);
+            }
+        });
+
+        optTodos.setText("Todos");
+
+        jScrollPane1.setViewportView(listaResultadosConsultas);
+
+        btnLimpiar.setText("Limpiar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(850, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(31, 31, 31))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton5)
-                            .addComponent(jRadioButton4)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton1)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(optTodos)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnLimpiar))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(optMarca)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(optTransmision)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(optModelo)
+                                    .addComponent(optEstilo))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(optPrecio)
+                                    .addComponent(optAño))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(168, 168, 168)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 320, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(332, 332, 332)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(850, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(41, 41, 41)
-                .addComponent(jRadioButton1)
-                .addGap(26, 26, 26)
-                .addComponent(jRadioButton2)
-                .addGap(26, 26, 26)
-                .addComponent(jRadioButton3)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButton4)
-                .addGap(30, 30, 30)
-                .addComponent(jRadioButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(optMarca)
+                            .addComponent(optTransmision))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(optModelo)
+                            .addComponent(optAño))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(optEstilo)
+                            .addComponent(optPrecio))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(optTodos)
+                            .addComponent(btnLimpiar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jButton1)
                 .addGap(36, 36, 36))
         );
@@ -134,9 +205,47 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+    private void optTransmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optTransmisionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton4ActionPerformed
+        consulta_Transmision v = new consulta_Transmision();
+         v.setVisible(true);
+         this.setVisible(false);
+    }//GEN-LAST:event_optTransmisionActionPerformed
+
+    private void optMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optMarcaActionPerformed
+        // TODO add your handling code here:
+         consulta_Marca v = new consulta_Marca();
+         v.setVisible(true);
+         this.setVisible(false);
+    }//GEN-LAST:event_optMarcaActionPerformed
+
+    private void optModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optModeloActionPerformed
+        // TODO add your handling code here:
+        consulta_Modelo v = new consulta_Modelo();
+         v.setVisible(true);
+         this.setVisible(false);
+    }//GEN-LAST:event_optModeloActionPerformed
+
+    private void optAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optAñoActionPerformed
+        // TODO add your handling code here:
+        consulta_Año v = new consulta_Año();
+         v.setVisible(true);
+         this.setVisible(false);
+    }//GEN-LAST:event_optAñoActionPerformed
+
+    private void optEstiloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optEstiloActionPerformed
+        // TODO add your handling code here:
+        consulta_Estilo v = new consulta_Estilo();
+         v.setVisible(true);
+         this.setVisible(false);
+    }//GEN-LAST:event_optEstiloActionPerformed
+
+    private void optPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optPrecioActionPerformed
+        // TODO add your handling code here:
+        consulta_Precio v = new consulta_Precio();
+         v.setVisible(true);
+         this.setVisible(false);
+    }//GEN-LAST:event_optPrecioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,12 +284,17 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listaResultadosConsultas;
+    private javax.swing.JRadioButton optAño;
+    private javax.swing.JRadioButton optEstilo;
+    private javax.swing.JRadioButton optMarca;
+    private javax.swing.JRadioButton optModelo;
+    private javax.swing.JRadioButton optPrecio;
+    private javax.swing.JRadioButton optTodos;
+    private javax.swing.JRadioButton optTransmision;
     // End of variables declaration//GEN-END:variables
 }
