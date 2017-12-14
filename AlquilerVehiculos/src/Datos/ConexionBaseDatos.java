@@ -865,7 +865,7 @@ public class ConexionBaseDatos {
            try {
 
                s = connection.createStatement();
-               rs = s.executeQuery("SELECT placa,nombre_marca,nombre_modelo,nombre_estilo,transmision,año,precio FROM vehiculo JOIN marca ON marca=marca.id_marca JOIN modelo ON modelo=modelo.id_modelo JOIN estilo ON estilo=estilo.id_estilo WHERE transmision = ' "+tipoTransmision+" ' ");
+               rs = s.executeQuery("SELECT placa,nombre_marca,nombre_modelo,nombre_estilo,año,precio FROM vehiculo JOIN marca ON marca=marca.id_marca JOIN modelo ON modelo=modelo.id_modelo JOIN estilo ON estilo=estilo.id_estilo WHERE transmision ='"+tipoTransmision+"'");
 
                while (rs.next()) {
                

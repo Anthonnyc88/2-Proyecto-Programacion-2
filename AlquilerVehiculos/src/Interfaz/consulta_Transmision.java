@@ -38,8 +38,8 @@ public class consulta_Transmision extends javax.swing.JFrame {
         btnConsultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaResultadosConsulta = new javax.swing.JList();
-        nombresTransmision = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
+        nombresTransmisiones = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,9 +59,9 @@ public class consulta_Transmision extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(listaResultadosConsulta);
 
-        nombresTransmision.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Manual", "Automatico" }));
-
         jLabel1.setText("Transmision:");
+
+        nombresTransmisiones.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Manual", "Automatico" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,8 +76,8 @@ public class consulta_Transmision extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(nombresTransmision, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
+                        .addComponent(nombresTransmisiones, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
                         .addComponent(btnConsultar)
                         .addGap(141, 141, 141))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,8 +92,8 @@ public class consulta_Transmision extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConsultar)
-                    .addComponent(nombresTransmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(nombresTransmisiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
                 .addComponent(btnRegresar)
                 .addContainerGap())
@@ -119,7 +119,9 @@ public class consulta_Transmision extends javax.swing.JFrame {
         
         modelo = new DefaultListModel();
         listaResultadosConsulta.setModel(modelo);
-        modelo.addElement(conectando.consultaTransmision(nombresTransmision.getSelectedItem().toString()));
+        String tipoTransmision=nombresTransmisiones.getSelectedItem().toString();
+        String c=conectando.consultaTransmision(tipoTransmision);
+        modelo.addElement(c);
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
@@ -163,6 +165,6 @@ public class consulta_Transmision extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList listaResultadosConsulta;
-    private javax.swing.JComboBox nombresTransmision;
+    private javax.swing.JComboBox nombresTransmisiones;
     // End of variables declaration//GEN-END:variables
 }
