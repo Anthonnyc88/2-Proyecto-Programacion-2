@@ -187,7 +187,6 @@ public class rentar_Vehiculo extends javax.swing.JFrame {
             while (rs.next()) {
                 String nombre = rs.getString("nombre_oficina");
                 listaOficinas.add(nombre);
-                //System.out.println("se llena la lista de oficinas");
           
             }
         } catch (Exception e) {
@@ -653,31 +652,11 @@ public class rentar_Vehiculo extends javax.swing.JFrame {
     private void btnVerDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDetallesActionPerformed
         // TODO add your handling code here:
         
-        conectando.crearConexionGeneral();
-        
-        String placaInfo=optsPlacasVehiculos.getSelectedItem().toString();
-        
-        try {
-
-            s = connection.createStatement();
-            //aqui estoy haciendo un JOIN
-            rs = s.executeQuery("SELECT nombre_marca,nombre_modelo,nombre_estilo,transmision,año FROM vehiculo JOIN marca ON marca=marca.id_marca JOIN modelo ON modelo=modelo.id_modelo JOIN estilo ON estilo=estilo.id_estilo WHERE placa='"+placaInfo+"'");
-            
-            while (rs.next()) {
-                String nombreMarca = rs.getString("nombre_marca");
-                String nombreModelo=rs.getString("nombre_modelo");
-                String nombreEstilo=rs.getString("nombre_estilo");
-                String tipoTransmision=rs.getString("transmision");
-                String añoVehiculo=rs.getString("año");
-            
-                String detalleTotal="Marca : "+nombreMarca+" , Modelo : "+nombreModelo+" , Estilo : "+nombreEstilo+" , Transmision : "+tipoTransmision+" , Año : "+añoVehiculo;
-                JOptionPane.showMessageDialog(null,detalleTotal);
-                System.out.println("Precio del alquiler es: "+obtenerPrecioAlquiler(optsPlacasVehiculos.getSelectedItem().toString()));
-            }
-        } catch (Exception e) {
-            System.out.println("Error de conexión "+e);
-        }
-        
+       String placaInfo=optsPlacasVehiculos.getSelectedItem().toString();
+       
+       conectando.detalleVehiculo(placaInfo);
+       
+       System.out.println("Precio del alquiler es: "+obtenerPrecioAlquiler(optsPlacasVehiculos.getSelectedItem().toString()));
     }//GEN-LAST:event_btnVerDetallesActionPerformed
 
     private void optGuardarDetallesRentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optGuardarDetallesRentaActionPerformed
