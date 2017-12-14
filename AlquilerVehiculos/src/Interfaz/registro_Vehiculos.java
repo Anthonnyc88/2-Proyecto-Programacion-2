@@ -9,7 +9,6 @@ import Datos.ConexionBaseDatos;
 import Proyecto.Principal;
 import java.awt.HeadlessException;
 import java.awt.Image;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -128,7 +127,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             System.out.println("Error de conexión");
-        }
+    }
 
     }
 
@@ -248,7 +247,6 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         ComboTransmision = new javax.swing.JComboBox();
         jLabel15 = new javax.swing.JLabel();
-        TextPrecio = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         ComboEstado = new javax.swing.JComboBox();
         jLabel17 = new javax.swing.JLabel();
@@ -258,6 +256,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
         btnAgregarImagen = new javax.swing.JButton();
         comboMarcas = new javax.swing.JComboBox();
         textAño = new javax.swing.JTextField();
+        textPrecio = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -354,6 +353,12 @@ public class registro_Vehiculos extends javax.swing.JFrame {
             }
         });
 
+        comboMarcas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboMarcasActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Opciones");
 
         jMenuItem1.setText("Eliminar Vehiculo");
@@ -384,17 +389,14 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                                     .addComponent(jLabel15)
                                     .addComponent(jLabel11))
                                 .addGap(26, 26, 26)
-                                .addComponent(TextPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TextPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(bntRegresar)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(122, 122, 122)
-                                .addComponent(TextPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(bntRegistrar)
-                                .addGap(90, 90, 90)))
+                        .addGap(140, 140, 140)
+                        .addComponent(bntRegistrar)
+                        .addGap(90, 90, 90)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,15 +471,17 @@ public class registro_Vehiculos extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(TextPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel11))
-                                .addGap(28, 28, 28))
+                                .addGap(21, 21, 21))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(comboMarcas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(TextPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65)
+                                .addGap(12, 12, 12)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(textPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1))
+                            .addComponent(jLabel15))
+                        .addGap(70, 70, 70)
                         .addComponent(bntRegistrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -535,7 +539,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
             int placa = Integer.parseInt(TextPlaca.getText());
             String transmisiones = ComboTransmision.getSelectedItem().toString();
             int años = Integer.parseInt(textAño.getText());
-            double precio = Double.parseDouble(TextPrecio.getText());
+            double precio = Double.parseDouble(textPrecio.getText());
             String estado = ComboEstado.getSelectedItem().toString();
 
             Statement s = connection.createStatement();
@@ -559,7 +563,7 @@ public class registro_Vehiculos extends javax.swing.JFrame {
             lblfotos.setIcon(null);
             TextPlaca.setText("");
             textAño.setText("");
-            TextPrecio.setText("");
+            textPrecio.setText("");
 
 //
         } catch (SQLException | NumberFormatException | HeadlessException x) {
@@ -571,6 +575,10 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     private void ComboModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboModeloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboModeloActionPerformed
+
+    private void comboMarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMarcasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboMarcasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -620,7 +628,6 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JComboBox ComboModelo;
     private javax.swing.JComboBox ComboTransmision;
     private javax.swing.JTextField TextPlaca;
-    private javax.swing.JTextField TextPrecio;
     private javax.swing.JButton bntRegistrar;
     private javax.swing.JButton bntRegresar;
     private javax.swing.JButton btnAgregarImagen;
@@ -642,5 +649,6 @@ public class registro_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel lblfotos;
     private javax.swing.JTextField textAño;
+    private javax.swing.JTextField textPrecio;
     // End of variables declaration//GEN-END:variables
 }

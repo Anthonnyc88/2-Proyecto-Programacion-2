@@ -45,6 +45,7 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         optMarca = new javax.swing.JRadioButton();
@@ -72,6 +73,7 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(optMarca);
         optMarca.setText("Marca");
         optMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +81,7 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(optModelo);
         optModelo.setText("Modelo");
         optModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +89,7 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(optEstilo);
         optEstilo.setText("Estilo");
         optEstilo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +97,7 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(optTransmision);
         optTransmision.setText("Transmision");
         optTransmision.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +105,7 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(optAño);
         optAño.setText("Año");
         optAño.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +113,7 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(optPrecio);
         optPrecio.setText("Precio");
         optPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +121,7 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(optTodos);
         optTodos.setText("Todos");
 
         jScrollPane1.setViewportView(listaResultadosConsultas);
@@ -285,6 +293,7 @@ public class buscar_Vehiculo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
