@@ -9,7 +9,6 @@ import Datos.ConexionBaseDatos;
 import Proyecto.Principal;
 import java.awt.HeadlessException;
 import java.awt.Image;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;

@@ -533,11 +533,6 @@ public class ConexionBaseDatos {
         }
 
     }
-
-    public void buscarVehiculo() {
-
-        crearConexionGeneral();
-    }
     
     /**
      * Metodo que devuelve el tipo de 
@@ -762,6 +757,126 @@ public class ConexionBaseDatos {
             
                    System.out.println("SE ESTA LLENANDO LA INFORMACION");
                  resultadoConsulta="Marca : "+marcaNombre+" , Modelo : "+nombreModelo+" , Estilo : "+nombreEstilo+" , Transmision : "+tipoTransmision+" , Año : "+añoVehiculo+" , Precio : "+precio;
+               }
+
+           } catch (Exception e) {
+               System.out.println("Problemas " + e);
+
+           }
+        
+        return  resultadoConsulta;
+    }
+    
+    public ArrayList<String> mostrarEstilos() {
+        
+        ArrayList<String> resultados = new ArrayList();
+        crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT nombre_estilo FROM estilo");
+
+            while (rs.next()) {
+                String nombreEstilos=rs.getString("nombre_estilo");
+                resultados.add(nombreEstilos);
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+    }
+        return  resultados;
+    }
+    
+    public int averiguarIDEstilo(String nombreEstilo) {
+        
+        int idEstilo = 0;
+      
+        crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT id_estilo FROM estilo WHERE nombre_estilo = '" + nombreEstilo + "'");
+
+            while (rs.next()) {
+                idEstilo = rs.getInt("id_estilo");
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+        return idEstilo;
+
+    }
+    
+    /**
+     * Metodo que realiza la consulta
+     * por Marca de un vehiculo
+     * 
+     * @param idEstilo
+     * @return 
+     */
+    public String consultaEstilo(String idEstilo){
+    
+        String resultadoConsulta="";
+    
+        crearConexionGeneral();
+           //crearConexionGeneralAnthonny();
+
+           try {
+
+               s = connection.createStatement();
+               rs = s.executeQuery("SELECT nombre_marca,nombre_modelo,nombre_estilo,transmision,año,precio FROM vehiculo JOIN marca ON marca=marca.id_marca JOIN modelo ON modelo=modelo.id_modelo JOIN estilo ON estilo=estilo.id_estilo WHERE estilo = ' "+idEstilo+" ' ");
+
+               while (rs.next()) {
+               
+                String nombreModelo=rs.getString("nombre_modelo");
+                String nombreEstilo=rs.getString("nombre_estilo");
+                String tipoTransmision=rs.getString("transmision");
+                String precio=rs.getString("precio");
+                String marcaNombre=rs.getString("nombre_marca");
+                String añoVehiculo=rs.getString("año");
+            
+                   //System.out.println("SE ESTA LLENANDO LA INFORMACION");
+                 resultadoConsulta="Marca : "+marcaNombre+" , Modelo : "+nombreModelo+" , Transmision : "+tipoTransmision+" , Año : "+añoVehiculo+" , Precio : "+precio;
+               }
+
+           } catch (Exception e) {
+               System.out.println("Problemas " + e);
+
+           }
+        
+        return  resultadoConsulta;
+    }
+    
+     /**
+     * Metodo que realiza la consulta
+     * por Tramision de un vehiculo
+     * 
+     * @param tipoTransmision
+     * @return 
+     */
+    public String consultaTransmision(String tipoTransmision){
+    
+        String resultadoConsulta="";
+    
+        crearConexionGeneral();
+           //crearConexionGeneralAnthonny();
+
+           try {
+
+               s = connection.createStatement();
+               rs = s.executeQuery("SELECT placa,nombre_marca,nombre_modelo,nombre_estilo,transmision,año,precio FROM vehiculo JOIN marca ON marca=marca.id_marca JOIN modelo ON modelo=modelo.id_modelo JOIN estilo ON estilo=estilo.id_estilo WHERE transmision = ' "+tipoTransmision+" ' ");
+
+               while (rs.next()) {
+               
+                String nombreModelo=rs.getString("nombre_modelo");
+                String nombreEstilo=rs.getString("nombre_estilo");
+                String placa=rs.getString("placa");
+                String precio=rs.getString("precio");
+                String marcaNombre=rs.getString("nombre_marca");
+                String añoVehiculo=rs.getString("año");
+            
+                 resultadoConsulta="Placa : "+placa+" , Marca : "+marcaNombre+" , Modelo : "+nombreModelo+" , Estilo : "+nombreEstilo+" , Año : "+añoVehiculo+" , Precio : "+precio;
                }
 
            } catch (Exception e) {
