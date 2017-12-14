@@ -886,4 +886,124 @@ public class ConexionBaseDatos {
         
         return  resultadoConsulta;
     }
+    
+    /**
+     * Metodo que realiza la consulta
+     * por Tramision de un vehiculo
+     * 
+     * @param precioV
+     * @return 
+     */
+    public String consultaPrecio(String precioV){
+    
+        String resultadoConsulta="";
+    
+        crearConexionGeneral();
+           //crearConexionGeneralAnthonny();
+
+           try {
+
+               s = connection.createStatement();
+               rs = s.executeQuery("SELECT placa,nombre_marca,nombre_modelo,nombre_estilo,año,transmision FROM vehiculo JOIN marca ON marca=marca.id_marca JOIN modelo ON modelo=modelo.id_modelo JOIN estilo ON estilo=estilo.id_estilo WHERE precio='"+precioV+"'");
+
+               while (rs.next()) {
+               
+                String nombreModelo=rs.getString("nombre_modelo");
+                String nombreEstilo=rs.getString("nombre_estilo");
+                String placa=rs.getString("placa");
+                String transmision=rs.getString("transmision");
+                String marcaNombre=rs.getString("nombre_marca");
+                String añoVehiculo=rs.getString("año");
+            
+                 resultadoConsulta="Placa : "+placa+" , Marca : "+marcaNombre+" , Modelo : "+nombreModelo+" , Estilo : "+nombreEstilo+" , Año : "+añoVehiculo+" , Transmision : "+transmision;
+               }
+
+           } catch (Exception e) {
+               System.out.println("Problemas " + e);
+
+           }
+        
+        return  resultadoConsulta;
+    }
+    
+    public ArrayList<String> mostrarModelos() {
+        
+        ArrayList<String> resultados = new ArrayList();
+        crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT nombre_modelo FROM modelo");
+
+            while (rs.next()) {
+                String nombreEstilos=rs.getString("nombre_modelo");
+                resultados.add(nombreEstilos);
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+    }
+        return  resultados;
+    }
+    
+    public int averiguarIDModelo(String nombreModelo) {
+        
+        int idModelo = 0;
+      
+        crearConexionGeneral();
+        //crearConexionGeneralAnthonny();
+        try {
+
+            s = connection.createStatement();
+            rs = s.executeQuery("SELECT id_modelo FROM modelo WHERE nombre_modelo = '" + nombreModelo + "'");
+
+            while (rs.next()) {
+                idModelo = rs.getInt("id_modelo");
+            }
+        } catch (Exception e) {
+            System.out.println("Error de conexión");
+        }
+        return idModelo;
+
+    }
+    
+    /**
+     * Metodo que realiza la consulta
+     * por Marca de un vehiculo
+     * 
+     * @param idModelo
+     * @return 
+     */
+    public String consultaModelo(String idModelo){
+    
+        String resultadoConsulta="";
+    
+        crearConexionGeneral();
+           //crearConexionGeneralAnthonny();
+
+           try {
+
+               s = connection.createStatement();
+               rs = s.executeQuery("SELECT placa,nombre_marca,nombre_modelo,nombre_estilo,transmision,año,precio FROM vehiculo JOIN marca ON marca=marca.id_marca JOIN modelo ON modelo=modelo.id_modelo JOIN estilo ON estilo=estilo.id_estilo WHERE modelo = ' "+idModelo+" ' ");
+
+               while (rs.next()) {
+       
+                String nombreEstilo=rs.getString("nombre_estilo");
+                String placa = rs.getString("placa");
+                String tipoTransmision=rs.getString("transmision");
+                String precio=rs.getString("precio");
+                String marcaNombre=rs.getString("nombre_marca");
+                String añoVehiculo=rs.getString("año");
+            
+                   //System.out.println("SE ESTA LLENANDO LA INFORMACION");
+                 resultadoConsulta="Placa : "+placa+" , Marca : "+marcaNombre+" , Transmision : "+tipoTransmision+" , Año : "+añoVehiculo+" , Precio : "+precio;
+               }
+
+           } catch (Exception e) {
+               System.out.println("Problemas " + e);
+
+           }
+        
+        return  resultadoConsulta;
+    }
 }
