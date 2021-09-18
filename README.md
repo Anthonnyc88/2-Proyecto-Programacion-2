@@ -1,4 +1,4 @@
-# rent-car
+# Rent-Car JAVA desktop application
 
 ![](https://user-images.githubusercontent.com/31899798/133910738-7128ae86-72a0-4dd0-8f9c-ae761abdcb27.png)
  
@@ -59,3 +59,16 @@ The administrator can delete data within the system as in the following section
 ![](https://user-images.githubusercontent.com/31899798/133910988-5c44aa89-99bc-4902-a2d2-fddd467318e8.jpeg)
 
 ![](https://user-images.githubusercontent.com/31899798/133910991-af62f5a1-c566-48e6-8793-b2cb77a358f0.png)
+
+
+
+
+# Reports
+
+
+There is also a reports section to consult vehicles by Brand and Year.
+
+
+![](https://user-images.githubusercontent.com/31899798/133911153-02294d2f-43bd-4573-9322-107f7ae4108c.PNG)
+
+![](https://user-images.githubusercontent.com/31899798/133911162-8d757514-dab8-404d-98b9-4957a55d5b9b.PNG)
