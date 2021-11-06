@@ -94,7 +94,7 @@ CREATE TABLE public.usuarios
     telefono integer NOT NULL,
     direccion character varying(20) COLLATE pg_catalog."default" NOT NULL,
     foto bytea NOT NULL,
-    "contraseña" character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    "contraseÃ±a" character varying(20) COLLATE pg_catalog."default" NOT NULL,
     tipo_usuario character varying(20) COLLATE  pg_catalog."default" NOT NULL,
     CONSTRAINT usuarios_pkey PRIMARY KEY (id_usuario)
 )
@@ -116,7 +116,7 @@ CREATE TABLE public.vehiculo
     modelo integer NOT NULL,
     estilo integer NOT NULL,
     transmision character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    "año" integer NOT NULL,
+    "aÃ±o" integer NOT NULL,
     precio double precision NOT NULL,
     estado boolean NOT NULL,
     foto bytea NOT NULL,
